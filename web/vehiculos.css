@@ -1,0 +1,229 @@
+/* Estilos adicionales para la página de vehículos */
+
+/* Hero específico para vehículos */
+.vehicle-hero {
+    background: linear-gradient(to right, #0077cc, #00a0b0);
+    padding: 70px 20px;
+  }
+  
+  /* Contenedor de filtros */
+  .filtros-container {
+    background-color: #ffffff;
+    padding: 25px;
+    margin: 20px auto;
+    max-width: 1200px;
+    border-radius: 10px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+  }
+  
+  .filtros-container h3 {
+    color: #0077cc;
+    margin-bottom: 20px;
+    font-size: 22px;
+  }
+  
+  .filtros {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end;
+  }
+  
+  .filtro-grupo {
+    flex: 1;
+    min-width: 150px;
+  }
+  
+  .filtro-grupo label {
+    display: block;
+    margin-bottom: 8px;
+    color: #444;
+    font-weight: 500;
+  }
+  
+  .filtro-grupo select,
+  .filtro-grupo input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .boton-filtrar {
+    background: #0077cc;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  
+  .boton-filtrar:hover {
+    background: #005fa3;
+  }
+  
+  /* Contenedor de vehículos */
+  .vehiculos-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .vehiculo-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .vehiculo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  }
+  
+  .vehiculo-imagen {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .vehiculo-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  
+  .vehiculo-card:hover .vehiculo-imagen img {
+    transform: scale(1.05);
+  }
+  
+  .etiqueta {
+    position: absolute;
+    top: 10px;
+    padding: 5px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    border-radius: 20px;
+  }
+  
+  .etiqueta.electrico {
+    background: #27ae60;
+    right: 10px;
+  }
+  
+  .etiqueta.gasolina {
+    background: #e74c3c;
+    right: 10px;
+  }
+  
+  .etiqueta.diesel {
+    background: #3498db;
+    right: 10px;
+  }
+  
+  .etiqueta.hibrido {
+    background: #9b59b6;
+    right: 10px;
+  }
+  
+  .etiqueta.cuatro-x-cuatro {
+    background: #f39c12;
+    right: 110px;
+  }
+  
+  .vehiculo-info {
+    padding: 20px;
+  }
+  
+  .vehiculo-info h3 {
+    font-size: 22px;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .tipo {
+    display: inline-block;
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 15px;
+    background: #f5f5f5;
+    padding: 4px 10px;
+    border-radius: 15px;
+  }
+  
+  .caracteristicas {
+    list-style: none;
+    margin-bottom: 20px;
+  }
+  
+  .caracteristicas li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .caracteristicas li:last-child {
+    border-bottom: none;
+  }
+  
+  .precio {
+    font-weight: bold;
+    color: #0077cc;
+    font-size: 18px;
+  }
+  
+  .boton-reservar {
+    display: block;
+    background: #0077cc;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background 0.3s;
+  }
+  
+  .boton-reservar:hover {
+    background: #005fa3;
+  }
+  
+  /* Activo en la navegación */
+  nav a.active {
+    color: #0077cc;
+    font-weight: bold;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .filtros {
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .filtro-grupo {
+      width: 100%;
+    }
+    
+    .vehiculos-container {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* Ajustes para pantallas pequeñas */
+  @media (max-width: 480px) {
+    .etiqueta.cuatro-x-cuatro {
+      top: 45px;
+      right: 10px;
+    }
+  }

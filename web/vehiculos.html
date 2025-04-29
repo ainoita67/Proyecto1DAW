@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vehículos – MOVEYOU Rent</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .filtros select {
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .grid-vehiculos {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .vehiculo {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .vehiculo img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .vehiculo-info {
+      padding: 15px;
+    }
+
+    .vehiculo-info h3 {
+      margin-bottom: 5px;
+      color: #0077cc;
+      font-size: 18px;
+    }
+
+    .vehiculo-info p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #444;
+    }
+
+    .vehiculo-precio {
+      margin-top: auto;
+      padding: 10px 15px;
+      background: #0077cc;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      border-radius: 0 0 15px 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>MOVEYOU Rent</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="vehiculos.html">Vehículos</a></li>
+        <li><a href="#">Reservas</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Nuestra flota disponible</h2>
+    <p>Encuentra el vehículo ideal para tu próxima aventura.</p>
+  </section>
+
+  <section class="section">
+    <h3 style="color:#0077cc; margin-bottom: 20px;">Filtrar por características</h3>
+    <div class="filtros">
+      <select name="tipo">
+        <option value="">Tipo de vehículo</option>
+        <option value="turismo">Turismo</option>
+        <option value="moto">Moto</option>
+        <option value="furgoneta">Furgoneta</option>
+      </select>
+      <select name="motor">
+        <option value="">Tipo de motor</option>
+        <option value="electrico">Eléctrico</option>
+        <option value="diesel">Diésel</option>
+        <option value="gasolina">Gasolina</option>
+        <option value="4x4">4x4</option>
+      </select>
+      <select name="plazas">
+        <option value="">Nº de plazas</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="7">7+</option>
+      </select>
+    </div>
+
+    <div class="grid-vehiculos">
+
+      <div class="vehiculo">
+        <img src="fotos/turismo1.jpg" alt="Turismo eléctrico">
+        <div class="vehiculo-info">
+          <h3>Turismo – Eléctrico</h3>
+          <p>Color: Blanco</p>
+          <p>Plazas: 5</p>
+          <p>Matrícula: 2023</p>
+        </div>
+        <div class="vehiculo-precio">10€/hora</div>
+      </div>
+
+      <div class="vehiculo">
+        <img src="fotos/moto1.jpg" alt="Moto urbana">
+        <div class="vehiculo-info">
+          <h3>Moto – Eléctrica</h3>
+          <p>Color: Roja</p>
+          <p>Plazas: 2</p>
+          <p>Matrícula: 2022</p>
+        </div>
+        <div class="vehiculo-precio">5€/hora</div>
+      </div>
+
+      <div class="vehiculo">
+        <img src="fotos/furgo1.jpg" alt="Furgoneta diesel">
+        <div class="vehiculo-info">
+          <h3>Furgoneta – Diésel</h3>
+          <p>Color: Azul</p>
+          <p>Plazas: 3</p>
+          <p>Matrícula: 2021</p>
+        </div>
+        <div class="vehiculo-precio">12€/hora</div>
+      </div>
+
+      <div class="vehiculo">
+        <img src="fotos/turismo2.jpg" alt="Turismo 4x4">
+        <div class="vehiculo-info">
+          <h3>Turismo – 4x4</h3>
+          <p>Color: Gris</p>
+          <p>Plazas: 5</p>
+          <p>Matrícula: 2020</p>
+        </div>
+        <div class="vehiculo-precio">14€/hora</div>
+      </div>
+
+      <div class="vehiculo">
+        <img src="fotos/furgo2.jpg" alt="Furgoneta eléctrica">
+        <div class="vehiculo-info">
+          <h3>Furgoneta – Eléctrica</h3>
+          <p>Color: Blanca</p>
+          <p>Plazas: 2</p>
+          <p>Matrícula: 2024</p>
+        </div>
+        <div class="vehiculo-precio">13€/hora</div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 MOVEYOU Rent. Todos los derechos reservados.
+  </footer>
+
+</body>
+</html>
