@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ho4PQCBDEfCIQszOCAZENA" name="Diagrama">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_ho4PQCBDEfCIQszOCAZENA" name="Diagrama">
   <packageImport xmi:type="uml:PackageImport" xmi:id="_hqOTECBDEfCIQszOCAZENA">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>
@@ -58,6 +58,14 @@
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_qyWqUCBFEfCIQszOCAZENA" name="total" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_XsheAiTcEfCIF6a7YdEqlQ" name="cliente" type="_u6Rz4CBDEfCIQszOCAZENA" aggregation="shared" association="_XsgP4CTcEfCIF6a7YdEqlQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XsheAyTcEfCIF6a7YdEqlQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XsheBCTcEfCIF6a7YdEqlQ" value="1"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_FXw3wSTdEfCIF6a7YdEqlQ" name="vehiculo" type="_v4zmwCBFEfCIQszOCAZENA" aggregation="composite" association="_FXvCkCTdEfCIF6a7YdEqlQ">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FXxe0CTdEfCIF6a7YdEqlQ"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FXyF4CTdEfCIF6a7YdEqlQ" value="1"/>
       </ownedAttribute>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_hnHCxyBFEfCIQszOCAZENA" name="resgistrar"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_hnHCyCBFEfCIQszOCAZENA" name="editar"/>
@@ -165,6 +173,39 @@
       </ownedAttribute>
     </packagedElement>
   </packagedElement>
-  <packagedElement xmi:type="uml:Package" xmi:id="_8cie4CHLEfCEuOPN4BzVcw" name="GUI"/>
-  <packagedElement xmi:type="uml:Package" xmi:id="_7jbsoCHLEfCEuOPN4BzVcw" name="bdd"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_8cie4CHLEfCEuOPN4BzVcw" name="BDD">
+    <packagedElement xmi:type="uml:Class" xmi:id="_MGmHQCTdEfCIF6a7YdEqlQ" name="usuario">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_VszzkCTdEfCIF6a7YdEqlQ" name="iniciarSesion"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_XAoL4CTdEfCIF6a7YdEqlQ" name="crearUsuario"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Ywyh8CTdEfCIF6a7YdEqlQ" name="eliminarUsuario"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_a31uACTdEfCIF6a7YdEqlQ" name="editarDatosUsuario"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_fy1oYCTdEfCIF6a7YdEqlQ" name="getInfo"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_idX8ACTdEfCIF6a7YdEqlQ" name="vehiculo">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_lRozYCTdEfCIF6a7YdEqlQ" name="getInfio"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_mdOcwCTdEfCIF6a7YdEqlQ" name="crearVehiculo"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_oO7q8CTdEfCIF6a7YdEqlQ" name="eliminarVehiculo"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_q6kKwCTdEfCIF6a7YdEqlQ" name="editarVehiculo"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tWVCkCTdEfCIF6a7YdEqlQ" name="mantenimiento"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_4LhqgCTdEfCIF6a7YdEqlQ" name="consultarDisponibilidad"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_9JR98CTdEfCIF6a7YdEqlQ" name="alquilar"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="__byMECTdEfCIF6a7YdEqlQ" name="editarAlquiler"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_BwhO0CTeEfCIF6a7YdEqlQ" name="eliminarAlquiler"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Hhr8MCTeEfCIF6a7YdEqlQ" name="consultarHistorial"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_U3uwQCTeEfCIF6a7YdEqlQ" client="_8cie4CHLEfCEuOPN4BzVcw" supplier="_3FpSsCHLEfCEuOPN4BzVcw"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_7jbsoCHLEfCEuOPN4BzVcw" name="GUI"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_XsgP4CTcEfCIF6a7YdEqlQ" memberEnd="_XsheAiTcEfCIF6a7YdEqlQ _XsiFECTcEfCIF6a7YdEqlQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_XsheACTcEfCIF6a7YdEqlQ" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_XsheASTcEfCIF6a7YdEqlQ" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_XsiFECTcEfCIF6a7YdEqlQ" name="alquiler" type="_hnHCwCBFEfCIQszOCAZENA" association="_XsgP4CTcEfCIF6a7YdEqlQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_FXvCkCTdEfCIF6a7YdEqlQ" memberEnd="_FXw3wSTdEfCIF6a7YdEqlQ _FXyF4STdEfCIF6a7YdEqlQ">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_FXwQsCTdEfCIF6a7YdEqlQ" source="org.eclipse.papyrus">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_FXw3wCTdEfCIF6a7YdEqlQ" key="nature" value="UML_Nature"/>
+    </eAnnotations>
+    <ownedEnd xmi:type="uml:Property" xmi:id="_FXyF4STdEfCIF6a7YdEqlQ" name="alquiler" type="_hnHCwCBFEfCIQszOCAZENA" association="_FXvCkCTdEfCIF6a7YdEqlQ"/>
+  </packagedElement>
 </uml:Model>
