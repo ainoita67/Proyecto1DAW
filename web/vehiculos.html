@@ -3,70 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Vehículos – MOVEYOU Rent</title>
+  <title>MOVEYOU Rent - Vehículos Disponibles</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .filtros {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 30px;
-    }
-
-    .filtros select {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-
-    .grid-vehiculos {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 30px;
-    }
-
-    .vehiculo {
-      background: #fff;
-      border-radius: 15px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .vehiculo img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .vehiculo-info {
-      padding: 15px;
-    }
-
-    .vehiculo-info h3 {
-      margin-bottom: 5px;
-      color: #0077cc;
-      font-size: 18px;
-    }
-
-    .vehiculo-info p {
-      margin: 4px 0;
-      font-size: 14px;
-      color: #444;
-    }
-
-    .vehiculo-precio {
-      margin-top: auto;
-      padding: 10px 15px;
-      background: #0077cc;
-      color: white;
-      font-weight: bold;
-      text-align: center;
-      border-radius: 0 0 15px 15px;
-    }
-  </style>
+  <link rel="stylesheet" href="vehiculos.css">
 </head>
 <body>
 
@@ -75,106 +14,229 @@
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="vehiculos.html">Vehículos</a></li>
+        <li><a href="vehiculos.html" class="active">Vehículos</a></li>
         <li><a href="#">Reservas</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
     </nav>
   </header>
 
-  <section class="hero">
-    <h2>Nuestra flota disponible</h2>
-    <p>Encuentra el vehículo ideal para tu próxima aventura.</p>
+  <section class="hero vehicle-hero">
+    <h2>Nuestra Flota</h2>
+    <p>Encuentra el vehículo perfecto para tus necesidades</p>
   </section>
 
-  <section class="section">
-    <h3 style="color:#0077cc; margin-bottom: 20px;">Filtrar por características</h3>
+  <section class="filtros-container">
+    <h3>Filtrar por:</h3>
     <div class="filtros">
-      <select name="tipo">
-        <option value="">Tipo de vehículo</option>
-        <option value="turismo">Turismo</option>
-        <option value="moto">Moto</option>
-        <option value="furgoneta">Furgoneta</option>
-      </select>
-      <select name="motor">
-        <option value="">Tipo de motor</option>
-        <option value="electrico">Eléctrico</option>
-        <option value="diesel">Diésel</option>
-        <option value="gasolina">Gasolina</option>
-        <option value="4x4">4x4</option>
-      </select>
-      <select name="plazas">
-        <option value="">Nº de plazas</option>
-        <option value="2">2</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="7">7+</option>
-      </select>
+      <div class="filtro-grupo">
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo">
+          <option value="todos">Todos</option>
+          <option value="turismo">Turismo</option>
+          <option value="moto">Moto</option>
+          <option value="furgoneta">Furgoneta</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="energia">Energía:</label>
+        <select id="energia" name="energia">
+          <option value="todos">Todos</option>
+          <option value="electrico">Eléctrico</option>
+          <option value="hibrido">Híbrido</option>
+          <option value="gasolina">Gasolina</option>
+          <option value="diesel">Diésel</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="plazas">Plazas:</label>
+        <select id="plazas" name="plazas">
+          <option value="todos">Todos</option>
+          <option value="2">2</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="7">7+</option>
+        </select>
+      </div>
+
+      <div class="filtro-grupo">
+        <label for="precio">Precio máximo por hora:</label>
+        <input type="range" id="precio" name="precio" min="5" max="50" value="50">
+        <span id="precio-valor">50€</span>
+      </div>
+
+      <button class="boton-filtrar">Aplicar filtros</button>
+    </div>
+  </section>
+
+  <section class="vehiculos-container">
+    <div class="vehiculo-card">
+      <div class="vehiculo-imagen">
+        <img src="/api/placeholder/400/300" alt="Renault ZOE">
+        <span class="etiqueta electrico">Eléctrico</span>
+      </div>
+      <div class="vehiculo-info">
+        <h3>Renault ZOE</h3>
+        <span class="tipo">Turismo</span>
+        <ul class="caracteristicas">
+          <li><strong>Color:</strong> Blanco</li>
+          <li><strong>Plazas:</strong> 5</li>
+          <li><strong>Año:</strong> 2023</li>
+          <li><strong>Precio/hora:</strong> <span class="precio">15€</span></li>
+        </ul>
+        <a href="#" class="boton-reservar">Reservar</a>
+      </div>
     </div>
 
-    <div class="grid-vehiculos">
-
-      <div class="vehiculo">
-        <img src="fotos/turismo1.jpg" alt="Turismo eléctrico">
-        <div class="vehiculo-info">
-          <h3>Turismo – Eléctrico</h3>
-          <p>Color: Blanco</p>
-          <p>Plazas: 5</p>
-          <p>Matrícula: 2023</p>
-        </div>
-        <div class="vehiculo-precio">10€/hora</div>
+    <div class="vehiculo-card">
+      <div class="vehiculo-imagen">
+        <img src="/api/placeholder/400/300" alt="Honda CB650R">
+        <span class="etiqueta gasolina">Gasolina</span>
       </div>
-
-      <div class="vehiculo">
-        <img src="fotos/moto1.jpg" alt="Moto urbana">
-        <div class="vehiculo-info">
-          <h3>Moto – Eléctrica</h3>
-          <p>Color: Roja</p>
-          <p>Plazas: 2</p>
-          <p>Matrícula: 2022</p>
-        </div>
-        <div class="vehiculo-precio">5€/hora</div>
+      <div class="vehiculo-info">
+        <h3>Honda CB650R</h3>
+        <span class="tipo">Moto</span>
+        <ul class="caracteristicas">
+          <li><strong>Color:</strong> Negro</li>
+          <li><strong>Plazas:</strong> 2</li>
+          <li><strong>Año:</strong> 2024</li>
+          <li><strong>Precio/hora:</strong> <span class="precio">12€</span></li>
+        </ul>
+        <a href="#" class="boton-reservar">Reservar</a>
       </div>
+    </div>
 
-      <div class="vehiculo">
-        <img src="fotos/furgo1.jpg" alt="Furgoneta diesel">
-        <div class="vehiculo-info">
-          <h3>Furgoneta – Diésel</h3>
-          <p>Color: Azul</p>
-          <p>Plazas: 3</p>
-          <p>Matrícula: 2021</p>
-        </div>
-        <div class="vehiculo-precio">12€/hora</div>
+    <div class="vehiculo-card">
+      <div class="vehiculo-imagen">
+        <img src="/api/placeholder/400/300" alt="Ford Transit">
+        <span class="etiqueta diesel">Diésel</span>
       </div>
-
-      <div class="vehiculo">
-        <img src="fotos/turismo2.jpg" alt="Turismo 4x4">
-        <div class="vehiculo-info">
-          <h3>Turismo – 4x4</h3>
-          <p>Color: Gris</p>
-          <p>Plazas: 5</p>
-          <p>Matrícula: 2020</p>
-        </div>
-        <div class="vehiculo-precio">14€/hora</div>
+      <div class="vehiculo-info">
+        <h3>Ford Transit</h3>
+        <span class="tipo">Furgoneta</span>
+        <ul class="caracteristicas">
+          <li><strong>Color:</strong> Gris</li>
+          <li><strong>Plazas:</strong> 3</li>
+          <li><strong>Año:</strong> 2022</li>
+          <li><strong>Precio/hora:</strong> <span class="precio">22€</span></li>
+        </ul>
+        <a href="#" class="boton-reservar">Reservar</a>
       </div>
+    </div>
 
-      <div class="vehiculo">
-        <img src="fotos/furgo2.jpg" alt="Furgoneta eléctrica">
-        <div class="vehiculo-info">
-          <h3>Furgoneta – Eléctrica</h3>
-          <p>Color: Blanca</p>
-          <p>Plazas: 2</p>
-          <p>Matrícula: 2024</p>
-        </div>
-        <div class="vehiculo-precio">13€/hora</div>
+    <div class="vehiculo-card">
+      <div class="vehiculo-imagen">
+        <img src="/api/placeholder/400/300" alt="Tesla Model 3">
+        <span class="etiqueta electrico">Eléctrico</span>
       </div>
+      <div class="vehiculo-info">
+        <h3>Tesla Model 3</h3>
+        <span class="tipo">Turismo</span>
+        <ul class="caracteristicas">
+          <li><strong>Color:</strong> Rojo</li>
+          <li><strong>Plazas:</strong> 5</li>
+          <li><strong>Año:</strong> 2024</li>
+          <li><strong>Precio/hora:</strong> <span class="precio">28€</span></li>
+        </ul>
+        <a href="#" class="boton-reservar">Reservar</a>
+      </div>
+    </div>
 
+    <div class="vehiculo-card">
+      <div class="vehiculo-imagen">
+        <img src="/api/placeholder/400/300" alt="BMW X5">
+        <span class="etiqueta hibrido">Híbrido</span>
+        <span class="etiqueta cuatro-x-cuatro">4x4</span>
+      </div>
+      <div class="vehiculo-info">
+        <h3>BMW X5</h3>
+        <span class="tipo">Turismo</span>
+        <ul class="caracteristicas">
+          <li><strong>Color:</strong> Azul</li>
+          <li><strong>Plazas:</strong> 7</li>
+          <li><strong>Año:</strong> 2023</li>
+          <li><strong>Precio/hora:</strong> <span class="precio">35€</span></li>
+        </ul>
+        <a href="#" class="boton-reservar">Reservar</a>
+      </div>
+    </div>
+
+    <div class="vehiculo-card">
+      <div class="vehiculo-imagen">
+        <img src="/api/placeholder/400/300" alt="Vespa Primavera">
+        <span class="etiqueta electrico">Eléctrico</span>
+      </div>
+      <div class="vehiculo-info">
+        <h3>Vespa Primavera</h3>
+        <span class="tipo">Moto</span>
+        <ul class="caracteristicas">
+          <li><strong>Color:</strong> Verde</li>
+          <li><strong>Plazas:</strong> 2</li>
+          <li><strong>Año:</strong> 2024</li>
+          <li><strong>Precio/hora:</strong> <span class="precio">8€</span></li>
+        </ul>
+        <a href="#" class="boton-reservar">Reservar</a>
+      </div>
+    </div>
+
+    <div class="vehiculo-card">
+      <div class="vehiculo-imagen">
+        <img src="/api/placeholder/400/300" alt="Mercedes-Benz Sprinter">
+        <span class="etiqueta diesel">Diésel</span>
+      </div>
+      <div class="vehiculo-info">
+        <h3>Mercedes-Benz Sprinter</h3>
+        <span class="tipo">Furgoneta</span>
+        <ul class="caracteristicas">
+          <li><strong>Color:</strong> Blanco</li>
+          <li><strong>Plazas:</strong> 3</li>
+          <li><strong>Año:</strong> 2022</li>
+          <li><strong>Precio/hora:</strong> <span class="precio">25€</span></li>
+        </ul>
+        <a href="#" class="boton-reservar">Reservar</a>
+      </div>
+    </div>
+
+    <div class="vehiculo-card">
+      <div class="vehiculo-imagen">
+        <img src="/api/placeholder/400/300" alt="Toyota RAV4">
+        <span class="etiqueta hibrido">Híbrido</span>
+        <span class="etiqueta cuatro-x-cuatro">4x4</span>
+      </div>
+      <div class="vehiculo-info">
+        <h3>Toyota RAV4</h3>
+        <span class="tipo">Turismo</span>
+        <ul class="caracteristicas">
+          <li><strong>Color:</strong> Gris</li>
+          <li><strong>Plazas:</strong> 5</li>
+          <li><strong>Año:</strong> 2023</li>
+          <li><strong>Precio/hora:</strong> <span class="precio">20€</span></li>
+        </ul>
+        <a href="#" class="boton-reservar">Reservar</a>
+      </div>
     </div>
   </section>
 
   <footer>
     &copy; 2025 MOVEYOU Rent. Todos los derechos reservados.
   </footer>
+
+  <script>
+    // Script para actualizar el valor del precio
+    const precioSlider = document.getElementById('precio');
+    const precioValor = document.getElementById('precio-valor');
+    
+    precioSlider.addEventListener('input', function() {
+      precioValor.textContent = this.value + '€';
+    });
+    
+    // Nota: Los filtros no funcionan realmente, como se solicitó
+    document.querySelector('.boton-filtrar').addEventListener('click', function() {
+      alert('Función de filtrado en desarrollo');
+    });
+  </script>
 
 </body>
 </html>
