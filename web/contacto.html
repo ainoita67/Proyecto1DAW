@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto – MOVEYOU Rent</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>MOVEYOU Rent</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="vehiculos.html">Vehículos</a></li>
+        <li><a href="#">Reservas</a></li>
+        <li><a href="contacto.html" class="active">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>¿Hablamos?</h2>
+    <p>Estamos aquí para ayudarte en todo lo que necesites.</p>
+  </section>
+
+  <section class="section info">
+    <img src="fotos/oficina.jpg" alt="Oficinas MOVEYOU Rent" height="400" width="600">
+    <div class="info-text">
+      <h3>Datos de contacto</h3>
+      <p><strong>Dirección:</strong> Calle de la Movilidad, 45 – Madrid</p>
+      <p><strong>Teléfono:</strong> +34 912 345 678</p>
+      <p><strong>Email:</strong> contacto@moveyourent.es</p>
+      <p><strong>Horario:</strong> Lunes a sábado, 9:00 a 20:00</p>
+    </div>
+  </section>
+
+  <section class="section news">
+    <h3>Nuestras cucursales y puntos de recogida</h3>
+    <img src="fotos/mimapa.png" alt="Mapa ubicación" style="width: 100%; max-width: 800px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+  </section>
+
+  <section class="section news">
+    <h3>Formulario de contacto</h3>
+    <form action="#" method="post" style="display: flex; flex-direction: column; gap: 20px; max-width: 600px;">
+      <input type="text" name="nombre" placeholder="Nombre completo" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios" style="padding: 12px; border-radius: 6px; border: 1px solid #ccc;">
+      
+      <input type="email" name="email" placeholder="Correo electrónico" required style="padding: 12px; border-radius: 6px; border: 1px solid #ccc;">
+      
+      <input type="tel" name="telefono" placeholder="Teléfono (opcional)" pattern="[0-9\s+()-]{9,15}" title="Introduce un teléfono válido" style="padding: 12px; border-radius: 6px; border: 1px solid #ccc;">
+
+      <textarea name="mensaje" placeholder="Escribe tu mensaje aquí" required rows="5" style="padding: 12px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
+
+      <button type="submit" style="padding: 12px; background: #0077cc; color: white; font-weight: bold; border: none; border-radius: 30px; cursor: pointer;">
+        Enviar mensaje
+      </button>
+    </form>
+  </section>
+
+  <footer>
+    &copy; 2025 MOVEYOU Rent. Todos los derechos reservados.
+  </footer>
+
+</body>
+</html>
