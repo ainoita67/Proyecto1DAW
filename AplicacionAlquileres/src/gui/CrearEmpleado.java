@@ -16,7 +16,7 @@ public class CrearEmpleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtNombre;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private JTextField textField_3;
@@ -71,10 +71,10 @@ public class CrearEmpleado extends JFrame {
 		lblDireccin.setBounds(73, 149, 70, 15);
 		contentPane.add(lblDireccin);
 		
-		textField = new JTextField();
-		textField.setBounds(226, 39, 170, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(226, 39, 170, 19);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
 		
 		textField_1 = new JTextField();
 		textField_1.setBounds(226, 66, 170, 19);
