@@ -1,11 +1,20 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Cliente;
+import bdd.Conexion;
+import bdd.DbCliente;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -18,6 +27,7 @@ public class CrearCliente extends JFrame {
 	private JTextField txtDni;
 	private JTextField textField_3;
 	private JTextField textField_4;
+	private DbCliente conexion;
 
 	/**
 	 * Launch the application.
@@ -100,9 +110,33 @@ public class CrearCliente extends JFrame {
 		btnCrear.setBounds(174, 198, 117, 25);
 		contentPane.add(btnCrear);
 		
+		btnCrear.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+             insertarCliente();
+            }
+        });
+		
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(359, 0, 79, 25);
 		contentPane.add(btnAtras);
 	}
+	
+    public void insertarCliente()
+    {
+    	System.out.println("Coy a ajflf");
+    	  
+    	Cliente cliente = new Cliente(txtNombre.getText(), txtNombre.getText(), int tfno, txtNombre.getText(), txtNombre.getText());
+           try {
+               conexion = new DbCliente();
+               if (conexion.crearCliente(cliente)) {
+                   JOptionPane.showMessageDialog(null, "Cliente insertado correctamente");
+               } else {
+                   JOptionPane.showMessageDialog(null, "Error al insertar cliente");
+               }
+               conexion.cerrar();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+    }
 
 }
