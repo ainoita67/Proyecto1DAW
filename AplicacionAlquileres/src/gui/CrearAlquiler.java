@@ -13,12 +13,16 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 
-public class GestionarClientes extends JFrame {
+public class CrearAlquiler extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField txtBuscarDni;
+	private JTextField txtBuscarMatricula;
+	private JTextField txtFechaFin;
+	private JTextField txtPrecio;
+	private JTextField txtFechaInicio;
 
 	/**
 	 * Launch the application.
@@ -27,7 +31,7 @@ public class GestionarClientes extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GestionarClientes frame = new GestionarClientes();
+					CrearAlquiler frame = new CrearAlquiler();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +43,7 @@ public class GestionarClientes extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GestionarClientes() {
+	public CrearAlquiler() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -49,7 +53,7 @@ public class GestionarClientes extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(27, 71, 400, 180);
+		scrollPane.setBounds(27, 71, 114, 180);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -78,15 +82,15 @@ public class GestionarClientes extends JFrame {
 		});
 		
 		JButton btnAadir = new JButton("Añadir");
-		btnAadir.setBounds(153, 37, 80, 25);
+		btnAadir.setBounds(358, 152, 80, 25);
 		contentPane.add(btnAadir);
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(245, 37, 80, 25);
+		btnEditar.setBounds(358, 189, 80, 25);
 		contentPane.add(btnEditar);
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(337, 37, 90, 25);
+		btnEliminar.setBounds(348, 226, 90, 25);
 		contentPane.add(btnEliminar);
 		
 		JButton btnMen = new JButton("Menú");
@@ -96,5 +100,37 @@ public class GestionarClientes extends JFrame {
 		JLabel lblClientes = new JLabel("Clientes");
 		lblClientes.setBounds(47, 13, 70, 15);
 		contentPane.add(lblClientes);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(163, 71, 114, 180);
+		contentPane.add(scrollPane_1);
+		
+		txtBuscarMatricula = new JTextField();
+		txtBuscarMatricula.setText("Buscar Matricula");
+		txtBuscarMatricula.setColumns(10);
+		txtBuscarMatricula.setBounds(163, 40, 114, 19);
+		contentPane.add(txtBuscarMatricula);
+		
+		JLabel lblVehiculos = new JLabel("Vehiculos");
+		lblVehiculos.setBounds(183, 13, 70, 15);
+		contentPane.add(lblVehiculos);
+		
+		txtFechaFin = new JTextField();
+		txtFechaFin.setText("Fecha Fin");
+		txtFechaFin.setBounds(324, 70, 114, 19);
+		contentPane.add(txtFechaFin);
+		txtFechaFin.setColumns(10);
+		
+		txtPrecio = new JTextField();
+		txtPrecio.setText("Precio/Hora");
+		txtPrecio.setBounds(324, 101, 114, 19);
+		contentPane.add(txtPrecio);
+		txtPrecio.setColumns(10);
+		
+		txtFechaInicio = new JTextField();
+		txtFechaInicio.setText("Fecha Inicio");
+		txtFechaInicio.setColumns(10);
+		txtFechaInicio.setBounds(324, 40, 114, 19);
+		contentPane.add(txtFechaInicio);
 	}
 }
