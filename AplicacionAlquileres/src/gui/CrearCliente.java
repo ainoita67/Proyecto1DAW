@@ -25,8 +25,8 @@ public class CrearCliente extends JFrame {
 	private JTextField txtNombre;
 	private JTextField txtEmail;
 	private JTextField txtDni;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtTfno;
+	private JTextField txtDireccion;
 	private DbCliente conexion;
 
 	/**
@@ -92,15 +92,15 @@ public class CrearCliente extends JFrame {
 		contentPane.add(txtDni);
 		txtDni.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(225, 129, 170, 19);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtTfno = new JTextField();
+		txtTfno.setBounds(225, 129, 170, 19);
+		contentPane.add(txtTfno);
+		txtTfno.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(225, 156, 170, 19);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtDireccion = new JTextField();
+		txtDireccion.setBounds(225, 156, 170, 19);
+		contentPane.add(txtDireccion);
+		txtDireccion.setColumns(10);
 		
 		JLabel lblCrearCliente = new JLabel("Crear Cliente");
 		lblCrearCliente.setBounds(177, 12, 98, 15);

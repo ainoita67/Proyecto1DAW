@@ -15,11 +15,11 @@ public class EditarCliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
+	private JTextField txtNombre;
+	private JTextField txtEmail;
+	private JTextField txtDni;
+	private JTextField txtTfno;
+	private JTextField txtDireccion;
 
 	/**
 	 * Launch the application.
@@ -69,30 +69,30 @@ public class EditarCliente extends JFrame {
 		lblDireccin.setBounds(72, 158, 70, 15);
 		contentPane.add(lblDireccin);
 		
-		textField = new JTextField();
-		textField.setBounds(225, 48, 170, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(225, 48, 170, 19);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(225, 75, 170, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setBounds(225, 75, 170, 19);
+		contentPane.add(txtEmail);
+		txtEmail.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(225, 102, 170, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtDni = new JTextField();
+		txtDni.setBounds(225, 102, 170, 19);
+		contentPane.add(txtDni);
+		txtDni.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(225, 129, 170, 19);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtTfno = new JTextField();
+		txtTfno.setBounds(225, 129, 170, 19);
+		contentPane.add(txtTfno);
+		txtTfno.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(225, 156, 170, 19);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtDireccion = new JTextField();
+		txtDireccion.setBounds(225, 156, 170, 19);
+		contentPane.add(txtDireccion);
+		txtDireccion.setColumns(10);
 		
 		JLabel lblCrearCliente = new JLabel("Editar Cliente");
 		lblCrearCliente.setBounds(177, 12, 98, 15);

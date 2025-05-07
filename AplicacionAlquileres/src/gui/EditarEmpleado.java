@@ -16,12 +16,12 @@ public class EditarEmpleado extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField txtNombre;
+	private JTextField txtEmail;
+	private JTextField txtDni;
+	private JTextField txtTfno;
+	private JTextField txtDireccion;
+	private JTextField txtContrasea;
 
 	/**
 	 * Launch the application.
@@ -71,30 +71,30 @@ public class EditarEmpleado extends JFrame {
 		lblDireccin.setBounds(73, 149, 70, 15);
 		contentPane.add(lblDireccin);
 		
-		textField = new JTextField();
-		textField.setBounds(226, 39, 170, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(226, 39, 170, 19);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(226, 66, 170, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setBounds(226, 66, 170, 19);
+		contentPane.add(txtEmail);
+		txtEmail.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(226, 93, 170, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtDni = new JTextField();
+		txtDni.setBounds(226, 93, 170, 19);
+		contentPane.add(txtDni);
+		txtDni.setColumns(10);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(226, 120, 170, 19);
-		contentPane.add(textField_3);
-		textField_3.setColumns(10);
+		txtTfno = new JTextField();
+		txtTfno.setBounds(226, 120, 170, 19);
+		contentPane.add(txtTfno);
+		txtTfno.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(226, 147, 170, 19);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtDireccion = new JTextField();
+		txtDireccion.setBounds(226, 147, 170, 19);
+		contentPane.add(txtDireccion);
+		txtDireccion.setColumns(10);
 		
 		JLabel lblCrearCliente = new JLabel("Editar Empleado");
 		lblCrearCliente.setBounds(174, 5, 117, 15);
@@ -116,10 +116,10 @@ public class EditarEmpleado extends JFrame {
 		lblContrasea.setBounds(73, 176, 111, 15);
 		contentPane.add(lblContrasea);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(226, 174, 170, 19);
-		contentPane.add(textField_5);
+		txtContrasea = new JTextField();
+		txtContrasea.setColumns(10);
+		txtContrasea.setBounds(226, 174, 170, 19);
+		contentPane.add(txtContrasea);
 		
 		JLabel lblRol = new JLabel("Rol");
 		lblRol.setBounds(73, 203, 111, 15);
@@ -129,9 +129,9 @@ public class EditarEmpleado extends JFrame {
 		chckbxEmpleado.setBounds(169, 199, 94, 23);
 		contentPane.add(chckbxEmpleado);
 		
-		JCheckBox chckbxAdministrador = new JCheckBox("Administrador");
-		chckbxAdministrador.setBounds(267, 199, 129, 23);
-		contentPane.add(chckbxAdministrador);
+		JCheckBox chckbxAdmin = new JCheckBox("Administrador");
+		chckbxAdmin.setBounds(267, 199, 129, 23);
+		contentPane.add(chckbxAdmin);
 	}
 
 }
