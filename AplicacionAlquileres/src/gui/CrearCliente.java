@@ -13,9 +13,9 @@ public class CrearCliente extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtNombre;
+	private JTextField txtEmail;
+	private JTextField txtDni;
 	private JTextField textField_3;
 	private JTextField textField_4;
 
@@ -67,20 +67,20 @@ public class CrearCliente extends JFrame {
 		lblDireccin.setBounds(72, 158, 70, 15);
 		contentPane.add(lblDireccin);
 		
-		textField = new JTextField();
-		textField.setBounds(225, 48, 170, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtNombre = new JTextField();
+		txtNombre.setBounds(225, 48, 170, 19);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(225, 75, 170, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setBounds(225, 75, 170, 19);
+		contentPane.add(txtEmail);
+		txtEmail.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(225, 102, 170, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtDni = new JTextField();
+		txtDni.setBounds(225, 102, 170, 19);
+		contentPane.add(txtDni);
+		txtDni.setColumns(10);
 		
 		textField_3 = new JTextField();
 		textField_3.setBounds(225, 129, 170, 19);
