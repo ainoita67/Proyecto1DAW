@@ -17,16 +17,12 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_4ndD0CBDEfCIQszOCAZENA" name="correo" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_4691sCBDEfCIQszOCAZENA" name="fecha_nac" visibility="private">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_5YrFYCBDEfCIQszOCAZENA" name="contrasenya" visibility="private">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_4691sCBDEfCIQszOCAZENA" name="direccion" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_LH0LMCBFEfCIQszOCAZENA" name="resgistrar"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_LdEpgCBFEfCIQszOCAZENA" name="editar"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_MeEMcCBFEfCIQszOCAZENA" name="mostrar"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_MxA9oCBFEfCIQszOCAZENA" name="alquilar"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_hnHCwCBFEfCIQszOCAZENA" name="Alquiler">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_hnHCwSBFEfCIQszOCAZENA" name="DNI" visibility="private">
@@ -49,7 +45,6 @@
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_oBuVwCBFEfCIQszOCAZENA" name="cliente" visibility="private" type="_u6Rz4CBDEfCIQszOCAZENA"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_ob0QwCBFEfCIQszOCAZENA" name="vehiculo" visibility="private" type="_v4zmwCBFEfCIQszOCAZENA"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_o1EeQCBFEfCIQszOCAZENA" name="empleado" visibility="private" type="_tjU9ICBFEfCIQszOCAZENA"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_pHmYsCBFEfCIQszOCAZENA" name="fecha_ini" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
       </ownedAttribute>
@@ -75,7 +70,7 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_jyYAcCBFEfCIQszOCAZENA" name="editar"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_kCLXACBFEfCIQszOCAZENA" name="mostrar"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_tjU9ICBFEfCIQszOCAZENA" name="empleado">
+    <packagedElement xmi:type="uml:Class" xmi:id="_tjU9ICBFEfCIQszOCAZENA" name="Empleado">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_f8khgCHPEfCEuOPN4BzVcw" name="DNI" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
@@ -88,7 +83,7 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_f8mWsCHPEfCEuOPN4BzVcw" name="correo" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_f8nk0CHPEfCEuOPN4BzVcw" name="fecha_nac" visibility="private">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_f8nk0CHPEfCEuOPN4BzVcw" name="direccion" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
       </ownedAttribute>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_f8oL4CHPEfCEuOPN4BzVcw" name="contrasenya" visibility="private">
@@ -100,8 +95,9 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_dIS4oCBGEfCIQszOCAZENA" name="registrar"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_dXd9ECBGEfCIQszOCAZENA" name="editar"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_drnoICBGEfCIQszOCAZENA" name="mostrar"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Qu0nsCmgEfCSy5nWwVwQVQ" name="iniciarsesion"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_v4zmwCBFEfCIQszOCAZENA" name="vehiculo">
+    <packagedElement xmi:type="uml:Class" xmi:id="_v4zmwCBFEfCIQszOCAZENA" name="Vehiculo">
       <ownedAttribute xmi:type="uml:Property" xmi:id="_351ogCBGEfCIQszOCAZENA" name="matricula" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
@@ -111,8 +107,14 @@
       <ownedAttribute xmi:type="uml:Property" xmi:id="_4sRLACBGEfCIQszOCAZENA" name="f_matriculacion" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_46GysCBGEfCIQszOCAZENA" name="f_mantenimiento" visibility="private">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_46GysCBGEfCIQszOCAZENA" name="proximo_mantenimiento" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDate"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_d3TIkCmaEfCSy5nWwVwQVQ" name="color" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:type="uml:Property" xmi:id="_mebWcCmaEfCSy5nWwVwQVQ" name="plazas" visibility="private">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedAttribute>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_em2hUCBGEfCIQszOCAZENA" name="Vehiculo"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_fX-cQCBGEfCIQszOCAZENA" name="editar"/>
@@ -121,79 +123,52 @@
       <ownedOperation xmi:type="uml:Operation" xmi:id="_gH2aACBGEfCIQszOCAZENA" name="disponible"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_6mR5QCBJEfCIQszOCAZENA" name="chPrecio"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_wzOAkCBFEfCIQszOCAZENA" name="moto">
+    <packagedElement xmi:type="uml:Class" xmi:id="_wzOAkCBFEfCIQszOCAZENA" name="Moto">
       <generalization xmi:type="uml:Generalization" xmi:id="_7i8gYCBKEfCIQszOCAZENA" general="_v4zmwCBFEfCIQszOCAZENA"/>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_m7M1wCBJEfCIQszOCAZENA" name="frecuencia1" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_m7Nc0CBJEfCIQszOCAZENA" name="antiguedad1" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_m7OD4CBJEfCIQszOCAZENA" name="frecuencia2" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_m7Oq8CBJEfCIQszOCAZENA" name="antiguedad2" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_Zwf2YCBGEfCIQszOCAZENA" name="furgoneta">
+    <packagedElement xmi:type="uml:Class" xmi:id="_Zwf2YCBGEfCIQszOCAZENA" name="Furgoneta">
       <generalization xmi:type="uml:Generalization" xmi:id="_5h7q4CBKEfCIQszOCAZENA" general="_v4zmwCBFEfCIQszOCAZENA"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_7HR04CBGEfCIQszOCAZENA" name="tipo" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
       </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_7V9xICBGEfCIQszOCAZENA" name="frecuencia1" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_7jXT8CBGEfCIQszOCAZENA" name="antiguedad1" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_K9MSwCBJEfCIQszOCAZENA" name="frecuencia2" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_K9Ng4CBJEfCIQszOCAZENA" name="antiguedad2" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
     </packagedElement>
-    <packagedElement xmi:type="uml:Class" xmi:id="_amN9cCBGEfCIQszOCAZENA" name="turismo">
+    <packagedElement xmi:type="uml:Class" xmi:id="_amN9cCBGEfCIQszOCAZENA" name="Turismo">
       <generalization xmi:type="uml:Generalization" xmi:id="_sZ7S0CBKEfCIQszOCAZENA" general="_v4zmwCBFEfCIQszOCAZENA"/>
       <ownedAttribute xmi:type="uml:Property" xmi:id="_kzMAYCBJEfCIQszOCAZENA" name="tipo" visibility="private">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_kzNOgCBJEfCIQszOCAZENA" name="frecuencia1" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_kzOcoCBJEfCIQszOCAZENA" name="antiguedad1" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_kzPqwCBJEfCIQszOCAZENA" name="frecuencia2" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
-      </ownedAttribute>
-      <ownedAttribute xmi:type="uml:Property" xmi:id="_kzRf8CBJEfCIQszOCAZENA" name="antiguedad2" visibility="private" isReadOnly="true">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EDouble"/>
       </ownedAttribute>
     </packagedElement>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_8cie4CHLEfCEuOPN4BzVcw" name="BDD">
     <packagedElement xmi:type="uml:Class" xmi:id="_MGmHQCTdEfCIF6a7YdEqlQ" name="usuario">
       <ownedOperation xmi:type="uml:Operation" xmi:id="_VszzkCTdEfCIF6a7YdEqlQ" name="iniciarSesion"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_XAoL4CTdEfCIF6a7YdEqlQ" name="crearUsuario"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_Ywyh8CTdEfCIF6a7YdEqlQ" name="eliminarUsuario"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_a31uACTdEfCIF6a7YdEqlQ" name="editarDatosUsuario"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_fy1oYCTdEfCIF6a7YdEqlQ" name="getInfo"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_f2fjsCmbEfCSy5nWwVwQVQ" name="crearEmpleado"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_iAhyUCmbEfCSy5nWwVwQVQ" name="eliminarEmpleado"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_joSaUCmbEfCSy5nWwVwQVQ" name="editarDatosEmpleado"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_mRjioCmbEfCSy5nWwVwQVQ" name="getEmpleado"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="_idX8ACTdEfCIF6a7YdEqlQ" name="vehiculo">
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_lRozYCTdEfCIF6a7YdEqlQ" name="getInfio"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_lRozYCTdEfCIF6a7YdEqlQ" name="getVehiculo"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_mdOcwCTdEfCIF6a7YdEqlQ" name="crearVehiculo"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_oO7q8CTdEfCIF6a7YdEqlQ" name="eliminarVehiculo"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_q6kKwCTdEfCIF6a7YdEqlQ" name="editarVehiculo"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_tWVCkCTdEfCIF6a7YdEqlQ" name="mantenimiento"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_tWVCkCTdEfCIF6a7YdEqlQ" name="calMantenimiento"/>
       <ownedOperation xmi:type="uml:Operation" xmi:id="_4LhqgCTdEfCIF6a7YdEqlQ" name="consultarDisponibilidad"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_9JR98CTdEfCIF6a7YdEqlQ" name="alquilar"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="__byMECTdEfCIF6a7YdEqlQ" name="editarAlquiler"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_BwhO0CTeEfCIF6a7YdEqlQ" name="eliminarAlquiler"/>
-      <ownedOperation xmi:type="uml:Operation" xmi:id="_Hhr8MCTeEfCIF6a7YdEqlQ" name="consultarHistorial"/>
     </packagedElement>
-    <packagedElement xmi:type="uml:Dependency" xmi:id="_U3uwQCTeEfCIF6a7YdEqlQ" client="_8cie4CHLEfCEuOPN4BzVcw" supplier="_3FpSsCHLEfCEuOPN4BzVcw"/>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_U3uwQCTeEfCIF6a7YdEqlQ" client="_ho4PQCBDEfCIQszOCAZENA" supplier="_3FpSsCHLEfCEuOPN4BzVcw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_6NpdoCmbEfCSy5nWwVwQVQ" name="Alquileres">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EvFcECmcEfCSy5nWwVwQVQ" name="getAlquiler"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EvGqMCmcEfCSy5nWwVwQVQ" name="crearAlquiler"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EvHRQCmcEfCSy5nWwVwQVQ" name="eliminarAlquiler"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_EvH4UCmcEfCSy5nWwVwQVQ" name="editarAlquiler"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_MZ0TICmcEfCSy5nWwVwQVQ" name="consultarHistorial"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_W4yzcCmcEfCSy5nWwVwQVQ" name="Cliente">
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ZbYsACmcEfCSy5nWwVwQVQ" name="crearCliente"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ZbeLkCmcEfCSy5nWwVwQVQ" name="eliminarCliente"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_Zbh18CmcEfCSy5nWwVwQVQ" name="editarDatosCliente"/>
+      <ownedOperation xmi:type="uml:Operation" xmi:id="_ZblgUCmcEfCSy5nWwVwQVQ" name="getCliente"/>
+    </packagedElement>
   </packagedElement>
   <packagedElement xmi:type="uml:Package" xmi:id="_7jbsoCHLEfCEuOPN4BzVcw" name="GUI"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_XsgP4CTcEfCIF6a7YdEqlQ" memberEnd="_XsheAiTcEfCIF6a7YdEqlQ _XsiFECTcEfCIF6a7YdEqlQ">

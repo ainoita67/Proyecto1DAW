@@ -1,0 +1,108 @@
+package gui;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
+public class CrearCliente extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CrearCliente frame = new CrearCliente();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public CrearCliente() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNombreCompleto = new JLabel("Nombre Completo");
+		lblNombreCompleto.setBounds(72, 50, 135, 15);
+		contentPane.add(lblNombreCompleto);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(72, 77, 70, 15);
+		contentPane.add(lblEmail);
+		
+		JLabel lblDni = new JLabel("DNI");
+		lblDni.setBounds(72, 104, 70, 15);
+		contentPane.add(lblDni);
+		
+		JLabel lblTelfono = new JLabel("Teléfono");
+		lblTelfono.setBounds(72, 131, 70, 15);
+		contentPane.add(lblTelfono);
+		
+		JLabel lblDireccin = new JLabel("Dirección");
+		lblDireccin.setBounds(72, 158, 70, 15);
+		contentPane.add(lblDireccin);
+		
+		textField = new JTextField();
+		textField.setBounds(225, 48, 170, 19);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		textField_1 = new JTextField();
+		textField_1.setBounds(225, 75, 170, 19);
+		contentPane.add(textField_1);
+		textField_1.setColumns(10);
+		
+		textField_2 = new JTextField();
+		textField_2.setBounds(225, 102, 170, 19);
+		contentPane.add(textField_2);
+		textField_2.setColumns(10);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(225, 129, 170, 19);
+		contentPane.add(textField_3);
+		textField_3.setColumns(10);
+		
+		textField_4 = new JTextField();
+		textField_4.setBounds(225, 156, 170, 19);
+		contentPane.add(textField_4);
+		textField_4.setColumns(10);
+		
+		JLabel lblCrearCliente = new JLabel("Crear Cliente");
+		lblCrearCliente.setBounds(177, 12, 98, 15);
+		contentPane.add(lblCrearCliente);
+		
+		JButton btnCrear = new JButton("+ Crear");
+		btnCrear.setBounds(174, 198, 117, 25);
+		contentPane.add(btnCrear);
+		
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.setBounds(359, 0, 79, 25);
+		contentPane.add(btnAtras);
+	}
+
+}
