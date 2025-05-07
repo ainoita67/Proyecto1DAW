@@ -16,10 +16,10 @@ public class EditarVehiculo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_4;
+	private JTextField txtMatricula;
+	private JTextField txtPrecio;
+	private JTextField txtFechaMatr;
+	private JTextField txtSubtipo;
 
 	/**
 	 * Launch the application.
@@ -69,25 +69,25 @@ public class EditarVehiculo extends JFrame {
 		lblDireccin.setBounds(72, 158, 70, 15);
 		contentPane.add(lblDireccin);
 		
-		textField = new JTextField();
-		textField.setBounds(225, 48, 170, 19);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		txtMatricula = new JTextField();
+		txtMatricula.setBounds(225, 48, 170, 19);
+		contentPane.add(txtMatricula);
+		txtMatricula.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(225, 75, 170, 19);
-		contentPane.add(textField_1);
-		textField_1.setColumns(10);
+		txtPrecio = new JTextField();
+		txtPrecio.setBounds(225, 75, 170, 19);
+		contentPane.add(txtPrecio);
+		txtPrecio.setColumns(10);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(225, 102, 170, 19);
-		contentPane.add(textField_2);
-		textField_2.setColumns(10);
+		txtFechaMatr = new JTextField();
+		txtFechaMatr.setBounds(225, 102, 170, 19);
+		contentPane.add(txtFechaMatr);
+		txtFechaMatr.setColumns(10);
 		
-		textField_4 = new JTextField();
-		textField_4.setBounds(225, 156, 170, 19);
-		contentPane.add(textField_4);
-		textField_4.setColumns(10);
+		txtSubtipo = new JTextField();
+		txtSubtipo.setBounds(225, 156, 170, 19);
+		contentPane.add(txtSubtipo);
+		txtSubtipo.setColumns(10);
 		
 		JLabel lblEditarVehiculo = new JLabel("Editar Vehiculo");
 		lblEditarVehiculo.setBounds(177, 12, 114, 15);
@@ -105,9 +105,9 @@ public class EditarVehiculo extends JFrame {
 		btnAtras.setBounds(358, 0, 80, 25);
 		contentPane.add(btnAtras);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Furgoneta");
-		chckbxNewCheckBox.setBounds(161, 127, 103, 23);
-		contentPane.add(chckbxNewCheckBox);
+		JCheckBox chckbxFurgo = new JCheckBox("Furgoneta");
+		chckbxFurgo.setBounds(161, 127, 103, 23);
+		contentPane.add(chckbxFurgo);
 		
 		JCheckBox chckbxTurismo = new JCheckBox("Turismo");
 		chckbxTurismo.setBounds(268, 127, 91, 23);
