@@ -1,10 +1,16 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import bdd.DbCliente;
+import modelo.Cliente;
+
 import javax.swing.JTable;
 
 import javax.swing.JScrollPane;
@@ -55,6 +61,8 @@ public class GestionarClientes extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+		cargarTablaClientes();
+		
 		txtBuscarDni = new JTextField();
 		txtBuscarDni.setText("Buscar DNI");
 		txtBuscarDni.setBounds(27, 40, 114, 19);
@@ -97,4 +105,40 @@ public class GestionarClientes extends JFrame {
 		lblClientes.setBounds(47, 13, 70, 15);
 		contentPane.add(lblClientes);
 	}
+	
+	public void cargarTablaClientes() {
+	    // Definir las columnas
+	    String[] columnas = {"DNI", "Nombre", "Teléfono", "Correo", "Dirección"};
+
+	    // Crear un modelo de tabla que no permita edición
+	    DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false; // Ninguna celda es editable
+	        }
+	    };
+
+	    try {
+	        DbCliente dbCliente = new DbCliente();
+	        ArrayList<Cliente> lista = dbCliente.verTodosClientes();
+
+	        for (Cliente c : lista) {
+	            Object[] fila = {
+	                c.getDNI(),
+	                c.getNombre(),
+	                c.getTfno(),
+	                c.getCorreo(),
+	                c.getDireccion()
+	            };
+	            modeloTabla.addRow(fila);
+	        }
+
+	        table.setModel(modeloTabla);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+
 }

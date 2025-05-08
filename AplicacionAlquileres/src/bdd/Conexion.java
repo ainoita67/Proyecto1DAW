@@ -22,6 +22,16 @@ public class Conexion {
     public Conexion() throws SQLException {
         conexion = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
     }
+    
+    public void cerrar() {
+        try {
+            if (conexion != null) conexion.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    
 }
 
 	

@@ -5,7 +5,9 @@
 package bdd;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import modelo.Cliente;
 
@@ -15,15 +17,15 @@ public class DbCliente extends Conexion{
 	}
 
 	public boolean crearCliente(Cliente cliente) {
-		String sql = "INSERT INTO usuario (dni, nombre, telef, correo, direccion, rol) VALUES (?, ?, ?, ?, ?, 'cliente')";
+		String sql = "INSERT INTO usuario (dni, nombre, telef, correo, direccion, rol) VALUES (?, ?, ?, ?, ?, 1)";
 
 		
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            stmt.setString(1, cliente.getNombre());
-            stmt.setString(2, cliente.getDNI());
-            stmt.setString(3, cliente.getDireccion());
-            stmt.setInt(4, cliente.getTfno());
-            stmt.setString(5, cliente.getCorreo());
+            stmt.setString(1, cliente.getDNI());
+            stmt.setString(2, cliente.getNombre());
+            stmt.setInt(3, cliente.getTfno());
+            stmt.setString(4, cliente.getCorreo());
+            stmt.setString(5, cliente.getDireccion());
             int filas = stmt.executeUpdate();
             return filas > 0;
         } catch (SQLException e) {
@@ -31,7 +33,52 @@ public class DbCliente extends Conexion{
             return false;
         }		
 	}
+	
+	public Cliente ver1Cliente(String dni) {
+	    String sql = "SELECT dni, nombre, telef, correo, direccion FROM usuario WHERE dni = ? and rol = 1";
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, dni);
+	        var rs = stmt.executeQuery();
+	        if (rs.next()) {
+	            String dniCliente = rs.getString("dni");
+	            String nombre = rs.getString("nombre");
+	            int telef = rs.getInt("telef");
+	            String correo = rs.getString("correo");
+	            String direccion = rs.getString("direccion");
+	            
+	            return new Cliente(dniCliente, nombre, telef, correo, direccion);
+	        } else {
+	            return null; // No se encontró el cliente
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	}
 
+	public ArrayList<Cliente> verTodosClientes() {
+		ArrayList<Cliente> listaClientes = new ArrayList<>();
+	    String sql = "SELECT dni, nombre, telef, correo, direccion FROM usuario WHERE rol = 1";
+	    
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql);
+	         ResultSet rs = stmt.executeQuery()) {
+	        
+	        while (rs.next()) {
+	            String dniCliente = rs.getString("dni");
+	            String nombre = rs.getString("nombre");
+	            int telef = rs.getInt("telef");
+	            String correo = rs.getString("correo");
+	            String direccion = rs.getString("direccion");
+	            
+	            Cliente cliente = new Cliente(dniCliente, nombre, telef, correo, direccion);
+	            listaClientes.add(cliente);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return listaClientes;
+	}
 
 	public void eliminarCliente() {
 	}
@@ -39,6 +86,5 @@ public class DbCliente extends Conexion{
 	public void editarDatosCliente() {
 	}
 
-	public void getCliente() {
-	}
+	
 }
