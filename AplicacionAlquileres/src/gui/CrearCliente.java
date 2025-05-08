@@ -125,7 +125,7 @@ public class CrearCliente extends JFrame {
     {
     	System.out.println("Coy a ajflf");
     	  
-    	Cliente cliente = new Cliente(txtNombre.getText(), txtNombre.getText(), int tfno, txtNombre.getText(), txtNombre.getText());
+    	Cliente cliente = new Cliente(txtDni.getText(), txtNombre.getText(), txtTfno.getText(), txtEmail.getText(), txtDireccion.getText());
            try {
                conexion = new DbCliente();
                if (conexion.crearCliente(cliente)) {
