@@ -23,6 +23,7 @@ public class EditarCliente extends JFrame {
 	private JTextField txtDni;
 	private JTextField txtTfno;
 	private JTextField txtDireccion;
+	private Cliente clienteActual;
 
 	/**
 	 * Launch the application.
@@ -31,7 +32,7 @@ public class EditarCliente extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarCliente frame = new EditarCliente();
+					EditarCliente frame = new EditarCliente(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +44,9 @@ public class EditarCliente extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditarCliente() {
+	public EditarCliente(Cliente cliente) {
+		this.clienteActual = cliente;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -97,21 +100,30 @@ public class EditarCliente extends JFrame {
 		contentPane.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
-		JLabel lblCrearCliente = new JLabel("Editar Cliente");
-		lblCrearCliente.setBounds(177, 12, 98, 15);
-		contentPane.add(lblCrearCliente);
+		JLabel lblEditarCliente = new JLabel("Editar Cliente");
+		lblEditarCliente.setBounds(177, 12, 98, 15);
+		contentPane.add(lblEditarCliente);
 		
-		JButton btnCrear = new JButton("Enviar");
-		btnCrear.addActionListener(new ActionListener() {
+		JButton btnEditar = new JButton("Guardar cambios");
+		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				guardarCambios();
 			}
 		});
-		btnCrear.setBounds(174, 198, 117, 25);
-		contentPane.add(btnCrear);
+		btnEditar.setBounds(174, 198, 117, 25);
+		contentPane.add(btnEditar);
 		
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(358, 0, 80, 25);
 		contentPane.add(btnAtras);
+		
+		btnAtras.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	irAGestionar();
+            }
+        });
+		
+		cargarDatosCliente(cliente);
 	}
 	
 	public void cargarDatosCliente(Cliente cliente) {
@@ -124,5 +136,34 @@ public class EditarCliente extends JFrame {
 	    txtDni.setEditable(false);
 	}
 
+	private void guardarCambios() {
+	    try {
+	        // Actualizar el objeto cliente con los valores nuevos
+	        clienteActual.setNombre(txtNombre.getText());
+	        clienteActual.setCorreo(txtEmail.getText());
+	        clienteActual.setTfno(txtTfno.getText());
+	        clienteActual.setDireccion(txtDireccion.getText());
+	        
+	        // Llamar a la base de datos para actualizar
+	        bdd.DbCliente db = new bdd.DbCliente();
+	        
+	        if (db.actualizarCliente(clienteActual)) {
+	            javax.swing.JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente.");
+	            dispose(); // Cerrar ventana después de guardar
+	            GestionarClientes ventanagestionar = new GestionarClientes();
+	            ventanagestionar.setVisible(true);
+	        } else {
+	            javax.swing.JOptionPane.showMessageDialog(this, "No se pudo actualizar el cliente.");
+	        }
 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el cliente.");
+	    }
+	}
+	
+	private void irAGestionar() {
+	    GestionarClientes ventanagestionar = new GestionarClientes();
+	    ventanagestionar.setVisible(true);
+	}
 }

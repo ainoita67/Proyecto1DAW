@@ -23,7 +23,7 @@ public class DbCliente extends Conexion{
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setString(1, cliente.getDNI());
             stmt.setString(2, cliente.getNombre());
-            stmt.setInt(3, cliente.getTfno());
+            stmt.setString(3, cliente.getTfno());
             stmt.setString(4, cliente.getCorreo());
             stmt.setString(5, cliente.getDireccion());
             int filas = stmt.executeUpdate();
@@ -42,7 +42,7 @@ public class DbCliente extends Conexion{
 	        if (rs.next()) {
 	            String dniCliente = rs.getString("dni");
 	            String nombre = rs.getString("nombre");
-	            int telef = rs.getInt("telef");
+	            String telef = rs.getString("telef");
 	            String correo = rs.getString("correo");
 	            String direccion = rs.getString("direccion");
 	            
@@ -66,7 +66,7 @@ public class DbCliente extends Conexion{
 	        while (rs.next()) {
 	            String dniCliente = rs.getString("dni");
 	            String nombre = rs.getString("nombre");
-	            int telef = rs.getInt("telef");
+	            String telef = rs.getString("telef");
 	            String correo = rs.getString("correo");
 	            String direccion = rs.getString("direccion");
 	            
@@ -79,12 +79,36 @@ public class DbCliente extends Conexion{
 	    
 	    return listaClientes;
 	}
+	
+	public boolean actualizarCliente(Cliente cliente) {
+	    String sql = "UPDATE usuario SET nombre=?, correo=?, telef=?, direccion=? WHERE dni=? AND rol=1";
 
-	public void eliminarCliente() {
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, cliente.getNombre());
+	        stmt.setString(2, cliente.getCorreo());
+	        stmt.setString(3, cliente.getTfno());
+	        stmt.setString(4, cliente.getDireccion());
+	        stmt.setString(5, cliente.getDNI());
+	        
+	        int filas = stmt.executeUpdate();
+	        return filas > 0; // Devuelve true si se actualizó
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
-	public void editarDatosCliente() {
-	}
+	public boolean eliminarCliente(String dni) {
+	    String sql = "DELETE FROM usuario WHERE dni = ? AND rol = 1";
 
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, dni);
+	        int filas = stmt.executeUpdate();
+	        return filas > 0; // Devuelve true si se eliminó al menos 1 fila
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 	
 }

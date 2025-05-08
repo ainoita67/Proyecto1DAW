@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -17,6 +19,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class GestionarClientes extends JFrame {
@@ -25,6 +28,7 @@ public class GestionarClientes extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JTextField txtBuscarDni;
+	private DbCliente conexion;
 
 	/**
 	 * Launch the application.
@@ -89,17 +93,41 @@ public class GestionarClientes extends JFrame {
 		btnAadir.setBounds(153, 37, 80, 25);
 		contentPane.add(btnAadir);
 		
+		btnAadir.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        abrirVentanaCrearCliente();
+		    }
+		});
+		
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBounds(245, 37, 80, 25);
 		contentPane.add(btnEditar);
+		
+		btnEditar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        editarCliente();
+		    }
+		});
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(337, 37, 90, 25);
 		contentPane.add(btnEliminar);
 		
+		btnEliminar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        eliminarCliente();
+		    }
+		});
+		
 		JButton btnMen = new JButton("Menú");
 		btnMen.setBounds(321, 0, 117, 25);
 		contentPane.add(btnMen);
+		
+		btnMen.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        irAMenu();
+		    }
+		});
 		
 		JLabel lblClientes = new JLabel("Clientes");
 		lblClientes.setBounds(47, 13, 70, 15);
@@ -140,5 +168,79 @@ public class GestionarClientes extends JFrame {
 	    }
 	}
 
+	private void editarCliente() {
+	    int filaSeleccionada = table.getSelectedRow();
 
+	    if (filaSeleccionada != -1) {
+	        String dniSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        try {
+	            DbCliente dbCliente = new DbCliente();
+	            Cliente clienteSeleccionado = dbCliente.ver1Cliente(dniSeleccionado);
+
+	            if (clienteSeleccionado != null) {
+	                EditarCliente ventanaEditar = new EditarCliente(clienteSeleccionado);
+	                ventanaEditar.setVisible(true);
+	                dispose(); // Cerrar
+	            } else {
+	                JOptionPane.showMessageDialog(this, "No se encontró el cliente.");
+	            }
+
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+	        }
+
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
+	}
+	
+	private void abrirVentanaCrearCliente() {
+	    CrearCliente ventanaCrear = new CrearCliente();
+	    ventanaCrear.setVisible(true);
+	}
+	
+	private void eliminarCliente() {
+	    int filaSeleccionada = table.getSelectedRow();
+
+	    if (filaSeleccionada != -1) {
+	        String dniSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        // Mostrar confirmación
+	        int confirmacion = JOptionPane.showConfirmDialog(this, 
+	                "¿Estás seguro de que quieres eliminar al cliente con DNI: " + dniSeleccionado + "?", 
+	                "Confirmar eliminación", 
+	                JOptionPane.YES_NO_OPTION);
+
+	        // Si elige "Sí" (YES_OPTION)
+	        if (confirmacion == JOptionPane.YES_OPTION) {
+	            try {
+	                conexion = new DbCliente();
+	                if (conexion.eliminarCliente(dniSeleccionado)) {
+	                    JOptionPane.showMessageDialog(this, "Cliente eliminado correctamente.");
+	                    dispose(); // Cerrar ventana actual
+	                    GestionarClientes ventanagestionar = new GestionarClientes();
+	                    ventanagestionar.setVisible(true);
+	                } else {
+	                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el cliente.");
+	                }
+	            } catch (Exception ex) {
+	                ex.printStackTrace();
+	                JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+	            }
+	        } else {
+	            // Si elige "No", no hacemos nada
+	            JOptionPane.showMessageDialog(this, "Eliminación cancelada.");
+	        }
+
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
+	}
+
+	private void irAMenu() {
+	    Menu ventanamenu = new Menu();
+	    ventanamenu.setVisible(true);
+	}
 }

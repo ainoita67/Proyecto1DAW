@@ -118,29 +118,39 @@ public class CrearCliente extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(359, 0, 79, 25);
 		contentPane.add(btnAtras);
+		
+		btnAtras.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	irAGestionar();
+            }
+        });
 	}
 	
     public void insertarCliente()
     {
   	
        try {
-    	   Cliente cliente = new Cliente(txtDni.getText(), txtNombre.getText(), Integer.parseInt(txtTfno.getText()), txtEmail.getText(), txtDireccion.getText());
+    	   Cliente cliente = new Cliente(txtDni.getText(), txtNombre.getText(), txtTfno.getText(), txtEmail.getText(), txtDireccion.getText());
     	   
            conexion = new DbCliente();
            if (conexion.crearCliente(cliente)) {
                JOptionPane.showMessageDialog(null, "Cliente insertado correctamente");
+               dispose(); // Cerrar ventana después de guardar
+	           GestionarClientes ventanagestionar = new GestionarClientes();
+	           ventanagestionar.setVisible(true);
            } else {
                JOptionPane.showMessageDialog(null, "Error al insertar cliente");
            }
            conexion.cerrar();
-           
-       } catch (NumberFormatException e) {
-    	    // Muestras un error si el tfno no es un número válido
-    	    JOptionPane.showMessageDialog(null, "Por favor, introduce un número de teléfono válido.", "Error", JOptionPane.ERROR_MESSAGE);
     	    
        } catch (SQLException ex) {
            ex.printStackTrace();
        }
     }
+    
+    private void irAGestionar() {
+	    GestionarClientes ventanagestionar = new GestionarClientes();
+	    ventanagestionar.setVisible(true);
+	}
 
 }
