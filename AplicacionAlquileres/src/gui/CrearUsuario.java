@@ -106,6 +106,7 @@ public class CrearUsuario extends JFrame {
 		JLabel lblCrearUsuario = new JLabel("Crear Usuario");
 		lblCrearUsuario.setBounds(174, 5, 117, 15);
 		contentPane.add(lblCrearUsuario);
+<<<<<<< Updated upstream
 		
 		JButton btnCrear = new JButton("+ Crear");
 		btnCrear.addActionListener(new ActionListener() {
@@ -118,6 +119,8 @@ public class CrearUsuario extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(359, 0, 79, 25);
 		contentPane.add(btnAtras);
+=======
+>>>>>>> Stashed changes
 		
 		JLabel lblContrasea = new JLabel("Contraseña");
 		lblContrasea.setBounds(73, 176, 111, 15);
@@ -139,8 +142,28 @@ public class CrearUsuario extends JFrame {
 		JCheckBox chckbxAdministrador = new JCheckBox("Administrador");
 		chckbxAdministrador.setBounds(267, 199, 129, 23);
 		contentPane.add(chckbxAdministrador);
-	}
 	
+		//cambiar boton por uno nuevo
+		
+		JButton btnCrear = new JButton("+ Crear");
+		btnCrear.setBounds(174, 198, 117, 25);
+		contentPane.add(btnCrear);
+		
+		btnCrear.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+             insertarUsuario();
+            }
+        });
+	
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.setBounds(359, 0, 79, 25);
+		contentPane.add(btnAtras);
+	}
+<<<<<<< Updated upstream
+	
+=======
+		
+>>>>>>> Stashed changes
 	public void insertarUsuario()
     {
     	System.out.println("Coy a ajflf");

@@ -72,3 +72,7 @@ public class Usuario {
 	
 
 }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
