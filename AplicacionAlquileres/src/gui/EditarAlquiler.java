@@ -18,7 +18,7 @@ public class EditarAlquiler extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtDni;
 	private JTextField txtMatricula;
-	private JTextField txtFechain;
+	private JTextField txtFechaini;
 	private JTextField txtFechafin;
 	private JTextField txtPrecio;
 
@@ -72,10 +72,10 @@ public class EditarAlquiler extends JFrame {
 		contentPane.add(txtMatricula);
 		txtMatricula.setColumns(10);
 		
-		txtFechain = new JTextField();
-		txtFechain.setBounds(225, 102, 170, 19);
-		contentPane.add(txtFechain);
-		txtFechain.setColumns(10);
+		txtFechaini = new JTextField();
+		txtFechaini.setBounds(225, 102, 170, 19);
+		contentPane.add(txtFechaini);
+		txtFechaini.setColumns(10);
 		
 		JLabel lblEditarVehiculo = new JLabel("Editar Alquiler");
 		lblEditarVehiculo.setBounds(177, 12, 114, 15);

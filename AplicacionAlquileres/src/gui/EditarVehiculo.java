@@ -105,9 +105,9 @@ public class EditarVehiculo extends JFrame {
 		btnAtras.setBounds(358, 0, 80, 25);
 		contentPane.add(btnAtras);
 		
-		JCheckBox chckbxNewCheckBox = new JCheckBox("Furgoneta");
-		chckbxNewCheckBox.setBounds(161, 127, 103, 23);
-		contentPane.add(chckbxNewCheckBox);
+		JCheckBox chckbxFurgo = new JCheckBox("Furgoneta");
+		chckbxFurgo.setBounds(161, 127, 103, 23);
+		contentPane.add(chckbxFurgo);
 		
 		JCheckBox chckbxTurismo = new JCheckBox("Turismo");
 		chckbxTurismo.setBounds(268, 127, 91, 23);

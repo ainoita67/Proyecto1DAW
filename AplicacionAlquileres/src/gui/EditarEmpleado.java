@@ -129,9 +129,9 @@ public class EditarEmpleado extends JFrame {
 		chckbxEmpleado.setBounds(169, 199, 94, 23);
 		contentPane.add(chckbxEmpleado);
 		
-		JCheckBox chckbxAdministrador = new JCheckBox("Administrador");
-		chckbxAdministrador.setBounds(267, 199, 129, 23);
-		contentPane.add(chckbxAdministrador);
+		JCheckBox chckbxAdmin = new JCheckBox("Administrador");
+		chckbxAdmin.setBounds(267, 199, 129, 23);
+		contentPane.add(chckbxAdmin);
 	}
 
 }
