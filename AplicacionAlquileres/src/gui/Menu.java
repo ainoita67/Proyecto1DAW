@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -49,6 +51,12 @@ public class Menu extends JFrame {
 		btnGestionarClientes.setBounds(22, 105, 184, 25);
 		contentPane.add(btnGestionarClientes);
 		
+		btnGestionarClientes.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        irAClientes();
+		    }
+		});
+		
 		JButton btnConsultarVehiculos = new JButton("Consultar Vehiculos");
 		btnConsultarVehiculos.setBounds(22, 152, 184, 25);
 		contentPane.add(btnConsultarVehiculos);
@@ -65,6 +73,12 @@ public class Menu extends JFrame {
 		btnGestionarVehiculos.setBounds(228, 152, 199, 25);
 		contentPane.add(btnGestionarVehiculos);
 		
+		btnGestionarVehiculos.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        irAVehiculos();
+		    }
+		});
+		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesión");
 		btnCerrarSesin.setBounds(22, 27, 131, 25);
 		contentPane.add(btnCerrarSesin);
@@ -76,5 +90,15 @@ public class Menu extends JFrame {
 		JLabel lblNewLabel = new JLabel("Usuario");
 		lblNewLabel.setBounds(228, 66, 199, 15);
 		contentPane.add(lblNewLabel);
+	}
+	
+	private void irAClientes() {
+	    GestionarClientes ventanaclientes = new GestionarClientes();
+	    ventanaclientes.setVisible(true);
+	}
+	
+	private void irAVehiculos() {
+	    GestionarVehiculos ventanavehiculos = new GestionarVehiculos();
+	    ventanavehiculos.setVisible(true);
 	}
 }

@@ -4,13 +4,13 @@
 
 package modelo;
 
-/************************************************************/
-/**
- * 
- */
 public class Turismo extends Vehiculo {
-	/**
-	 * 
-	 */
+	
 	private String tipo;
+	
+	public Turismo(String matricula, Double precioH, String f_matriculacion, String proximo_mantenimiento, String color,
+			int plazas, String tipo_turismo) {
+		super(matricula, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
+		this.tipo = tipo_turismo;
+	}
 }

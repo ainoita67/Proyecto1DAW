@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import modelo.Cliente;
-import bdd.Conexion;
 import bdd.DbCliente;
 
 import javax.swing.JLabel;
@@ -119,24 +118,39 @@ public class CrearCliente extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(359, 0, 79, 25);
 		contentPane.add(btnAtras);
+		
+		btnAtras.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	irAGestionar();
+            }
+        });
 	}
 	
     public void insertarCliente()
     {
-    	System.out.println("Coy a ajflf");
-    	  
-    	Cliente cliente = new Cliente(txtDni.getText(), txtNombre.getText(), txtTfno.getText(), txtEmail.getText(), txtDireccion.getText());
-           try {
-               conexion = new DbCliente();
-               if (conexion.crearCliente(cliente)) {
-                   JOptionPane.showMessageDialog(null, "Cliente insertado correctamente");
-               } else {
-                   JOptionPane.showMessageDialog(null, "Error al insertar cliente");
-               }
-               conexion.cerrar();
-           } catch (SQLException ex) {
-               ex.printStackTrace();
+  	
+       try {
+    	   Cliente cliente = new Cliente(txtDni.getText(), txtNombre.getText(), txtTfno.getText(), txtEmail.getText(), txtDireccion.getText());
+    	   
+           conexion = new DbCliente();
+           if (conexion.crearCliente(cliente)) {
+               JOptionPane.showMessageDialog(null, "Cliente insertado correctamente");
+               dispose(); // Cerrar ventana después de guardar
+	           GestionarClientes ventanagestionar = new GestionarClientes();
+	           ventanagestionar.setVisible(true);
+           } else {
+               JOptionPane.showMessageDialog(null, "Error al insertar cliente");
            }
+           conexion.cerrar();
+    	    
+       } catch (SQLException ex) {
+           ex.printStackTrace();
+       }
     }
+    
+    private void irAGestionar() {
+	    GestionarClientes ventanagestionar = new GestionarClientes();
+	    ventanagestionar.setVisible(true);
+	}
 
 }

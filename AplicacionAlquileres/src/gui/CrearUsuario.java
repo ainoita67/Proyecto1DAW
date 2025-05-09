@@ -5,16 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import bdd.DbUsuario;
-import modelo.Usuario;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 
@@ -28,7 +22,6 @@ public class CrearUsuario extends JFrame {
 	private JTextField txtTfno;
 	private JTextField txtDireccion;
 	private JTextField txtContrasea;
-	private DbUsuario conexion;
 
 	/**
 	 * Launch the application.
@@ -103,9 +96,9 @@ public class CrearUsuario extends JFrame {
 		contentPane.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
-		JLabel lblCrearUsuario = new JLabel("Crear Usuario");
-		lblCrearUsuario.setBounds(174, 5, 117, 15);
-		contentPane.add(lblCrearUsuario);
+		JLabel lblCrearCliente = new JLabel("Crear Empleado");
+		lblCrearCliente.setBounds(174, 5, 117, 15);
+		contentPane.add(lblCrearCliente);
 		
 		JButton btnCrear = new JButton("+ Crear");
 		btnCrear.addActionListener(new ActionListener() {
@@ -140,22 +133,4 @@ public class CrearUsuario extends JFrame {
 		chckbxAdministrador.setBounds(267, 199, 129, 23);
 		contentPane.add(chckbxAdministrador);
 	}
-	
-	public void insertarUsuario()
-    {
-    	System.out.println("Coy a ajflf");
-    	  
-    	Usuario usuario = new Usuario(txtNombre.getText(), txtEmail.getText(), txtTfno.getText(), txtDni.getText(), txtDireccion.getText(),txtContrasea.getText());
-           try {
-               conexion = new DbUsuario();
-               if (conexion.crearUsuario(usuario)) {
-                   JOptionPane.showMessageDialog(null, "Usuario insertado correctamente");
-               } else {
-                   JOptionPane.showMessageDialog(null, "Error al insertar usuario");
-               }
-               conexion.cerrar();
-           } catch (SQLException ex) {
-               ex.printStackTrace();
-           }
-    }
 }

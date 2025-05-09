@@ -13,10 +13,10 @@ public class CrearVehiculo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textNombre;
-	private JTextField textEmail;
-	private JTextField textDNI;
-	private JTextField textDireccion;
+	private JTextField txtMatricula;
+	private JTextField txtPrecio;
+	private JTextField txtFechaMatr;
+	private JTextField txtSubtipo;
 
 	/**
 	 * Launch the application.
@@ -46,10 +46,10 @@ public class CrearVehiculo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textNombre = new JTextField();
-		textNombre.setBounds(218, 47, 143, 19);
-		contentPane.add(textNombre);
-		textNombre.setColumns(10);
+		txtMatricula = new JTextField();
+		txtMatricula.setBounds(218, 47, 143, 19);
+		contentPane.add(txtMatricula);
+		txtMatricula.setColumns(10);
 		
 		JLabel lblCrearVehiculo = new JLabel("Crear Vehiculo");
 		lblCrearVehiculo.setBounds(169, 7, 114, 15);
@@ -67,15 +67,15 @@ public class CrearVehiculo extends JFrame {
 		lblEmail.setBounds(57, 76, 143, 15);
 		contentPane.add(lblEmail);
 		
-		textEmail = new JTextField();
-		textEmail.setColumns(10);
-		textEmail.setBounds(218, 74, 143, 19);
-		contentPane.add(textEmail);
+		txtPrecio = new JTextField();
+		txtPrecio.setColumns(10);
+		txtPrecio.setBounds(218, 74, 143, 19);
+		contentPane.add(txtPrecio);
 		
-		textDNI = new JTextField();
-		textDNI.setColumns(10);
-		textDNI.setBounds(218, 105, 143, 19);
-		contentPane.add(textDNI);
+		txtFechaMatr = new JTextField();
+		txtFechaMatr.setColumns(10);
+		txtFechaMatr.setBounds(218, 105, 143, 19);
+		contentPane.add(txtFechaMatr);
 		
 		JLabel lblDNI = new JLabel("Fecha Matriculación");
 		lblDNI.setBounds(57, 107, 171, 15);
@@ -85,10 +85,10 @@ public class CrearVehiculo extends JFrame {
 		lblTelefono.setBounds(57, 134, 55, 15);
 		contentPane.add(lblTelefono);
 		
-		textDireccion = new JTextField();
-		textDireccion.setColumns(10);
-		textDireccion.setBounds(218, 163, 143, 19);
-		contentPane.add(textDireccion);
+		txtSubtipo = new JTextField();
+		txtSubtipo.setColumns(10);
+		txtSubtipo.setBounds(218, 163, 143, 19);
+		contentPane.add(txtSubtipo);
 		
 		JLabel lblDireccion = new JLabel("Subtipo");
 		lblDireccion.setBounds(57, 165, 143, 15);

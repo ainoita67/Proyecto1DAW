@@ -4,69 +4,38 @@
 
 package modelo;
 
-/************************************************************/
-/**
- * 
- */
-public class Vehiculo {
-	/**
-	 * 
-	 */
-	private int matricula;
-	/**
-	 * 
-	 */
-	private EDouble precioH;
-	/**
-	 * 
-	 */
-	private EDate f_matriculacion;
-	/**
-	 * 
-	 */
-	private EDate proximo_mantenimiento;
-	/**
-	 * 
-	 */
+public abstract class Vehiculo {
+	
+	private String matricula;
+	private Double precioH;
+	private String f_matriculacion;
+	private String proximo_mantenimiento;
 	private String color;
-	/**
-	 * 
-	 */
 	private int plazas;
 
-	/**
-	 * 
-	 */
-	public void Vehiculo() {
+	public Vehiculo(String matricula, Double precioH, String f_matriculacion, String proximo_mantenimiento, String color,
+			int plazas) {
+		super();
+		this.matricula = matricula;
+		this.precioH = precioH;
+		this.f_matriculacion = f_matriculacion;
+		this.proximo_mantenimiento = proximo_mantenimiento;
+		this.color = color;
+		this.plazas = plazas;
 	}
 
-	/**
-	 * 
-	 */
 	public void editar() {
 	}
 
-	/**
-	 * 
-	 */
 	public void mostrar() {
 	}
 
-	/**
-	 * 
-	 */
 	public void hacerMantenimiento() {
 	}
 
-	/**
-	 * 
-	 */
 	public void disponible() {
 	}
 
-	/**
-	 * 
-	 */
 	public void chPrecio() {
 	}
 }

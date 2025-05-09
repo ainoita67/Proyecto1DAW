@@ -4,44 +4,63 @@
 
 package bdd;
 
-/************************************************************/
-/**
- * 
- */
-public class DbVehiculo {
-	/**
-	 * 
-	 */
-	public void getVehiculo() {
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import modelo.Vehiculo;
+
+public class DbVehiculo extends Conexion{
+	public DbVehiculo() throws SQLException {
+		super();
+	}
+	
+	public ArrayList<Vehiculo> verTodosVehiculos() {
+		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
+	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, tipo, tipo_turismo, tipo_furgo FROM vehiculo";
+	    
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql);
+	         ResultSet rs = stmt.executeQuery()) {
+	        
+	        while (rs.next()) {
+	            String matricula = rs.getString("matricula");
+	            String modelo = rs.getString("modelo");
+	            String marca = rs.getString("marca");
+	            Double precioh = rs.getDouble("precioh");
+	            String fecha_matriculacion = rs.getString("fecha_matriculacion");
+	            String color = rs.getString("color");
+	            String plazas = rs.getString("plazas");
+	            String tipo = rs.getString("tipo");
+	            String tipo_turismo = rs.getString("tipo_turismo");
+	            String tipo_furgo = rs.getString("tipo_furgo");
+	            
+	            if (tipo == "turismo") {
+	            	Vehiculo vehiculo = new Turismo(matricula, precioh, String f_matriculacion, String proximo_mantenimiento, String color,
+	            			int plazas, String tipo_turismo);
+	            	listaVehiculos.add(vehiculo);
+	            }
+
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return listaVehiculos;
 	}
 
-	/**
-	 * 
-	 */
 	public void crearVehiculo() {
 	}
 
-	/**
-	 * 
-	 */
 	public void eliminarVehiculo() {
 	}
 
-	/**
-	 * 
-	 */
 	public void editarVehiculo() {
 	}
 
-	/**
-	 * 
-	 */
 	public void calMantenimiento() {
 	}
 
-	/**
-	 * 
-	 */
 	public void consultarDisponibilidad() {
 	}
 }
