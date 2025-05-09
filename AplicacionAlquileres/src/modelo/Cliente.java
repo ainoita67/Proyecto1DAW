@@ -7,11 +7,11 @@ package modelo;
 public class Cliente {
 	private final String DNI;
 	private String nombre;
-	private int tfno;
+	private String tfno;
 	private String correo;
 	private String direccion;
 
-	public Cliente(String dNI, String nombre, int tfno, String correo, String direccion) {
+	public Cliente(String dNI, String nombre, String tfno, String correo, String direccion) {
 		super();
 		DNI = dNI;
 		this.nombre = nombre;
@@ -39,11 +39,11 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public int getTfno() {
+	public String getTfno() {
 		return tfno;
 	}
 
-	public void setTfno(int tfno) {
+	public void setTfno(String tfno) {
 		this.tfno = tfno;
 	}
 

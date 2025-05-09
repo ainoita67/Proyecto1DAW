@@ -22,7 +22,7 @@ public class DbCliente extends Conexion{
             stmt.setString(1, cliente.getNombre());
             stmt.setString(2, cliente.getDNI());
             stmt.setString(3, cliente.getDireccion());
-            stmt.setInt(4, cliente.getTfno());
+            stmt.setString(4, cliente.getTfno());
             stmt.setString(5, cliente.getCorreo());
             int filas = stmt.executeUpdate();
             return filas > 0;
