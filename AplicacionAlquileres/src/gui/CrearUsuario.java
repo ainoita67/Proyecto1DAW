@@ -5,16 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import bdd.DbUsuario;
-import modelo.Usuario;
-
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 
@@ -28,7 +22,6 @@ public class CrearUsuario extends JFrame {
 	private JTextField txtTfno;
 	private JTextField txtDireccion;
 	private JTextField txtContrasea;
-	private DbUsuario conexion;
 
 	/**
 	 * Launch the application.
@@ -103,10 +96,9 @@ public class CrearUsuario extends JFrame {
 		contentPane.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
-		JLabel lblCrearUsuario = new JLabel("Crear Usuario");
-		lblCrearUsuario.setBounds(174, 5, 117, 15);
-		contentPane.add(lblCrearUsuario);
-<<<<<<< Updated upstream
+		JLabel lblCrearCliente = new JLabel("Crear Empleado");
+		lblCrearCliente.setBounds(174, 5, 117, 15);
+		contentPane.add(lblCrearCliente);
 		
 		JButton btnCrear = new JButton("+ Crear");
 		btnCrear.addActionListener(new ActionListener() {
@@ -119,8 +111,6 @@ public class CrearUsuario extends JFrame {
 		JButton btnAtras = new JButton("Atras");
 		btnAtras.setBounds(359, 0, 79, 25);
 		contentPane.add(btnAtras);
-=======
->>>>>>> Stashed changes
 		
 		JLabel lblContrasea = new JLabel("Contraseña");
 		lblContrasea.setBounds(73, 176, 111, 15);
@@ -142,43 +132,5 @@ public class CrearUsuario extends JFrame {
 		JCheckBox chckbxAdministrador = new JCheckBox("Administrador");
 		chckbxAdministrador.setBounds(267, 199, 129, 23);
 		contentPane.add(chckbxAdministrador);
-	
-		//cambiar boton por uno nuevo
-		
-		JButton btnCrear = new JButton("+ Crear");
-		btnCrear.setBounds(174, 198, 117, 25);
-		contentPane.add(btnCrear);
-		
-		btnCrear.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-             insertarUsuario();
-            }
-        });
-	
-		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(359, 0, 79, 25);
-		contentPane.add(btnAtras);
 	}
-<<<<<<< Updated upstream
-	
-=======
-		
->>>>>>> Stashed changes
-	public void insertarUsuario()
-    {
-    	System.out.println("Coy a ajflf");
-    	  
-    	Usuario usuario = new Usuario(txtNombre.getText(), txtEmail.getText(), txtTfno.getText(), txtDni.getText(), txtDireccion.getText(),txtContrasea.getText());
-           try {
-               conexion = new DbUsuario();
-               if (conexion.crearUsuario(usuario)) {
-                   JOptionPane.showMessageDialog(null, "Usuario insertado correctamente");
-               } else {
-                   JOptionPane.showMessageDialog(null, "Error al insertar usuario");
-               }
-               conexion.cerrar();
-           } catch (SQLException ex) {
-               ex.printStackTrace();
-           }
-    }
 }

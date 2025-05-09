@@ -12,7 +12,6 @@ public class Cliente {
 	private String direccion;
 
 	public Cliente(String dNI, String nombre, String tfno, String correo, String direccion) {
-		super();
 		DNI = dNI;
 		this.nombre = nombre;
 		this.tfno = tfno;
