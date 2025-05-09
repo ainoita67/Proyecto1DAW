@@ -4,13 +4,13 @@
 
 package bdd;
 
-<<<<<<< Updated upstream
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import modelo.Usuario;
 
-=======
+
 /************************************************************/
 /**
  * 
@@ -24,30 +24,14 @@ import java.sql.SQLException;
 
 import modelo.Usuario;
 
->>>>>>> Stashed changes
 public class DbUsuario extends Conexion{
 	public DbUsuario() throws SQLException {
 		super();
 	}
 		
 	public boolean crearUsuario(Usuario usuario) {
-		String sql = "INSERT INTO usuario (dni, nombre, telef, correo, direccion, contrasenya, rol) VALUES (?, ?, ?, ?, ?, ?, 'usuario')";
+		String sql = "INSERT INTO usuario (dni, nombre, telef, correo, direccion, contrasenya, rol) VALUES (?, ?, ?, ?, ?, ?, ?)";	
 
-<<<<<<< Updated upstream
-        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            stmt.setString(1, usuario.getNombre());
-            stmt.setString(2, usuario.getDNI());
-            stmt.setString(3, usuario.getDireccion());
-            stmt.setString(4, usuario.getTfno());
-            stmt.setString(5, usuario.getCorreo());
-            stmt.setString(6, usuario.getContrasea());
-            int filas = stmt.executeUpdate();
-            return filas > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }		
-=======
      try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
          stmt.setString(1, usuario.getNombre());
          stmt.setString(2, usuario.getDNI());
@@ -55,13 +39,14 @@ public class DbUsuario extends Conexion{
          stmt.setString(4, usuario.getTfno());
          stmt.setString(5, usuario.getCorreo());
          stmt.setString(6, usuario.getContrasea());
+         stmt.setString(7, usuario.getRol());
          int filas = stmt.executeUpdate();
          return filas > 0;
      } catch (SQLException e) {
          e.printStackTrace();
          return false;
      	}
->>>>>>> Stashed changes
+
 	}
 	/**
 	 * 

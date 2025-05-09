@@ -15,8 +15,9 @@ public class Usuario {
 	private String correo;
 	private String direccion;
 	private String contrasea;
+	private String rol;
 
-	public Usuario(String dNI, String nombre, String tfno, String correo, String direccion, String contrasea) {
+	public Usuario(String dNI, String nombre, String tfno, String correo, String direccion, String contrasea, String rol) {
 		super();
 		DNI = dNI;
 		this.nombre = nombre;
@@ -24,6 +25,7 @@ public class Usuario {
 		this.correo = correo;
 		this.direccion = direccion;
 		this.contrasea = contrasea;
+		this.rol = rol;
 	}
 
 	public String getNombre() {
@@ -70,9 +72,13 @@ public class Usuario {
 		return DNI;
 	}
 	
-
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+	
+	public String getRol() {
+		return rol;
+	}
+	
 }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
