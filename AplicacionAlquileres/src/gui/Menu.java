@@ -96,9 +96,12 @@ public class Menu extends JFrame {
 	    GestionarClientes ventanaclientes = new GestionarClientes();
 	    ventanaclientes.setVisible(true);
 	}
+<<<<<<< Updated upstream
 	
 	private void irAVehiculos() {
 	    GestionarVehiculos ventanavehiculos = new GestionarVehiculos();
 	    ventanavehiculos.setVisible(true);
 	}
+=======
+>>>>>>> Stashed changes
 }
