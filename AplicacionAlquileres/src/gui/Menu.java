@@ -73,6 +73,12 @@ public class Menu extends JFrame {
 		btnGestionarVehiculos.setBounds(228, 152, 199, 25);
 		contentPane.add(btnGestionarVehiculos);
 		
+		btnGestionarVehiculos.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        irAVehiculos();
+		    }
+		});
+		
 		JButton btnCerrarSesin = new JButton("Cerrar Sesión");
 		btnCerrarSesin.setBounds(22, 27, 131, 25);
 		contentPane.add(btnCerrarSesin);
@@ -89,5 +95,10 @@ public class Menu extends JFrame {
 	private void irAClientes() {
 	    GestionarClientes ventanaclientes = new GestionarClientes();
 	    ventanaclientes.setVisible(true);
+	}
+	
+	private void irAVehiculos() {
+	    GestionarVehiculos ventanavehiculos = new GestionarVehiculos();
+	    ventanavehiculos.setVisible(true);
 	}
 }
