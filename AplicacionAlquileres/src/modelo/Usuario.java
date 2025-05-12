@@ -15,9 +15,9 @@ public class Usuario {
 	private String correo;
 	private String direccion;
 	private String contrasea;
-	private String rol;
+	private int rol;
 
-	public Usuario(String dNI, String nombre, String tfno, String correo, String direccion, String contrasea, String rol) {
+	public Usuario(String dNI, String nombre, String tfno, String correo, String direccion, String contrasea, int rol) {
 		super();
 		DNI = dNI;
 		this.nombre = nombre;
@@ -72,11 +72,11 @@ public class Usuario {
 		return DNI;
 	}
 	
-	public void setRol(String rol) {
+	public void setRol(int rol) {
 		this.rol = rol;
 	}
 	
-	public String getRol() {
+	public int getRol() {
 		return rol;
 	}
 	

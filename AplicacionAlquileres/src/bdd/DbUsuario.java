@@ -39,7 +39,7 @@ public class DbUsuario extends Conexion{
          stmt.setString(4, usuario.getTfno());
          stmt.setString(5, usuario.getCorreo());
          stmt.setString(6, usuario.getContrasea());
-         stmt.setString(7, usuario.getRol());
+         stmt.setInt(7, usuario.getRol());
          int filas = stmt.executeUpdate();
          return filas > 0;
      } catch (SQLException e) {

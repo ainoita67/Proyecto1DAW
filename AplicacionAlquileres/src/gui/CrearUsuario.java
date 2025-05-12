@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import bdd.DbCliente;
 import bdd.DbUsuario;
 import modelo.Usuario;
 
@@ -113,7 +112,7 @@ public class CrearUsuario extends JFrame {
 		rdbtnEmpleado.setBounds(195, 199, 94, 23);
 		contentPane.add(rdbtnEmpleado);
 		
-		JRadioButton rdbtnAdmin = new JRadioButton("Administador");
+		rdbtnAdmin = new JRadioButton("Administador");
 		rdbtnAdmin.setBounds(293, 199, 126, 23);
 		contentPane.add(rdbtnAdmin);
 		
@@ -156,13 +155,14 @@ public class CrearUsuario extends JFrame {
 	
 	public void insertarUsuario()
     {
-		String rol = "";
+		int rol=0;
+		System.out.println(1);
 		if (rdbtnEmpleado.isSelected()) {
-		    rol = "Empleado";
+		    rol=2;
 		} else if (rdbtnAdmin.isSelected()) {
-		    rol = "Administrador";
+		    rol=3;
 		}
-		
+		System.out.println(1);
     	System.out.println("Coy a ajflf");
     	  
     	Usuario usuario = new Usuario(txtNombre.getText(), txtEmail.getText(), txtTfno.getText(), txtDni.getText(), txtDireccion.getText(),txtContrasea.getText(), rol);
