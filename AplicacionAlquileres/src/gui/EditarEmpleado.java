@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Cliente;
+import modelo.Usuario;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -22,6 +26,7 @@ public class EditarEmpleado extends JFrame {
 	private JTextField txtTfno;
 	private JTextField txtDireccion;
 	private JTextField txtContrasea;
+	private Usuario usuarioActual;
 
 	/**
 	 * Launch the application.
@@ -30,7 +35,7 @@ public class EditarEmpleado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					EditarEmpleado frame = new EditarEmpleado();
+					EditarEmpleado frame = new EditarEmpleado(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +47,9 @@ public class EditarEmpleado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public EditarEmpleado() {
+	public EditarEmpleado(Usuario usuario) {
+		this.usuarioActual = usuario;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -132,6 +139,48 @@ public class EditarEmpleado extends JFrame {
 		JCheckBox chckbxAdmin = new JCheckBox("Administrador");
 		chckbxAdmin.setBounds(267, 199, 129, 23);
 		contentPane.add(chckbxAdmin);
+	
+		cargarDatosUsuario(usuario);
+	}
+
+	public void cargarDatosUsuario(Usuario usuario) {
+	    txtNombre.setText(usuario.getNombre());
+	    txtEmail.setText(usuario.getCorreo());
+	    txtDni.setText(usuario.getDNI());
+	    txtTfno.setText(String.valueOf(usuario.getTfno()));
+	    txtDireccion.setText(usuario.getDireccion());
+	    
+	    txtDni.setEditable(false);
+		}
+	private void guardarCambios() {
+	    try {
+	        // Actualizar el objeto cliente con los valores nuevos
+	        usuarioActual.setNombre(txtNombre.getText());
+	        usuarioActual.setCorreo(txtEmail.getText());
+	        usuarioActual.setTfno(txtTfno.getText());
+	        usuarioActual.setDireccion(txtDireccion.getText());
+	        
+	        // Llamar a la base de datos para actualizar
+	        bdd.DbCliente db = new bdd.DbCliente();
+	        
+	        if (db.actualizarUsuario(usuarioActual)) {
+	            javax.swing.JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente.");
+	            dispose(); // Cerrar ventana después de guardar
+	            GestionarUsuarios ventanagestionar = new GestionarUsuarios();
+	            ventanagestionar.setVisible(true);
+	        } else {
+	            javax.swing.JOptionPane.showMessageDialog(this, "No se pudo actualizar el cliente.");
+	        }
+	
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el cliente.");
+	    }
+	}
+	
+	private void irAGestionar() {
+	    GestionarUsuarios ventanagestionar = new GestionarUsuarios();
+	    ventanagestionar.setVisible(true);
 	}
 
 }

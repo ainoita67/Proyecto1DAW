@@ -6,8 +6,11 @@ package bdd;
 
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import modelo.Cliente;
 import modelo.Usuario;
 
 
@@ -51,19 +54,59 @@ public class DbUsuario extends Conexion{
 	/**
 	 * 
 	 */
-	public void eliminarEmpleado() {
+	public ArrayList<Usuario> verTodosUsuario() {
+		ArrayList<Usuario> listaUsuario = new ArrayList<>();
+	    String sql = "SELECT dni, nombre, telef, correo, direccion FROM usuario WHERE rol = 2";
+	    
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql);
+	         ResultSet rs = stmt.executeQuery()) {
+	        
+	        while (rs.next()) {
+	            String dniUsuario = rs.getString("dni");
+	            String nombre = rs.getString("nombre");
+	            String telef = rs.getString("telef");
+	            String correo = rs.getString("correo");
+	            String direccion = rs.getString("direccion");
+	            
+	            Usuario usuario = new Usuario(dniUsuario, nombre, telef, correo, direccion, direccion, 2);
+	            listaUsuario.add(usuario);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return listaUsuario;
+	}
+	
+	public boolean actualizarUsuario(Usuario usuario) {
+	    String sql = "UPDATE usuario SET nombre=?, correo=?, telef=?, direccion=? WHERE dni=? AND rol=1";
+
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, usuario.getNombre());
+	        stmt.setString(2, usuario.getCorreo());
+	        stmt.setString(3, usuario.getTfno());
+	        stmt.setString(4, usuario.getDireccion());
+	        stmt.setString(5, usuario.getDNI());
+	        
+	        int filas = stmt.executeUpdate();
+	        return filas > 0; // Devuelve true si se actualizó
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
-	/**
-	 * 
-	 */
-	public void editarDatosEmpleado() {
-	}
+	public boolean eliminarUsuario(String dni) {
+	    String sql = "DELETE FROM usuario WHERE dni = ? AND rol = 2";
 
-	/**
-	 * 
-	 */
-	public void getEmpleado() {
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, dni);
+	        int filas = stmt.executeUpdate();
+	        return filas > 0; // Devuelve true si se eliminó al menos 1 fila
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 }
 

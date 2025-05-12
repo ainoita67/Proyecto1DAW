@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 
-public class GestionarEmpleado extends JFrame {
+public class GestionarUsuarios extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -27,7 +27,7 @@ public class GestionarEmpleado extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GestionarEmpleado frame = new GestionarEmpleado();
+					GestionarUsuarios frame = new GestionarUsuarios();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class GestionarEmpleado extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GestionarEmpleado() {
+	public GestionarUsuarios() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
