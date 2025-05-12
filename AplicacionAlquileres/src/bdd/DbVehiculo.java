@@ -8,7 +8,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
+import modelo.Turismo;
 import modelo.Vehiculo;
 
 public class DbVehiculo extends Conexion{
@@ -18,26 +20,43 @@ public class DbVehiculo extends Conexion{
 	
 	public ArrayList<Vehiculo> verTodosVehiculos() {
 		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
-	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, tipo, tipo_turismo, tipo_furgo FROM vehiculo";
+	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia \n"
+	    		+ "FROM vehiculo v \n"
+	    		+ "JOIN tipo t ON v.tipo = t.id \n"
+	    		+ "JOIN fechasmant f ON f.tipo = t.id \n"
+	    		+ "WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) BETWEEN f.desde AND f.hasta;";
+	    
+	    SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, 
+	    IF(
+	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula) IS NOT NULL,
+	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula),
+	            v.fecha_matriculacion
+	        ) AS fecha_ultimo_mantenimiento
+	    FROM vehiculo v 
+	    JOIN tipo t ON v.tipo = t.id 
+	    JOIN fechasmant f ON f.tipo = t.id 
+	    WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) BETWEEN f.desde AND f.hasta;
 	    
 	    try (PreparedStatement stmt = conexion.prepareStatement(sql);
 	         ResultSet rs = stmt.executeQuery()) {
 	        
 	        while (rs.next()) {
-	            String matricula = rs.getString("matricula");
+	        	String matricula = rs.getString("matricula");
 	            String modelo = rs.getString("modelo");
 	            String marca = rs.getString("marca");
 	            Double precioh = rs.getDouble("precioh");
-	            String fecha_matriculacion = rs.getString("fecha_matriculacion");
+	            LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
 	            String color = rs.getString("color");
-	            String plazas = rs.getString("plazas");
+	            int plazas = rs.getInt("plazas");
 	            String tipo = rs.getString("tipo");
 	            String tipo_turismo = rs.getString("tipo_turismo");
 	            String tipo_furgo = rs.getString("tipo_furgo");
+	            int frecuencia = rs.getInt("frecuencia");
+	            
+	            LocalDate prox_mantenimiento = 
 	            
 	            if (tipo == "turismo") {
-	            	Vehiculo vehiculo = new Turismo(matricula, precioh, String f_matriculacion, String proximo_mantenimiento, String color,
-	            			int plazas, String tipo_turismo);
+	            	Vehiculo vehiculo = new Turismo(matricula, precioh, fecha_matriculacion, fecha_matriculacion, color, plazas, tipo_turismo);
 	            	listaVehiculos.add(vehiculo);
 	            }
 

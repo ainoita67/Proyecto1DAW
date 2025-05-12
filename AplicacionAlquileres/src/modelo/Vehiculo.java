@@ -4,17 +4,18 @@
 
 package modelo;
 
+import java.time.LocalDate;
+
 public abstract class Vehiculo {
 	
 	private String matricula;
 	private Double precioH;
-	private String f_matriculacion;
-	private String proximo_mantenimiento;
+	private LocalDate f_matriculacion;
+	private LocalDate proximo_mantenimiento;
 	private String color;
 	private int plazas;
 
-	public Vehiculo(String matricula, Double precioH, String f_matriculacion, String proximo_mantenimiento, String color,
-			int plazas) {
+	public Vehiculo(String matricula, Double precioH, LocalDate f_matriculacion, LocalDate proximo_mantenimiento, String color, int plazas) {
 		super();
 		this.matricula = matricula;
 		this.precioH = precioH;

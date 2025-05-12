@@ -4,13 +4,17 @@
 
 package modelo;
 
+import java.time.LocalDate;
+
 public class Turismo extends Vehiculo {
 	
+	public Turismo(String matricula, Double precioH, LocalDate f_matriculacion, LocalDate proximo_mantenimiento,
+			String color, int plazas, String tipo) {
+		super(matricula, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
+		this.tipo = tipo;
+	}
+
 	private String tipo;
 	
-	public Turismo(String matricula, Double precioH, String f_matriculacion, String proximo_mantenimiento, String color,
-			int plazas, String tipo_turismo) {
-		super(matricula, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
-		this.tipo = tipo_turismo;
-	}
+
 }
