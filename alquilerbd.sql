@@ -36,7 +36,7 @@ create table usuario(
     telef varchar(15),
     correo varchar(100),
     direccion varchar(100),
-    contraseña varchar(255),
+    contrasea varchar(255),
     rol int,
     primary key(dni)
 );

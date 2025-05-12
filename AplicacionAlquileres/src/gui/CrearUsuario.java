@@ -11,10 +11,12 @@ import bdd.DbUsuario;
 import modelo.Usuario;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
 import javax.swing.JRadioButton;
@@ -29,9 +31,9 @@ public class CrearUsuario extends JFrame {
 	private JTextField txtTfno;
 	private JTextField txtDireccion;
 	private JTextField txtContrasea;
-	private DbCliente conexion;
-	JRadioButton rdbtnEmpleado;
-	JRadioButton rdbtnAdmin;
+	private DbUsuario conexion;
+	JRadioButton rdbtnEmpleado=null;
+	JRadioButton rdbtnAdmin=null;
 	/**
 	 * Launch the application.
 	 */
@@ -142,6 +144,7 @@ public class CrearUsuario extends JFrame {
 		
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				insertarUsuario();
 			}
 		});
 		
@@ -167,6 +170,7 @@ public class CrearUsuario extends JFrame {
                conexion = new DbUsuario();
                if (conexion.crearUsuario(usuario)) {
                    JOptionPane.showMessageDialog(null, "Usuario insertado correctamente");
+                   dispose();
                } else {
                    JOptionPane.showMessageDialog(null, "Error al insertar usuario");
                }

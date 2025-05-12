@@ -30,7 +30,7 @@ public class DbUsuario extends Conexion{
 	}
 		
 	public boolean crearUsuario(Usuario usuario) {
-		String sql = "INSERT INTO usuario (dni, nombre, telef, correo, direccion, contrasenya, rol) VALUES (?, ?, ?, ?, ?, ?, ?)";	
+		String sql = "INSERT INTO usuario (dni, nombre, telef, correo, direccion, contrasea, rol) VALUES (?, ?, ?, ?, ?, ?, ?)";	
 
      try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
          stmt.setString(1, usuario.getNombre());
