@@ -25,6 +25,7 @@ public class GestionarUsuarios extends JFrame {
     private JTable table;
     private JTextField txtBuscarDni;
     private DbUsuario conexion;
+    private int currentRol = 2; // Para mantener un seguimiento del rol actual
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
@@ -98,19 +99,21 @@ public class GestionarUsuarios extends JFrame {
 
 	        try {
 	            DbUsuario dbUsuario = new DbUsuario();
-	            Usuario usuarioSeleccionado = dbUsuario.ver1Usuario(dniSeleccionado);
+	            // Obtener el rol del usuario desde la tabla
+                int rol = table.getValueAt(filaSeleccionada, 5).toString().equals("Empleado") ? 2 : 3;
+	            Usuario usuarioSeleccionado = dbUsuario.ver1Usuario(dniSeleccionado, rol);
 
 	            if (usuarioSeleccionado != null) {
 	                EditarEmpleado ventanaEditar = new EditarEmpleado(usuarioSeleccionado);
 	                ventanaEditar.setVisible(true);
-	                dispose(); // Cerrar
+	                dispose(); // Cerrar ventana actual
 	            } else {
-	                JOptionPane.showMessageDialog(this, "No se encontró el cliente.");
+	                JOptionPane.showMessageDialog(this, "No se encontró el usuario.");
 	            }
 
 	        } catch (Exception ex) {
 	            ex.printStackTrace();
-	            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+	            JOptionPane.showMessageDialog(this, "Error al obtener datos del usuario.");
 	        }
 
 	    } else {
@@ -119,6 +122,7 @@ public class GestionarUsuarios extends JFrame {
 	}
     
 	public void cargarTablaUsuarios(int rol) {
+        this.currentRol = rol; // Guardar el rol actual
         String[] columnas = {"DNI", "Nombre", "Teléfono", "Correo", "Dirección", "Rol"};
         DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0);
         try {
@@ -159,4 +163,3 @@ public class GestionarUsuarios extends JFrame {
         }
     }
 }
-

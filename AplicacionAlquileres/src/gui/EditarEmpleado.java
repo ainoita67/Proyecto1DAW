@@ -141,10 +141,24 @@ public class EditarEmpleado extends JFrame {
 		
 		chckbxEmpleado = new JCheckBox("Empleado");
 		chckbxEmpleado.setBounds(169, 199, 94, 23);
+		chckbxEmpleado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxEmpleado.isSelected()) {
+					chckbxAdmin.setSelected(false);
+				}
+			}
+		});
 		contentPane.add(chckbxEmpleado);
 		
 		chckbxAdmin = new JCheckBox("Administrador");
 		chckbxAdmin.setBounds(267, 199, 129, 23);
+		chckbxAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (chckbxAdmin.isSelected()) {
+					chckbxEmpleado.setSelected(false);
+				}
+			}
+		});
 		contentPane.add(chckbxAdmin);
 	
 		cargarDatosUsuario(usuario);
@@ -159,12 +173,13 @@ public class EditarEmpleado extends JFrame {
 			txtDireccion.setText(usuario.getDireccion());
 			txtContrasea.setText(usuario.getContrasea());
 			
-			// Cargar roles - esto dependerá de cómo estén implementados los roles en tu modelo
-			if (usuario.isAdmin()) {
+			// Cargar roles basado en el rol del usuario
+			if (usuario.getRol() == 3) {
 				chckbxAdmin.setSelected(true);
-			}
-			if (usuario.isEmpleado()) {
+				chckbxEmpleado.setSelected(false);
+			} else if (usuario.getRol() == 2) {
 				chckbxEmpleado.setSelected(true);
+				chckbxAdmin.setSelected(false);
 			}
 			
 			txtDni.setEditable(false);
@@ -180,29 +195,33 @@ public class EditarEmpleado extends JFrame {
 			usuarioActual.setDireccion(txtDireccion.getText());
 			usuarioActual.setContrasea(txtContrasea.getText());
 			
-			// Actualizar roles según checkboxes
-			usuarioActual.setAdmin(chckbxAdmin.isSelected());
-			usuarioActual.setEmpleado(chckbxEmpleado.isSelected());
+			// Actualizar rol según el checkbox seleccionado
+			if (chckbxAdmin.isSelected()) {
+				usuarioActual.setRol(3);
+			} else if (chckbxEmpleado.isSelected()) {
+				usuarioActual.setRol(2);
+			}
 			
 			// Llamar a la base de datos para actualizar
 			bdd.DbUsuario db = new bdd.DbUsuario();
 			
 			if (db.actualizarUsuario(usuarioActual)) {
-				javax.swing.JOptionPane.showMessageDialog(this, "Empleado actualizado correctamente.");
+				javax.swing.JOptionPane.showMessageDialog(this, "Usuario actualizado correctamente.");
 				dispose(); // Cerrar ventana después de guardar
 				GestionarUsuarios ventanagestionar = new GestionarUsuarios();
 				ventanagestionar.setVisible(true);
 			} else {
-				javax.swing.JOptionPane.showMessageDialog(this, "No se pudo actualizar el empleado.");
+				javax.swing.JOptionPane.showMessageDialog(this, "No se pudo actualizar el usuario.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el empleado.");
+			javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el usuario.");
 		}
 	}
 	
 	private void irAGestionar() {
 		GestionarUsuarios ventanagestionar = new GestionarUsuarios();
 		ventanagestionar.setVisible(true);
+		dispose();
 	}
 }
