@@ -79,6 +79,26 @@ public class Usuario {
 	public int getRol() {
 		return rol;
 	}
-	
+
+	public boolean isAdmin() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean isEmpleado() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public void setAdmin(boolean selected) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEmpleado(boolean selected) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
 

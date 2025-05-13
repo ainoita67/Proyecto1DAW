@@ -69,6 +69,12 @@ public class Menu extends JFrame {
 		btnGestionarEmpleados.setBounds(228, 105, 199, 25);
 		contentPane.add(btnGestionarEmpleados);
 		
+		btnGestionarEmpleados.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        irAUsuarios();
+		    }
+		});
+		
 		JButton btnGestionarVehiculos = new JButton("Gestionar vehiculos");
 		btnGestionarVehiculos.setBounds(228, 152, 199, 25);
 		contentPane.add(btnGestionarVehiculos);
@@ -95,6 +101,11 @@ public class Menu extends JFrame {
 	private void irAClientes() {
 	    GestionarClientes ventanaclientes = new GestionarClientes();
 	    ventanaclientes.setVisible(true);
+	}
+	
+	private void irAUsuarios() {
+	    GestionarUsuarios ventanausuarios = new GestionarUsuarios();
+	    ventanausuarios.setVisible(true);
 	}
 	
 	private void irAVehiculos() {

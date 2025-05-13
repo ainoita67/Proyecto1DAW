@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import modelo.Cliente;
 import modelo.Usuario;
 
 import javax.swing.JLabel;
@@ -27,6 +26,8 @@ public class EditarEmpleado extends JFrame {
 	private JTextField txtDireccion;
 	private JTextField txtContrasea;
 	private Usuario usuarioActual;
+	private JCheckBox chckbxEmpleado;
+	private JCheckBox chckbxAdmin;
 
 	/**
 	 * Launch the application.
@@ -103,19 +104,25 @@ public class EditarEmpleado extends JFrame {
 		contentPane.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
-		JLabel lblCrearCliente = new JLabel("Editar Empleado");
-		lblCrearCliente.setBounds(174, 5, 117, 15);
-		contentPane.add(lblCrearCliente);
+		JLabel lblEditarEmpleado = new JLabel("Editar Empleado");
+		lblEditarEmpleado.setBounds(174, 5, 117, 15);
+		contentPane.add(lblEditarEmpleado);
 		
-		JButton btnCrear = new JButton("Guardar Cambios");
-		btnCrear.addActionListener(new ActionListener() {
+		JButton btnGuardar = new JButton("Guardar Cambios");
+		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				guardarCambios();
 			}
 		});
-		btnCrear.setBounds(138, 230, 180, 25);
-		contentPane.add(btnCrear);
+		btnGuardar.setBounds(138, 230, 180, 25);
+		contentPane.add(btnGuardar);
 		
 		JButton btnAtras = new JButton("Atras");
+		btnAtras.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	irAGestionar();
+            }
+        });
 		btnAtras.setBounds(359, 0, 79, 25);
 		contentPane.add(btnAtras);
 		
@@ -132,11 +139,11 @@ public class EditarEmpleado extends JFrame {
 		lblRol.setBounds(73, 203, 111, 15);
 		contentPane.add(lblRol);
 		
-		JCheckBox chckbxEmpleado = new JCheckBox("Empleado");
+		chckbxEmpleado = new JCheckBox("Empleado");
 		chckbxEmpleado.setBounds(169, 199, 94, 23);
 		contentPane.add(chckbxEmpleado);
 		
-		JCheckBox chckbxAdmin = new JCheckBox("Administrador");
+		chckbxAdmin = new JCheckBox("Administrador");
 		chckbxAdmin.setBounds(267, 199, 129, 23);
 		contentPane.add(chckbxAdmin);
 	
@@ -144,43 +151,58 @@ public class EditarEmpleado extends JFrame {
 	}
 
 	public void cargarDatosUsuario(Usuario usuario) {
-	    txtNombre.setText(usuario.getNombre());
-	    txtEmail.setText(usuario.getCorreo());
-	    txtDni.setText(usuario.getDNI());
-	    txtTfno.setText(String.valueOf(usuario.getTfno()));
-	    txtDireccion.setText(usuario.getDireccion());
-	    
-	    txtDni.setEditable(false);
+		if (usuario != null) {
+			txtNombre.setText(usuario.getNombre());
+			txtEmail.setText(usuario.getCorreo());
+			txtDni.setText(usuario.getDNI());
+			txtTfno.setText(String.valueOf(usuario.getTfno()));
+			txtDireccion.setText(usuario.getDireccion());
+			txtContrasea.setText(usuario.getContrasea());
+			
+			// Cargar roles - esto dependerá de cómo estén implementados los roles en tu modelo
+			if (usuario.isAdmin()) {
+				chckbxAdmin.setSelected(true);
+			}
+			if (usuario.isEmpleado()) {
+				chckbxEmpleado.setSelected(true);
+			}
+			
+			txtDni.setEditable(false);
 		}
-	private void guardarCambios() {
-	    try {
-	        // Actualizar el objeto cliente con los valores nuevos
-	        usuarioActual.setNombre(txtNombre.getText());
-	        usuarioActual.setCorreo(txtEmail.getText());
-	        usuarioActual.setTfno(txtTfno.getText());
-	        usuarioActual.setDireccion(txtDireccion.getText());
-	        
-	        // Llamar a la base de datos para actualizar
-	        bdd.DbCliente db = new bdd.DbCliente();
-	        
-	        if (db.actualizarUsuario(usuarioActual)) {
-	            javax.swing.JOptionPane.showMessageDialog(this, "Cliente actualizado correctamente.");
-	            dispose(); // Cerrar ventana después de guardar
-	            GestionarUsuarios ventanagestionar = new GestionarUsuarios();
-	            ventanagestionar.setVisible(true);
-	        } else {
-	            javax.swing.JOptionPane.showMessageDialog(this, "No se pudo actualizar el cliente.");
-	        }
+	}
 	
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	        javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el cliente.");
-	    }
+	private void guardarCambios() {
+		try {
+			// Actualizar el objeto usuario con los valores nuevos
+			usuarioActual.setNombre(txtNombre.getText());
+			usuarioActual.setCorreo(txtEmail.getText());
+			usuarioActual.setTfno(txtTfno.getText());
+			usuarioActual.setDireccion(txtDireccion.getText());
+			usuarioActual.setContrasea(txtContrasea.getText());
+			
+			// Actualizar roles según checkboxes
+			usuarioActual.setAdmin(chckbxAdmin.isSelected());
+			usuarioActual.setEmpleado(chckbxEmpleado.isSelected());
+			
+			// Llamar a la base de datos para actualizar
+			bdd.DbUsuario db = new bdd.DbUsuario();
+			
+			if (db.actualizarUsuario(usuarioActual)) {
+				javax.swing.JOptionPane.showMessageDialog(this, "Empleado actualizado correctamente.");
+				dispose(); // Cerrar ventana después de guardar
+				GestionarUsuarios ventanagestionar = new GestionarUsuarios();
+				ventanagestionar.setVisible(true);
+			} else {
+				javax.swing.JOptionPane.showMessageDialog(this, "No se pudo actualizar el empleado.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el empleado.");
+		}
 	}
 	
 	private void irAGestionar() {
-	    GestionarUsuarios ventanagestionar = new GestionarUsuarios();
-	    ventanagestionar.setVisible(true);
+		GestionarUsuarios ventanagestionar = new GestionarUsuarios();
+		ventanagestionar.setVisible(true);
 	}
-
 }
