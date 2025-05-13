@@ -1,16 +1,26 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import bdd.DbCliente;
+import bdd.DbVehiculo;
+import modelo.Cliente;
+import modelo.Vehiculo;
+
 import javax.swing.JTable;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class GestionarVehiculos extends JFrame {
@@ -55,6 +65,8 @@ public class GestionarVehiculos extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+		cargarTablaClientes();
+		
 		txtBuscarMatricula = new JTextField();
 		txtBuscarMatricula.setText("Buscar Matricula");
 		txtBuscarMatricula.setBounds(27, 40, 114, 19);
@@ -96,5 +108,70 @@ public class GestionarVehiculos extends JFrame {
 		JLabel lblNewLabel = new JLabel("Vehiculos");
 		lblNewLabel.setBounds(46, 13, 70, 15);
 		contentPane.add(lblNewLabel);
+	}
+	
+	public void cargarTablaClientes() {
+	    // Definir las columnas
+	    String[] columnas = {"Matrícula", "Marca", "Modelo", "Precio/Hora", "F matriculacion", "prox mantenimiento", "Plazas", "Color"};
+
+	    // Crear un modelo de tabla que no permita edición
+	    DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false; // Ninguna celda es editable
+	        }
+	    };
+
+	    try {
+	        DbVehiculo dbVehiculo = new DbVehiculo();
+	        ArrayList<Vehiculo> lista = dbVehiculo.verTodosVehiculos();
+	        
+	        for (Vehiculo v : lista) {
+	            Object[] fila = {
+	            	v.getMatricula(),
+	            	v.getMarca(),
+	            	v.getModelo(),
+	            	v.getPrecioH(),
+	            	v.getF_matriculacion(),
+	            	v.getProximo_mantenimiento(),
+	            	v.getPlazas(),
+	            	v.getColor()
+
+	            };
+	            modeloTabla.addRow(fila);
+	        }
+
+	        table.setModel(modeloTabla);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	private void editarVehiculo() {
+	    int filaSeleccionada = table.getSelectedRow();
+
+	    if (filaSeleccionada != -1) {
+	        String matriculaSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        try {
+	            DbVehiculo dbVehiculo = new DbVehiculo();
+	            Vehiculo vehiculoSeleccionado = dbVehiculo.ver1Vehiculo(matriculaSeleccionado);
+
+	            if (vehiculoSeleccionado != null) {
+	                EditarVehiculo ventanaEditar = new EditarVehiculo(vehiculoSeleccionado);
+	                ventanaEditar.setVisible(true);
+	                dispose(); // Cerrar
+	            } else {
+	                JOptionPane.showMessageDialog(this, "No se encontró el vehiculo.");
+	            }
+
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+	        }
+
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
 	}
 }

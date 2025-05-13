@@ -8,22 +8,29 @@ import java.time.LocalDate;
 
 public abstract class Vehiculo {
 	
-	private String matricula;
-	private Double precioH;
-	private LocalDate f_matriculacion;
-	private LocalDate proximo_mantenimiento;
-	private String color;
-	private int plazas;
-
-	public Vehiculo(String matricula, Double precioH, LocalDate f_matriculacion, LocalDate proximo_mantenimiento, String color, int plazas) {
+	public Vehiculo(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
+			LocalDate proximo_mantenimiento, String color, int plazas) {
 		super();
 		this.matricula = matricula;
+		this.marca = marca;
+		this.modelo = modelo;
 		this.precioH = precioH;
 		this.f_matriculacion = f_matriculacion;
 		this.proximo_mantenimiento = proximo_mantenimiento;
 		this.color = color;
 		this.plazas = plazas;
 	}
+
+	private String matricula;
+	private String marca;
+	private String modelo;
+	private Double precioH;
+	private LocalDate f_matriculacion;
+	private LocalDate proximo_mantenimiento;
+	private String color;
+	private int plazas;
+
+	
 
 	public void editar() {
 	}
@@ -38,5 +45,69 @@ public abstract class Vehiculo {
 	}
 
 	public void chPrecio() {
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public Double getPrecioH() {
+		return precioH;
+	}
+
+	public void setPrecioH(Double precioH) {
+		this.precioH = precioH;
+	}
+
+	public LocalDate getF_matriculacion() {
+		return f_matriculacion;
+	}
+
+	public void setF_matriculacion(LocalDate f_matriculacion) {
+		this.f_matriculacion = f_matriculacion;
+	}
+
+	public LocalDate getProximo_mantenimiento() {
+		return proximo_mantenimiento;
+	}
+
+	public void setProximo_mantenimiento(LocalDate proximo_mantenimiento) {
+		this.proximo_mantenimiento = proximo_mantenimiento;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+
+	public int getPlazas() {
+		return plazas;
+	}
+
+	public void setPlazas(int plazas) {
+		this.plazas = plazas;
+	}
+
+	public String getMarca() {
+		return marca;
+	}
+
+	public void setMarca(String marca) {
+		this.marca = marca;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 }

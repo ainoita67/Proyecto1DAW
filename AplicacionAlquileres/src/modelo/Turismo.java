@@ -8,9 +8,9 @@ import java.time.LocalDate;
 
 public class Turismo extends Vehiculo {
 	
-	public Turismo(String matricula, Double precioH, LocalDate f_matriculacion, LocalDate proximo_mantenimiento,
-			String color, int plazas, String tipo) {
-		super(matricula, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
+	public Turismo(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
+			LocalDate proximo_mantenimiento, String color, int plazas, String tipo) {
+		super(matricula, marca, modelo, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
 		this.tipo = tipo;
 	}
 

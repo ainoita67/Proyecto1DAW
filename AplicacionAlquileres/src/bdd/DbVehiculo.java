@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
+import modelo.Furgoneta;
+import modelo.Moto;
 import modelo.Turismo;
 import modelo.Vehiculo;
 
@@ -20,22 +22,18 @@ public class DbVehiculo extends Conexion{
 	
 	public ArrayList<Vehiculo> verTodosVehiculos() {
 		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
-	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia \n"
-	    		+ "FROM vehiculo v \n"
-	    		+ "JOIN tipo t ON v.tipo = t.id \n"
-	    		+ "JOIN fechasmant f ON f.tipo = t.id \n"
-	    		+ "WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) BETWEEN f.desde AND f.hasta;";
+	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, \n"
+	    		+ "	    IF(\n"
+	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula) IS NOT NULL,\n"
+	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula),\n"
+	    		+ "	            v.fecha_matriculacion\n"
+	    		+ "	        ) AS fecha_ultimo_mantenimiento\n"
+	    		+ "	    FROM vehiculo v \n"
+	    		+ "	    JOIN tipo t ON v.tipo = t.id \n"
+	    		+ "	    JOIN fechasmant f ON f.tipo = t.id \n"
+	    		+ "	    WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) >= f.desde AND TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) < f.hasta;";
 	    
-	    SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, 
-	    IF(
-	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula) IS NOT NULL,
-	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula),
-	            v.fecha_matriculacion
-	        ) AS fecha_ultimo_mantenimiento
-	    FROM vehiculo v 
-	    JOIN tipo t ON v.tipo = t.id 
-	    JOIN fechasmant f ON f.tipo = t.id 
-	    WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) BETWEEN f.desde AND f.hasta;
+	    
 	    
 	    try (PreparedStatement stmt = conexion.prepareStatement(sql);
 	         ResultSet rs = stmt.executeQuery()) {
@@ -48,15 +46,25 @@ public class DbVehiculo extends Conexion{
 	            LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
 	            String color = rs.getString("color");
 	            int plazas = rs.getInt("plazas");
-	            String tipo = rs.getString("tipo");
+	            int tipo = rs.getInt("tipo");
 	            String tipo_turismo = rs.getString("tipo_turismo");
 	            String tipo_furgo = rs.getString("tipo_furgo");
 	            int frecuencia = rs.getInt("frecuencia");
+	            LocalDate ultimo_mant = rs.getDate("fecha_ultimo_mantenimiento").toLocalDate();
+
 	            
-	            LocalDate prox_mantenimiento = 
+	            LocalDate prox_mantenimiento = ultimo_mant.plusMonths(frecuencia);
 	            
-	            if (tipo == "turismo") {
-	            	Vehiculo vehiculo = new Turismo(matricula, precioh, fecha_matriculacion, fecha_matriculacion, color, plazas, tipo_turismo);
+	            if (tipo == 1) {
+	            	Vehiculo vehiculo = new Turismo(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_turismo);
+	            	listaVehiculos.add(vehiculo);
+	            }
+	            if (tipo == 2) {
+	            	Vehiculo vehiculo = new Furgoneta(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_furgo);
+	            	listaVehiculos.add(vehiculo);
+	            }
+	            if (tipo == 3) {
+	            	Vehiculo vehiculo = new Moto(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas);
 	            	listaVehiculos.add(vehiculo);
 	            }
 
@@ -66,6 +74,59 @@ public class DbVehiculo extends Conexion{
 	    }
 	    
 	    return listaVehiculos;
+	}
+	
+	public Vehiculo ver1Vehiculo(String matricula) {
+	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, \n"
+	    		+ "	    IF(\n"
+	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula) IS NOT NULL,\n"
+	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula),\n"
+	    		+ "	            v.fecha_matriculacion\n"
+	    		+ "	        ) AS fecha_ultimo_mantenimiento\n"
+	    		+ "	    FROM vehiculo v \n"
+	    		+ "	    JOIN tipo t ON v.tipo = t.id \n"
+	    		+ "	    JOIN fechasmant f ON f.tipo = t.id \n"
+	    		+ "	    WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) >= f.desde AND TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) < f.hasta and matricula = ?";
+	    
+	    
+	    
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)){
+	    	stmt.setString(1, matricula);
+	    	var rs = stmt.executeQuery();
+	        while (rs.next()) {
+	        	String matriculaVehiculo = rs.getString("matricula");
+	            String modelo = rs.getString("modelo");
+	            String marca = rs.getString("marca");
+	            Double precioh = rs.getDouble("precioh");
+	            LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
+	            String color = rs.getString("color");
+	            int plazas = rs.getInt("plazas");
+	            int tipo = rs.getInt("tipo");
+	            String tipo_turismo = rs.getString("tipo_turismo");
+	            String tipo_furgo = rs.getString("tipo_furgo");
+	            int frecuencia = rs.getInt("frecuencia");
+	            LocalDate ultimo_mant = rs.getDate("fecha_ultimo_mantenimiento").toLocalDate();
+
+	            
+	            LocalDate prox_mantenimiento = ultimo_mant.plusMonths(frecuencia);
+	            
+	            if (tipo == 1) {
+	            	Vehiculo vehiculo = new Turismo(matriculaVehiculo, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_turismo);
+	            	return vehiculo;
+	            }
+	            if (tipo == 2) {
+	            	Vehiculo vehiculo = new Furgoneta(matriculaVehiculo, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_furgo);
+	            	return vehiculo;	            }
+	            if (tipo == 3) {
+	            	Vehiculo vehiculo = new Moto(matriculaVehiculo, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas);
+	            	return vehiculo;	            }
+
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return null;
 	}
 
 	public void crearVehiculo() {
