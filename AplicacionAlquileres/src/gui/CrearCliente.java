@@ -149,8 +149,10 @@ public class CrearCliente extends JFrame {
     }
     
     private void irAGestionar() {
+    	CrearCliente ventanacliente = new CrearCliente();
 	    GestionarClientes ventanagestionar = new GestionarClientes();
 	    ventanagestionar.setVisible(true);
+	    ventanacliente.setVisible(false);
 	}
 
 }

@@ -99,17 +99,23 @@ public class Menu extends JFrame {
 	}
 	
 	private void irAClientes() {
+		Menu ventanamenu = new Menu();
 	    GestionarClientes ventanaclientes = new GestionarClientes();
 	    ventanaclientes.setVisible(true);
+	    ventanamenu.setVisible(false);
 	}
 	
 	private void irAUsuarios() {
+		Menu ventanamenu = new Menu();
 	    GestionarUsuarios ventanausuarios = new GestionarUsuarios();
 	    ventanausuarios.setVisible(true);
+	    ventanamenu.setVisible(false);
 	}
 	
 	private void irAVehiculos() {
+		Menu ventanamenu = new Menu();
 	    GestionarVehiculos ventanavehiculos = new GestionarVehiculos();
 	    ventanavehiculos.setVisible(true);
+	    ventanamenu.setVisible(false);
 	}
 }

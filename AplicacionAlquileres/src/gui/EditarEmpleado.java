@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 
 public class EditarEmpleado extends JFrame {
 
@@ -180,6 +181,10 @@ public class EditarEmpleado extends JFrame {
 			} else if (usuario.getRol() == 2) {
 				chckbxEmpleado.setSelected(true);
 				chckbxAdmin.setSelected(false);
+			} else {
+				// Si no es ninguno de los roles conocidos, por defecto marca como empleado
+				chckbxEmpleado.setSelected(true);
+				chckbxAdmin.setSelected(false);
 			}
 			
 			txtDni.setEditable(false);
@@ -188,40 +193,57 @@ public class EditarEmpleado extends JFrame {
 	
 	private void guardarCambios() {
 		try {
+			// Validar que al menos uno de los roles esté seleccionado
+			if (!chckbxEmpleado.isSelected() && !chckbxAdmin.isSelected()) {
+				JOptionPane.showMessageDialog(this, "Debe seleccionar un rol (Empleado o Administrador).");
+				return;
+			}
+			
+			// Validar campos obligatorios
+			if (txtNombre.getText().trim().isEmpty() || 
+				txtEmail.getText().trim().isEmpty() || 
+				txtTfno.getText().trim().isEmpty() ||
+				txtContrasea.getText().trim().isEmpty()) {
+				JOptionPane.showMessageDialog(this, "Todos los campos son obligatorios.");
+				return;
+			}
+			
 			// Actualizar el objeto usuario con los valores nuevos
-			usuarioActual.setNombre(txtNombre.getText());
-			usuarioActual.setCorreo(txtEmail.getText());
-			usuarioActual.setTfno(txtTfno.getText());
-			usuarioActual.setDireccion(txtDireccion.getText());
-			usuarioActual.setContrasea(txtContrasea.getText());
+			usuarioActual.setNombre(txtNombre.getText().trim());
+			usuarioActual.setCorreo(txtEmail.getText().trim());
+			usuarioActual.setTfno(txtTfno.getText().trim());
+			usuarioActual.setDireccion(txtDireccion.getText().trim());
+			usuarioActual.setContrasea(txtContrasea.getText().trim());
 			
 			// Actualizar rol según el checkbox seleccionado
 			if (chckbxAdmin.isSelected()) {
-				usuarioActual.setRol(3);
+				usuarioActual.setRol(3); // Usando el método directo setRol
 			} else if (chckbxEmpleado.isSelected()) {
-				usuarioActual.setRol(2);
+				usuarioActual.setRol(2); // Usando el método directo setRol
 			}
 			
 			// Llamar a la base de datos para actualizar
 			bdd.DbUsuario db = new bdd.DbUsuario();
 			
 			if (db.actualizarUsuario(usuarioActual)) {
-				javax.swing.JOptionPane.showMessageDialog(this, "Usuario actualizado correctamente.");
+				JOptionPane.showMessageDialog(this, "Usuario actualizado correctamente.");
 				dispose(); // Cerrar ventana después de guardar
 				GestionarUsuarios ventanagestionar = new GestionarUsuarios();
 				ventanagestionar.setVisible(true);
 			} else {
-				javax.swing.JOptionPane.showMessageDialog(this, "No se pudo actualizar el usuario.");
+				JOptionPane.showMessageDialog(this, "No se pudo actualizar el usuario.");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			javax.swing.JOptionPane.showMessageDialog(this, "Error al actualizar el usuario.");
+			JOptionPane.showMessageDialog(this, "Error al actualizar el usuario: " + e.getMessage());
 		}
 	}
 	
 	private void irAGestionar() {
+		EditarEmpleado ventanaeditar = new EditarEmpleado(usuarioActual);
 		GestionarUsuarios ventanagestionar = new GestionarUsuarios();
 		ventanagestionar.setVisible(true);
+		ventanaeditar.setVisible(false);
 		dispose();
 	}
 }
