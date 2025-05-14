@@ -240,7 +240,9 @@ public class GestionarClientes extends JFrame {
 	}
 
 	private void irAMenu() {
+		GestionarClientes ventanacliente = new GestionarClientes();
 	    Menu ventanamenu = new Menu();
 	    ventanamenu.setVisible(true);
+	    ventanacliente.setVisible(false);
 	}
 }

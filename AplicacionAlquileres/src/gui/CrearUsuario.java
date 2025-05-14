@@ -5,12 +5,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import bdd.DbUsuario;
+import modelo.Usuario;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
+import javax.swing.JRadioButton;
 
 public class CrearUsuario extends JFrame {
 
@@ -22,7 +30,9 @@ public class CrearUsuario extends JFrame {
 	private JTextField txtTfno;
 	private JTextField txtDireccion;
 	private JTextField txtContrasea;
-
+	private DbUsuario conexion;
+	JRadioButton rdbtnEmpleado=null;
+	JRadioButton rdbtnAdmin=null;
 	/**
 	 * Launch the application.
 	 */
@@ -96,21 +106,22 @@ public class CrearUsuario extends JFrame {
 		contentPane.add(txtDireccion);
 		txtDireccion.setColumns(10);
 		
+		ButtonGroup grupoBotones= new ButtonGroup();
+		
+		rdbtnEmpleado = new JRadioButton("Empleado");
+		rdbtnEmpleado.setBounds(195, 199, 94, 23);
+		contentPane.add(rdbtnEmpleado);
+		
+		rdbtnAdmin = new JRadioButton("Administador");
+		rdbtnAdmin.setBounds(293, 199, 126, 23);
+		contentPane.add(rdbtnAdmin);
+		
+		grupoBotones.add(rdbtnAdmin);
+		grupoBotones.add(rdbtnEmpleado);
+		
 		JLabel lblCrearCliente = new JLabel("Crear Empleado");
 		lblCrearCliente.setBounds(174, 5, 117, 15);
 		contentPane.add(lblCrearCliente);
-		
-		JButton btnCrear = new JButton("+ Crear");
-		btnCrear.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		btnCrear.setBounds(174, 230, 117, 25);
-		contentPane.add(btnCrear);
-		
-		JButton btnAtras = new JButton("Atras");
-		btnAtras.setBounds(359, 0, 79, 25);
-		contentPane.add(btnAtras);
 		
 		JLabel lblContrasea = new JLabel("Contraseña");
 		lblContrasea.setBounds(73, 176, 111, 15);
@@ -125,12 +136,47 @@ public class CrearUsuario extends JFrame {
 		lblRol.setBounds(73, 203, 111, 15);
 		contentPane.add(lblRol);
 		
-		JCheckBox chckbxEmpleado = new JCheckBox("Empleado");
-		chckbxEmpleado.setBounds(169, 199, 94, 23);
-		contentPane.add(chckbxEmpleado);
 		
-		JCheckBox chckbxAdministrador = new JCheckBox("Administrador");
-		chckbxAdministrador.setBounds(267, 199, 129, 23);
-		contentPane.add(chckbxAdministrador);
+		JButton btnCrear = new JButton("+ Crear");
+		btnCrear.setBounds(174, 230, 117, 25);
+		contentPane.add(btnCrear);
+		
+		btnCrear.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				insertarUsuario();
+			}
+		});
+		
+		JButton btnAtras = new JButton("Atras");
+		btnAtras.setBounds(359, 0, 79, 25);
+		contentPane.add(btnAtras);
+		
 	}
+	
+	public void insertarUsuario()
+    {
+		int rol=0;
+		System.out.println(1);
+		if (rdbtnEmpleado.isSelected()) {
+		    rol=2;
+		} else if (rdbtnAdmin.isSelected()) {
+		    rol=3;
+		}
+		System.out.println(1);
+    	System.out.println("Coy a ajflf");
+    	  
+    	Usuario usuario = new Usuario(txtNombre.getText(), txtEmail.getText(), txtTfno.getText(), txtDni.getText(), txtDireccion.getText(),txtContrasea.getText(), rol);
+           try {
+               conexion = new DbUsuario();
+               if (conexion.crearUsuario(usuario)) {
+                   JOptionPane.showMessageDialog(null, "Usuario insertado correctamente");
+                   dispose();
+               } else {
+                   JOptionPane.showMessageDialog(null, "Error al insertar usuario");
+               }
+               conexion.cerrar();
+           } catch (SQLException ex) {
+               ex.printStackTrace();
+           }
+    }
 }
