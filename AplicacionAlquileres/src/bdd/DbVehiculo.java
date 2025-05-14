@@ -128,14 +128,96 @@ public class DbVehiculo extends Conexion{
 	    
 	    return null;
 	}
+	
+	public boolean actualizarVehiculo(Vehiculo vehiculo) {
+	    String sql = "UPDATE vehiculo SET modelo = ?, marca = ?, precioh = ?, fecha_matriculacion = ?, color = ?, plazas = ?, tipo = ?, tipo_turismo = ?, tipo_furgo = ? WHERE matricula = ?";
 
-	public void crearVehiculo() {
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, vehiculo.getModelo());
+	        stmt.setString(2, vehiculo.getMarca());
+	        stmt.setDouble(3, vehiculo.getPrecioH());
+	        stmt.setDate(4, java.sql.Date.valueOf(vehiculo.getF_matriculacion()));
+	        stmt.setString(5, vehiculo.getColor());
+	        stmt.setInt(6, vehiculo.getPlazas());
+
+	        if (vehiculo instanceof Turismo) {
+	            stmt.setInt(7, 1); // tipo = 1 para Turismo
+	            stmt.setString(8, ((Turismo) vehiculo).getTipo());
+	            stmt.setNull(9, java.sql.Types.VARCHAR); 
+	        } else if (vehiculo instanceof Furgoneta) {
+	            stmt.setInt(7, 2); // tipo = 2 para Furgoneta
+	            stmt.setNull(8, java.sql.Types.VARCHAR); 
+	            stmt.setString(9, ((Furgoneta) vehiculo).getTipo());
+	        } else if (vehiculo instanceof Moto) {
+	            stmt.setInt(7, 3); // tipo = 3 para Moto
+	            stmt.setNull(8, java.sql.Types.VARCHAR);
+	            stmt.setNull(9, java.sql.Types.VARCHAR);
+	        } else {
+	            return false; // Tipo desconocido
+	        }
+
+	        stmt.setString(10, vehiculo.getMatricula());
+
+	        int filas = stmt.executeUpdate();
+	        return filas > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
-	public void eliminarVehiculo() {
+
+	public boolean crearVehiculo(Vehiculo vehiculo) {
+	    String sql = "INSERT INTO vehiculo (matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, tipo, tipo_turismo, tipo_furgo) "
+	               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, vehiculo.getMatricula());
+	        stmt.setString(2, vehiculo.getModelo());
+	        stmt.setString(3, vehiculo.getMarca());
+	        stmt.setDouble(4, vehiculo.getPrecioH());
+	        stmt.setDate(5, java.sql.Date.valueOf(vehiculo.getF_matriculacion()));
+	        stmt.setString(6, vehiculo.getColor());
+	        stmt.setInt(7, vehiculo.getPlazas());
+
+	        if (vehiculo instanceof Turismo) {
+	            stmt.setInt(8, 1); // tipo 1: Turismo
+	            stmt.setString(9, ((Turismo) vehiculo).getTipo());
+	            stmt.setNull(10, java.sql.Types.VARCHAR);
+	        } else if (vehiculo instanceof Furgoneta) {
+	            stmt.setInt(8, 2); // tipo 2: Furgoneta
+	            stmt.setNull(9, java.sql.Types.VARCHAR);
+	            stmt.setString(10, ((Furgoneta) vehiculo).getTipo());
+	        } else if (vehiculo instanceof Moto) {
+	            stmt.setInt(8, 3); // tipo 3: Moto
+	            stmt.setNull(9, java.sql.Types.VARCHAR);
+	            stmt.setNull(10, java.sql.Types.VARCHAR);
+	        } else {
+	            return false; // Tipo no reconocido
+	        }
+
+	        int filas = stmt.executeUpdate();
+	        return filas > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
-	public void editarVehiculo() {
+
+	public boolean eliminarVehiculo(String matricula) {
+	    String sql = "DELETE FROM vehiculo WHERE matricula = ?";
+
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, matricula);
+	        int filas = stmt.executeUpdate();
+	        return filas > 0; // Devuelve true si se eliminó al menos una fila
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
 	public void calMantenimiento() {

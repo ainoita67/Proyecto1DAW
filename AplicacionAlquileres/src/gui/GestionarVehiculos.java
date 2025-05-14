@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -92,18 +94,38 @@ public class GestionarVehiculos extends JFrame {
 		JButton btnAadir = new JButton("Añadir");
 		btnAadir.setBounds(153, 37, 80, 25);
 		contentPane.add(btnAadir);
+		btnAadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirVentanaCrearVehiculo();
+			}
+		});
 		
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBounds(245, 37, 80, 25);
 		contentPane.add(btnEditar);
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editarVehiculo();
+			}
+		});
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(337, 37, 90, 25);
 		contentPane.add(btnEliminar);
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				eliminarVehiculo();
+			}
+		});
 		
 		JButton btnMen = new JButton("Menú");
 		btnMen.setBounds(321, 0, 117, 25);
 		contentPane.add(btnMen);
+		btnMen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				irAMenu();
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel("Vehiculos");
 		lblNewLabel.setBounds(46, 13, 70, 15);
@@ -174,4 +196,51 @@ public class GestionarVehiculos extends JFrame {
 	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
 	    }
 	}
+	
+	private void abrirVentanaCrearVehiculo() {
+		CrearVehiculo ventanaCrear = new CrearVehiculo();
+	    ventanaCrear.setVisible(true);
+	    dispose();
+	}
+	
+	private void eliminarVehiculo() {
+	    int filaSeleccionada = table.getSelectedRow();
+
+	    if (filaSeleccionada != -1) {
+	        String matriculaSeleccionada = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        int confirmacion = JOptionPane.showConfirmDialog(this,
+	                "¿Estás seguro de que quieres eliminar el vehículo con matrícula: " + matriculaSeleccionada + "?",
+	                "Confirmar eliminación",
+	                JOptionPane.YES_NO_OPTION);
+
+	        if (confirmacion == JOptionPane.YES_OPTION) {
+	            try {
+	                DbVehiculo dbVehiculo = new DbVehiculo();
+	                boolean exito = dbVehiculo.eliminarVehiculo(matriculaSeleccionada);
+
+	                if (exito) {
+	                    JOptionPane.showMessageDialog(this, "Vehículo eliminado correctamente.");
+	                    cargarTablaClientes(); // Recargar la tabla
+	                } else {
+	                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el vehículo.");
+	                }
+	            } catch (Exception ex) {
+	                ex.printStackTrace();
+	                JOptionPane.showMessageDialog(this, "Error al eliminar el vehículo.");
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Eliminación cancelada.");
+	        }
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
+	}
+	
+	private void irAMenu() {
+	    Menu ventanamenu = new Menu();
+	    ventanamenu.setVisible(true);
+	    dispose();
+	}
+
 }
