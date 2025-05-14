@@ -4,103 +4,25 @@
 
 package modelo;
 
-/************************************************************/
-/**
- * 
- */
+import java.time.LocalDate;
+
 public class Alquiler {
-	/**
-	 * 
-	 */
-	private String DNI;
-	/**
-	 * 
-	 */
-	private String nombre;
-	/**
-	 * 
-	 */
-	private int tfno;
-	/**
-	 * 
-	 */
-	private String correo;
-	/**
-	 * 
-	 */
-	private Date fecha_nac;
-	/**
-	 * 
-	 */
-	private String contrasenya;
-	/**
-	 * 
-	 */
+
+
 	private Cliente cliente;
-	/**
-	 * 
-	 */
 	private Vehiculo vehiculo;
-	/**
-	 * 
-	 */
-	private EDate fecha_ini;
-	/**
-	 * 
-	 */
-	private EDate fecha_fin;
-	/**
-	 * 
-	 */
-	private EDouble total;
-	/**
-	 * 
-	 */
-	public DbCliente cliente;
-	/**
-	 * 
-	 */
-	public Vehiculo vehiculo;
+	private LocalDate fecha_ini;
+	private LocalDate fecha_fin;
+	private Double total;
 
-	/**
-	 * 
-	 */
-	public void resgistrar() {
-	}
 
-	/**
-	 * 
-	 */
-	public void editar() {
-	}
-
-	/**
-	 * 
-	 */
-	public void mostrar() {
-	}
-
-	/**
-	 * 
-	 */
-	public void alquilar() {
-	}
-
-	/**
-	 * 
-	 */
+	
 	public void Alquiler() {
 	}
-
-	/**
-	 * 
-	 */
+	
 	public void editar() {
 	}
 
-	/**
-	 * 
-	 */
 	public void mostrar() {
 	}
 }
