@@ -199,6 +199,7 @@ public class GestionarClientes extends JFrame {
 	private void abrirVentanaCrearCliente() {
 	    CrearCliente ventanaCrear = new CrearCliente();
 	    ventanaCrear.setVisible(true);
+	    dispose();
 	}
 	
 	private void eliminarCliente() {
