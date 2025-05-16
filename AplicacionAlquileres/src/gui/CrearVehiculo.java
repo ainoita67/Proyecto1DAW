@@ -75,7 +75,7 @@ public class CrearVehiculo extends JFrame {
 		lblMatricula.setBounds(98, 127, 135, 15);
 		contentPane.add(lblMatricula);
 		
-		JLabel lblPrecio = new JLabel("Precio/hora");
+		JLabel lblPrecio = new JLabel("Precio/dia");
 		lblPrecio.setBounds(98, 210, 98, 15);
 		contentPane.add(lblPrecio);
 		
