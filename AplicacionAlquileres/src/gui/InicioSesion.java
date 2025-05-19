@@ -19,6 +19,8 @@ import javax.swing.JOptionPane;
 
 import bdd.Conexion;
 import bdd.DbUsuario;
+import modelo.Sesion;
+import modelo.Usuario;
 
 public class InicioSesion extends JFrame {
 
@@ -110,21 +112,10 @@ public class InicioSesion extends JFrame {
 		// Acción del botón "Enviar"
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String dni = txtDni.getText();
-				String password = txtContrasea.getText();
+				
 
-				if (DbUsuario.verificarCredenciales(dni, password)) {
-					// Si la verificación es correcta, abrir la ventana del menú
-					Menu menu = new Menu();
-					menu.setVisible(true);
-					dispose(); // Cerrar la ventana de inicio de sesión
-				} else {
-					// Si las credenciales son incorrectas, mostrar mensaje de error
-					JOptionPane.showMessageDialog(null, "DNI o contraseña incorrectos");
-				}
 			}
 		});
 	}
 
-	
 }

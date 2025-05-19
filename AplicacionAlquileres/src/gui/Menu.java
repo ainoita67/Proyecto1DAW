@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import modelo.Usuario;
+
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
@@ -89,33 +92,47 @@ public class Menu extends JFrame {
 		btnCerrarSesin.setBounds(22, 27, 131, 25);
 		contentPane.add(btnCerrarSesin);
 		
+		btnCerrarSesin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				InicioSesion inicio = new InicioSesion();
+				inicio.setVisible(true);
+				dispose();
+			}
+		});
+		
 		JLabel lblUsuario = new JLabel("Usuario:");
 		lblUsuario.setBounds(147, 66, 60, 15);
 		contentPane.add(lblUsuario);
 		
-		JLabel lblNewLabel = new JLabel("Usuario");
-		lblNewLabel.setBounds(228, 66, 199, 15);
-		contentPane.add(lblNewLabel);
+		JLabel lblUsuarioactivo = new JLabel("");
+		lblUsuarioactivo.setBounds(228, 66, 199, 15);
+		contentPane.add(lblUsuarioactivo);
+
+		Usuario usuario = modelo.Sesion.getUsuarioActivo();
+		if (usuario != null) {
+		    lblUsuarioactivo.setText(usuario.getNombre());
+		}
+		
 	}
 	
 	private void irAClientes() {
 		Menu ventanamenu = new Menu();
 	    GestionarClientes ventanaclientes = new GestionarClientes();
 	    ventanaclientes.setVisible(true);
-	    ventanamenu.setVisible(false);
+	    this.dispose();
 	}
 	
 	private void irAUsuarios() {
 		Menu ventanamenu = new Menu();
 	    GestionarUsuarios ventanausuarios = new GestionarUsuarios();
 	    ventanausuarios.setVisible(true);
-	    ventanamenu.setVisible(false);
+	    this.dispose();
 	}
 	
 	private void irAVehiculos() {
 		Menu ventanamenu = new Menu();
 	    GestionarVehiculos ventanavehiculos = new GestionarVehiculos();
 	    ventanavehiculos.setVisible(true);
-	    ventanamenu.setVisible(false);
+	    this.dispose();
 	}
 }
