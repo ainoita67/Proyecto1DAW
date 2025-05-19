@@ -112,8 +112,32 @@ public class InicioSesion extends JFrame {
 		// Acción del botón "Enviar"
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String dni = txtDni.getText();
+				String contrasena = txtContrasea.getText();
 				
+		        if (DbUsuario.verificarCredenciales(dni, contrasena)) {
+		            try {
+		                DbUsuario dbUsuario = new DbUsuario();
+		                Usuario usuario = dbUsuario.ver1Usuario(dni);
+		                if (usuario != null) {
+		                    Sesion.setUsuarioActivo(usuario); // Guardar el usuario en la sesión
 
+		                    // Abrir ventana Menu
+		                    Menu menu = new Menu(); // Asegúrate de importar tu clase Menu
+		                    menu.setVisible(true);
+
+		                    // Cerrar ventana actual
+		                    dispose();
+		                } else {
+		                    JOptionPane.showMessageDialog(null, "Error al obtener los datos del usuario.");
+		                }
+		            } catch (SQLException ex) {
+		                ex.printStackTrace();
+		                JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos.");
+		            }
+		        } else {
+		            JOptionPane.showMessageDialog(null, "DNI o contraseña incorrectos.");
+		        }		
 			}
 		});
 	}

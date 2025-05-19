@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Sesion;
 import modelo.Usuario;
 
 import javax.swing.JButton;
@@ -95,6 +96,8 @@ public class Menu extends JFrame {
 		btnCerrarSesin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InicioSesion inicio = new InicioSesion();
+				Sesion.cerrarSesionUsuario();
+				Sesion.cerrarSesionRol();
 				inicio.setVisible(true);
 				dispose();
 			}
