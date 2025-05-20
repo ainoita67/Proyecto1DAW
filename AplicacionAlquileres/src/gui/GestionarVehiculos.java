@@ -1,16 +1,28 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import bdd.DbCliente;
+import bdd.DbVehiculo;
+import modelo.Cliente;
+import modelo.Vehiculo;
+
 import javax.swing.JTable;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 
 public class GestionarVehiculos extends JFrame {
@@ -55,6 +67,8 @@ public class GestionarVehiculos extends JFrame {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+		cargarTablaClientes();
+		
 		txtBuscarMatricula = new JTextField();
 		txtBuscarMatricula.setText("Buscar Matricula");
 		txtBuscarMatricula.setBounds(27, 40, 114, 19);
@@ -80,21 +94,153 @@ public class GestionarVehiculos extends JFrame {
 		JButton btnAadir = new JButton("Añadir");
 		btnAadir.setBounds(153, 37, 80, 25);
 		contentPane.add(btnAadir);
+		btnAadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirVentanaCrearVehiculo();
+			}
+		});
 		
 		JButton btnEditar = new JButton("Editar");
 		btnEditar.setBounds(245, 37, 80, 25);
 		contentPane.add(btnEditar);
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				editarVehiculo();
+			}
+		});
 		
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(337, 37, 90, 25);
 		contentPane.add(btnEliminar);
+		btnEliminar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				eliminarVehiculo();
+			}
+		});
 		
 		JButton btnMen = new JButton("Menú");
 		btnMen.setBounds(321, 0, 117, 25);
 		contentPane.add(btnMen);
+		btnMen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				irAMenu();
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel("Vehiculos");
 		lblNewLabel.setBounds(46, 13, 70, 15);
 		contentPane.add(lblNewLabel);
 	}
+	
+	public void cargarTablaClientes() {
+	    // Definir las columnas
+	    String[] columnas = {"Matrícula", "Marca", "Modelo", "Precio/Hora", "F matriculacion", "prox mantenimiento", "Plazas", "Color"};
+
+	    // Crear un modelo de tabla que no permita edición
+	    DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false; // Ninguna celda es editable
+	        }
+	    };
+
+	    try {
+	        DbVehiculo dbVehiculo = new DbVehiculo();
+	        ArrayList<Vehiculo> lista = dbVehiculo.verTodosVehiculos();
+	        
+	        for (Vehiculo v : lista) {
+	            Object[] fila = {
+	            	v.getMatricula(),
+	            	v.getMarca(),
+	            	v.getModelo(),
+	            	v.getPrecioH(),
+	            	v.getF_matriculacion(),
+	            	v.getProximo_mantenimiento(),
+	            	v.getPlazas(),
+	            	v.getColor()
+
+	            };
+	            modeloTabla.addRow(fila);
+	        }
+
+	        table.setModel(modeloTabla);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+	private void editarVehiculo() {
+	    int filaSeleccionada = table.getSelectedRow();
+
+	    if (filaSeleccionada != -1) {
+	        String matriculaSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        try {
+	            DbVehiculo dbVehiculo = new DbVehiculo();
+	            Vehiculo vehiculoSeleccionado = dbVehiculo.ver1Vehiculo(matriculaSeleccionado);
+
+	            if (vehiculoSeleccionado != null) {
+	                EditarVehiculo ventanaEditar = new EditarVehiculo(vehiculoSeleccionado);
+	                ventanaEditar.setVisible(true);
+	                dispose(); // Cerrar
+	            } else {
+	                JOptionPane.showMessageDialog(this, "No se encontró el vehiculo.");
+	            }
+
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+	        }
+
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
+	}
+	
+	private void abrirVentanaCrearVehiculo() {
+		CrearVehiculo ventanaCrear = new CrearVehiculo();
+	    ventanaCrear.setVisible(true);
+	    dispose();
+	}
+	
+	private void eliminarVehiculo() {
+	    int filaSeleccionada = table.getSelectedRow();
+
+	    if (filaSeleccionada != -1) {
+	        String matriculaSeleccionada = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        int confirmacion = JOptionPane.showConfirmDialog(this,
+	                "¿Estás seguro de que quieres eliminar el vehículo con matrícula: " + matriculaSeleccionada + "?",
+	                "Confirmar eliminación",
+	                JOptionPane.YES_NO_OPTION);
+
+	        if (confirmacion == JOptionPane.YES_OPTION) {
+	            try {
+	                DbVehiculo dbVehiculo = new DbVehiculo();
+	                boolean exito = dbVehiculo.eliminarVehiculo(matriculaSeleccionada);
+
+	                if (exito) {
+	                    JOptionPane.showMessageDialog(this, "Vehículo eliminado correctamente.");
+	                    cargarTablaClientes(); // Recargar la tabla
+	                } else {
+	                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el vehículo.");
+	                }
+	            } catch (Exception ex) {
+	                ex.printStackTrace();
+	                JOptionPane.showMessageDialog(this, "Error al eliminar el vehículo.");
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(this, "Eliminación cancelada.");
+	        }
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
+	}
+	
+	private void irAMenu() {
+	    Menu ventanamenu = new Menu();
+	    ventanamenu.setVisible(true);
+	    dispose();
+	}
+
 }

@@ -4,9 +4,13 @@
 
 package modelo;
 
-/************************************************************/
-/**
- * 
- */
+import java.time.LocalDate;
+
 public class Moto extends Vehiculo {
+	public Moto(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
+			LocalDate proximo_mantenimiento, String color, int plazas) {
+		super(matricula, marca, modelo, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
+	}
+
+	
 }

@@ -8,7 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
+import modelo.Furgoneta;
+import modelo.Moto;
+import modelo.Turismo;
 import modelo.Vehiculo;
 
 public class DbVehiculo extends Conexion{
@@ -18,26 +22,49 @@ public class DbVehiculo extends Conexion{
 	
 	public ArrayList<Vehiculo> verTodosVehiculos() {
 		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
-	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, tipo, tipo_turismo, tipo_furgo FROM vehiculo";
+	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, \n"
+	    		+ "	    IF(\n"
+	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula) IS NOT NULL,\n"
+	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula),\n"
+	    		+ "	            v.fecha_matriculacion\n"
+	    		+ "	        ) AS fecha_ultimo_mantenimiento\n"
+	    		+ "	    FROM vehiculo v \n"
+	    		+ "	    JOIN tipo t ON v.tipo = t.id \n"
+	    		+ "	    JOIN fechasmant f ON f.tipo = t.id \n"
+	    		+ "	    WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) >= f.desde AND TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) < f.hasta;";
+	    
+	    
 	    
 	    try (PreparedStatement stmt = conexion.prepareStatement(sql);
 	         ResultSet rs = stmt.executeQuery()) {
 	        
 	        while (rs.next()) {
-	            String matricula = rs.getString("matricula");
+	        	String matricula = rs.getString("matricula");
 	            String modelo = rs.getString("modelo");
 	            String marca = rs.getString("marca");
 	            Double precioh = rs.getDouble("precioh");
-	            String fecha_matriculacion = rs.getString("fecha_matriculacion");
+	            LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
 	            String color = rs.getString("color");
-	            String plazas = rs.getString("plazas");
-	            String tipo = rs.getString("tipo");
+	            int plazas = rs.getInt("plazas");
+	            int tipo = rs.getInt("tipo");
 	            String tipo_turismo = rs.getString("tipo_turismo");
 	            String tipo_furgo = rs.getString("tipo_furgo");
+	            int frecuencia = rs.getInt("frecuencia");
+	            LocalDate ultimo_mant = rs.getDate("fecha_ultimo_mantenimiento").toLocalDate();
+
 	            
-	            if (tipo == "turismo") {
-	            	Vehiculo vehiculo = new Turismo(matricula, precioh, String f_matriculacion, String proximo_mantenimiento, String color,
-	            			int plazas, String tipo_turismo);
+	            LocalDate prox_mantenimiento = ultimo_mant.plusMonths(frecuencia);
+	            
+	            if (tipo == 1) {
+	            	Vehiculo vehiculo = new Turismo(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_turismo);
+	            	listaVehiculos.add(vehiculo);
+	            }
+	            if (tipo == 2) {
+	            	Vehiculo vehiculo = new Furgoneta(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_furgo);
+	            	listaVehiculos.add(vehiculo);
+	            }
+	            if (tipo == 3) {
+	            	Vehiculo vehiculo = new Moto(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas);
 	            	listaVehiculos.add(vehiculo);
 	            }
 
@@ -48,14 +75,149 @@ public class DbVehiculo extends Conexion{
 	    
 	    return listaVehiculos;
 	}
+	
+	public Vehiculo ver1Vehiculo(String matricula) {
+	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, \n"
+	    		+ "	    IF(\n"
+	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula) IS NOT NULL,\n"
+	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula),\n"
+	    		+ "	            v.fecha_matriculacion\n"
+	    		+ "	        ) AS fecha_ultimo_mantenimiento\n"
+	    		+ "	    FROM vehiculo v \n"
+	    		+ "	    JOIN tipo t ON v.tipo = t.id \n"
+	    		+ "	    JOIN fechasmant f ON f.tipo = t.id \n"
+	    		+ "	    WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) >= f.desde AND TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) < f.hasta and matricula = ?";
+	    
+	    
+	    
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)){
+	    	stmt.setString(1, matricula);
+	    	var rs = stmt.executeQuery();
+	        while (rs.next()) {
+	        	String matriculaVehiculo = rs.getString("matricula");
+	            String modelo = rs.getString("modelo");
+	            String marca = rs.getString("marca");
+	            Double precioh = rs.getDouble("precioh");
+	            LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
+	            String color = rs.getString("color");
+	            int plazas = rs.getInt("plazas");
+	            int tipo = rs.getInt("tipo");
+	            String tipo_turismo = rs.getString("tipo_turismo");
+	            String tipo_furgo = rs.getString("tipo_furgo");
+	            int frecuencia = rs.getInt("frecuencia");
+	            LocalDate ultimo_mant = rs.getDate("fecha_ultimo_mantenimiento").toLocalDate();
 
-	public void crearVehiculo() {
+	            
+	            LocalDate prox_mantenimiento = ultimo_mant.plusMonths(frecuencia);
+	            
+	            if (tipo == 1) {
+	            	Vehiculo vehiculo = new Turismo(matriculaVehiculo, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_turismo);
+	            	return vehiculo;
+	            }
+	            if (tipo == 2) {
+	            	Vehiculo vehiculo = new Furgoneta(matriculaVehiculo, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_furgo);
+	            	return vehiculo;	            }
+	            if (tipo == 3) {
+	            	Vehiculo vehiculo = new Moto(matriculaVehiculo, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas);
+	            	return vehiculo;	            }
+
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    
+	    return null;
+	}
+	
+	public boolean actualizarVehiculo(Vehiculo vehiculo) {
+	    String sql = "UPDATE vehiculo SET modelo = ?, marca = ?, precioh = ?, fecha_matriculacion = ?, color = ?, plazas = ?, tipo = ?, tipo_turismo = ?, tipo_furgo = ? WHERE matricula = ?";
+
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, vehiculo.getModelo());
+	        stmt.setString(2, vehiculo.getMarca());
+	        stmt.setDouble(3, vehiculo.getPrecioH());
+	        stmt.setDate(4, java.sql.Date.valueOf(vehiculo.getF_matriculacion()));
+	        stmt.setString(5, vehiculo.getColor());
+	        stmt.setInt(6, vehiculo.getPlazas());
+
+	        if (vehiculo instanceof Turismo) {
+	            stmt.setInt(7, 1); // tipo = 1 para Turismo
+	            stmt.setString(8, ((Turismo) vehiculo).getTipo());
+	            stmt.setNull(9, java.sql.Types.VARCHAR); 
+	        } else if (vehiculo instanceof Furgoneta) {
+	            stmt.setInt(7, 2); // tipo = 2 para Furgoneta
+	            stmt.setNull(8, java.sql.Types.VARCHAR); 
+	            stmt.setString(9, ((Furgoneta) vehiculo).getTipo());
+	        } else if (vehiculo instanceof Moto) {
+	            stmt.setInt(7, 3); // tipo = 3 para Moto
+	            stmt.setNull(8, java.sql.Types.VARCHAR);
+	            stmt.setNull(9, java.sql.Types.VARCHAR);
+	        } else {
+	            return false; // Tipo desconocido
+	        }
+
+	        stmt.setString(10, vehiculo.getMatricula());
+
+	        int filas = stmt.executeUpdate();
+	        return filas > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
-	public void eliminarVehiculo() {
+
+	public boolean crearVehiculo(Vehiculo vehiculo) {
+	    String sql = "INSERT INTO vehiculo (matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, tipo, tipo_turismo, tipo_furgo) "
+	               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, vehiculo.getMatricula());
+	        stmt.setString(2, vehiculo.getModelo());
+	        stmt.setString(3, vehiculo.getMarca());
+	        stmt.setDouble(4, vehiculo.getPrecioH());
+	        stmt.setDate(5, java.sql.Date.valueOf(vehiculo.getF_matriculacion()));
+	        stmt.setString(6, vehiculo.getColor());
+	        stmt.setInt(7, vehiculo.getPlazas());
+
+	        if (vehiculo instanceof Turismo) {
+	            stmt.setInt(8, 1); // tipo 1: Turismo
+	            stmt.setString(9, ((Turismo) vehiculo).getTipo());
+	            stmt.setNull(10, java.sql.Types.VARCHAR);
+	        } else if (vehiculo instanceof Furgoneta) {
+	            stmt.setInt(8, 2); // tipo 2: Furgoneta
+	            stmt.setNull(9, java.sql.Types.VARCHAR);
+	            stmt.setString(10, ((Furgoneta) vehiculo).getTipo());
+	        } else if (vehiculo instanceof Moto) {
+	            stmt.setInt(8, 3); // tipo 3: Moto
+	            stmt.setNull(9, java.sql.Types.VARCHAR);
+	            stmt.setNull(10, java.sql.Types.VARCHAR);
+	        } else {
+	            return false; // Tipo no reconocido
+	        }
+
+	        int filas = stmt.executeUpdate();
+	        return filas > 0;
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
-	public void editarVehiculo() {
+
+	public boolean eliminarVehiculo(String matricula) {
+	    String sql = "DELETE FROM vehiculo WHERE matricula = ?";
+
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, matricula);
+	        int filas = stmt.executeUpdate();
+	        return filas > 0; // Devuelve true si se eliminó al menos una fila
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
 	}
 
 	public void calMantenimiento() {
