@@ -165,7 +165,7 @@ public class CrearUsuario extends JFrame {
 		System.out.println(1);
     	System.out.println("Coy a ajflf");
     	  
-    	Usuario usuario = new Usuario(txtNombre.getText(), txtEmail.getText(), txtTfno.getText(), txtDni.getText(), txtDireccion.getText(),txtContrasea.getText(), rol);
+    	Usuario usuario = new Usuario( txtDni.getText(), txtNombre.getText(), txtTfno.getText(), txtEmail.getText(), txtDireccion.getText(), txtContrasea.getText(), rol);
            try {
                conexion = new DbUsuario();
                if (conexion.crearUsuario(usuario)) {
@@ -179,4 +179,12 @@ public class CrearUsuario extends JFrame {
                ex.printStackTrace();
            }
     }
+	
+	private void irAGestionar() {
+		CrearUsuario ventanaeditar = new CrearUsuario();
+		GestionarUsuarios ventanagestionar = new GestionarUsuarios();
+		ventanagestionar.setVisible(true);
+		ventanaeditar.setVisible(false);
+		dispose();
+	}
 }

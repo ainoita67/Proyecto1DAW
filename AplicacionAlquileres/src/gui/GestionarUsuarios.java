@@ -224,6 +224,6 @@ public class GestionarUsuarios extends JFrame {
     	GestionarUsuarios ventanausuario = new GestionarUsuarios();
 	    Menu ventanamenu = new Menu();
 	    ventanamenu.setVisible(true);
-	    ventanausuario.setVisible(false);
+	    this.dispose();
 	}
 }

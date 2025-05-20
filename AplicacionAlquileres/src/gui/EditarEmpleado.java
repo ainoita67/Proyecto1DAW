@@ -243,7 +243,6 @@ public class EditarEmpleado extends JFrame {
 		EditarEmpleado ventanaeditar = new EditarEmpleado(usuarioActual);
 		GestionarUsuarios ventanagestionar = new GestionarUsuarios();
 		ventanagestionar.setVisible(true);
-		ventanaeditar.setVisible(false);
-		dispose();
+		this.dispose();
 	}
 }
