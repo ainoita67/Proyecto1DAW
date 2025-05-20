@@ -62,12 +62,8 @@ public class Menu extends JFrame {
 		    }
 		});
 		
-		JButton btnConsultarVehiculos = new JButton("Consultar Vehiculos");
-		btnConsultarVehiculos.setBounds(22, 152, 184, 25);
-		contentPane.add(btnConsultarVehiculos);
-		
 		JButton btnGestionarAlquileres = new JButton("Gestionar Alquileres");
-		btnGestionarAlquileres.setBounds(22, 200, 184, 25);
+		btnGestionarAlquileres.setBounds(228, 105, 199, 25);
 		contentPane.add(btnGestionarAlquileres);
 		btnGestionarAlquileres.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -76,7 +72,7 @@ public class Menu extends JFrame {
 		});
 		
 		JButton btnGestionarEmpleados = new JButton("Gestionar Empleados");
-		btnGestionarEmpleados.setBounds(228, 105, 199, 25);
+		btnGestionarEmpleados.setBounds(228, 152, 199, 25);
 		contentPane.add(btnGestionarEmpleados);
 		
 		btnGestionarEmpleados.addActionListener(new ActionListener() {
@@ -86,7 +82,7 @@ public class Menu extends JFrame {
 		});
 		
 		JButton btnGestionarVehiculos = new JButton("Gestionar Vehiculos");
-		btnGestionarVehiculos.setBounds(228, 152, 199, 25);
+		btnGestionarVehiculos.setBounds(22, 152, 184, 25);
 		contentPane.add(btnGestionarVehiculos);
 		
 		btnGestionarVehiculos.addActionListener(new ActionListener() {
@@ -125,7 +121,6 @@ public class Menu extends JFrame {
 		    
 		    if (rol==2) {
 		    	btnGestionarEmpleados.setVisible(false);
-		    	btnConsultarVehiculos.setVisible(false);
 		    }else if (rol==3) {
 		    	
 		    }
