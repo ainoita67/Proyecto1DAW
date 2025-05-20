@@ -244,6 +244,6 @@ public class GestionarClientes extends JFrame {
 		GestionarClientes ventanacliente = new GestionarClientes();
 	    Menu ventanamenu = new Menu();
 	    ventanamenu.setVisible(true);
-	    ventanacliente.setVisible(false);
+	    this.dispose();
 	}
 }

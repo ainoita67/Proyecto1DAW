@@ -165,5 +165,6 @@ public class EditarCliente extends JFrame {
 	private void irAGestionar() {
 	    GestionarClientes ventanagestionar = new GestionarClientes();
 	    ventanagestionar.setVisible(true);
+	    this.dispose();
 	}
 }

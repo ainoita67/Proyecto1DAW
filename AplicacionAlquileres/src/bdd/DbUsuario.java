@@ -3,6 +3,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import modelo.Usuario;
 public class DbUsuario extends Conexion {
     public DbUsuario() throws SQLException {
@@ -99,4 +102,31 @@ public class DbUsuario extends Conexion {
         }
         return null;
     }
+    
+ // Método para verificar las credenciales en la base de datos
+ 	public static boolean verificarCredenciales(String dni, String password) {
+ 		Conexion db = null;
+
+ 		try {
+ 			db = new Conexion();
+ 			// Consulta para verificar las credenciales
+ 			String sql = "SELECT * FROM usuario WHERE dni = ? AND contrasea = ?";
+ 			PreparedStatement ps = db.conexion.prepareStatement(sql);
+ 			ps.setString(1, dni);
+ 			ps.setString(2, password);
+ 			ResultSet rs = ps.executeQuery();
+
+ 			// Si se encuentran registros con ese DNI y contraseña, la verificación es exitosa
+ 			return rs.next();
+
+ 		} catch (SQLException e) {
+ 			e.printStackTrace();
+ 			JOptionPane.showMessageDialog(null, "Error en la base de datos: " + e.getMessage());
+ 			return false;
+ 		} finally {
+ 			if (db != null) {
+ 				db.cerrar(); // Cerrar la conexión a la base de datos
+ 			}
+ 		}
+ 	}
 }

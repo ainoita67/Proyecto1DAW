@@ -1,6 +1,13 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -8,6 +15,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import bdd.Conexion;
+import bdd.DbUsuario;
+import modelo.Sesion;
+import modelo.Usuario;
 
 public class InicioSesion extends JFrame {
 
@@ -40,7 +53,6 @@ public class InicioSesion extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -48,7 +60,7 @@ public class InicioSesion extends JFrame {
 		lblIniciarSesin.setBounds(164, 53, 100, 15);
 		contentPane.add(lblIniciarSesin);
 		
-		//campo DNI
+		// Campo DNI
 		txtDni = new JTextField();
 		txtDni.setText("DNI");
 		txtDni.setBounds(164, 80, 114, 19);
@@ -56,21 +68,21 @@ public class InicioSesion extends JFrame {
 		txtDni.setColumns(10);
 		
 		// Evento para borrar el "placeholder" cuando el usuario hace clic
-		txtDni.addFocusListener(new java.awt.event.FocusAdapter() {
-		    public void focusGained(java.awt.event.FocusEvent evt) {
+		txtDni.addFocusListener(new FocusAdapter() {
+		    public void focusGained(FocusEvent evt) {
 		        if (txtDni.getText().equals("DNI")) {
 		        	txtDni.setText("");
 		        }
 		    }
 		    
-		    public void focusLost(java.awt.event.FocusEvent evt) {
-		        // Si el usuario deja el campo vacío, vuelve a mostrar el placeholder
+		    public void focusLost(FocusEvent evt) {
 		        if (txtDni.getText().isEmpty()) {
 		        	txtDni.setText("DNI");
 		        }
 		    }
 		});
 		
+		// Campo Contraseña
 		txtContrasea = new JTextField();
 		txtContrasea.setText("Contraseña");
 		txtContrasea.setBounds(164, 111, 114, 19);
@@ -78,23 +90,56 @@ public class InicioSesion extends JFrame {
 		txtContrasea.setColumns(10);
 		
 		// Evento para borrar el "placeholder" cuando el usuario hace clic
-		txtContrasea.addFocusListener(new java.awt.event.FocusAdapter() {
-		    public void focusGained(java.awt.event.FocusEvent evt) {
+		txtContrasea.addFocusListener(new FocusAdapter() {
+		    public void focusGained(FocusEvent evt) {
 		        if (txtContrasea.getText().equals("Contraseña")) {
 		        	txtContrasea.setText("");
 		        }
 		    }
 		    
-		    public void focusLost(java.awt.event.FocusEvent evt) {
-		        // Si el usuario deja el campo vacío, vuelve a mostrar el placeholder
+		    public void focusLost(FocusEvent evt) {
 		        if (txtContrasea.getText().isEmpty()) {
 		        	txtContrasea.setText("Contraseña");
 		        }
 		    }
 		});
 		
-		JButton btnEnviar = new JButton("enviar");
+		// Botón de Enviar
+		JButton btnEnviar = new JButton("Enviar");
 		btnEnviar.setBounds(161, 144, 117, 25);
 		contentPane.add(btnEnviar);
+
+		// Acción del botón "Enviar"
+		btnEnviar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String dni = txtDni.getText();
+				String contrasena = txtContrasea.getText();
+				
+		        if (DbUsuario.verificarCredenciales(dni, contrasena)) {
+		            try {
+		                DbUsuario dbUsuario = new DbUsuario();
+		                Usuario usuario = dbUsuario.ver1Usuario(dni);
+		                if (usuario != null) {
+		                    Sesion.setUsuarioActivo(usuario); // Guardar el usuario en la sesión
+
+		                    // Abrir ventana Menu
+		                    Menu menu = new Menu(); // Asegúrate de importar tu clase Menu
+		                    menu.setVisible(true);
+
+		                    // Cerrar ventana actual
+		                    dispose();
+		                } else {
+		                    JOptionPane.showMessageDialog(null, "Error al obtener los datos del usuario.");
+		                }
+		            } catch (SQLException ex) {
+		                ex.printStackTrace();
+		                JOptionPane.showMessageDialog(null, "Error al conectar con la base de datos.");
+		            }
+		        } else {
+		            JOptionPane.showMessageDialog(null, "DNI o contraseña incorrectos.");
+		        }		
+			}
+		});
 	}
+
 }
