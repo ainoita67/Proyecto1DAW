@@ -20,61 +20,73 @@ public class DbVehiculo extends Conexion{
 		super();
 	}
 	
-	public ArrayList<Vehiculo> verTodosVehiculos() {
-		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
-	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, \n"
-	    		+ "	    IF(\n"
-	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula) IS NOT NULL,\n"
-	    		+ "	            (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula),\n"
-	    		+ "	            v.fecha_matriculacion\n"
-	    		+ "	        ) AS fecha_ultimo_mantenimiento\n"
-	    		+ "	    FROM vehiculo v \n"
-	    		+ "	    JOIN tipo t ON v.tipo = t.id \n"
-	    		+ "	    JOIN fechasmant f ON f.tipo = t.id \n"
-	    		+ "	    WHERE TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) >= f.desde AND TIMESTAMPDIFF(YEAR, fecha_matriculacion, CURDATE()) < f.hasta;";
+	public ArrayList<Vehiculo> obtenerVehiculos(LocalDate fecha1, LocalDate fecha2, boolean soloDisponibles) {
+	    ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
 	    
-	    
-	    
-	    try (PreparedStatement stmt = conexion.prepareStatement(sql);
-	         ResultSet rs = stmt.executeQuery()) {
-	        
-	        while (rs.next()) {
-	        	String matricula = rs.getString("matricula");
-	            String modelo = rs.getString("modelo");
-	            String marca = rs.getString("marca");
-	            Double precioh = rs.getDouble("precioh");
-	            LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
-	            String color = rs.getString("color");
-	            int plazas = rs.getInt("plazas");
-	            int tipo = rs.getInt("tipo");
-	            String tipo_turismo = rs.getString("tipo_turismo");
-	            String tipo_furgo = rs.getString("tipo_furgo");
-	            int frecuencia = rs.getInt("frecuencia");
-	            LocalDate ultimo_mant = rs.getDate("fecha_ultimo_mantenimiento").toLocalDate();
+	    StringBuilder sql = new StringBuilder(
+	        "SELECT \n"
+	        + "    v.matricula, \n"
+	        + "    v.modelo, \n"
+	        + "    v.marca, \n"
+	        + "    v.precioh, \n"
+	        + "    v.fecha_matriculacion, \n"
+	        + "    v.color, \n"
+	        + "    v.plazas, \n"
+	        + "    v.tipo, \n"
+	        + "    v.tipo_turismo, \n"
+	        + "    v.tipo_furgo, \n"
+	        + "    f.frecuencia,\n"
+	        + "    IF(\n"
+	        + "        (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula) IS NOT NULL,\n"
+	        + "        (SELECT MAX(m.fecha) FROM mantenimiento m WHERE m.matricula = v.matricula),\n"
+	        + "        v.fecha_matriculacion\n"
+	        + "    ) AS fecha_ultimo_mantenimiento\n"
+	        + "FROM vehiculo v\n"
+	        + "JOIN tipo t ON v.tipo = t.id\n"
+	        + "JOIN fechasmant f ON f.tipo = t.id\n"
+	        + "WHERE \n"
+	        + "    TIMESTAMPDIFF(YEAR, v.fecha_matriculacion, CURDATE()) >= f.desde\n"
+	        + "    AND TIMESTAMPDIFF(YEAR, v.fecha_matriculacion, CURDATE()) < f.hasta\n"
+	    );
 
-	            
-	            LocalDate prox_mantenimiento = ultimo_mant.plusMonths(frecuencia);
-	            
-	            if (tipo == 1) {
-	            	Vehiculo vehiculo = new Turismo(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_turismo);
-	            	listaVehiculos.add(vehiculo);
-	            }
-	            if (tipo == 2) {
-	            	Vehiculo vehiculo = new Furgoneta(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_furgo);
-	            	listaVehiculos.add(vehiculo);
-	            }
-	            if (tipo == 3) {
-	            	Vehiculo vehiculo = new Moto(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas);
-	            	listaVehiculos.add(vehiculo);
-	            }
+	    if (soloDisponibles) {
+	        sql.append(
+	            "AND NOT EXISTS (\n"
+	            + "    SELECT 1 \n"
+	            + "    FROM alquiler a\n"
+	            + "    WHERE a.vehiculo = v.matricula\n"
+	            + "    AND (\n"
+	            + "        a.fechaini BETWEEN ? AND ?\n"
+	            + "        OR a.fechafin BETWEEN ? AND ?\n"
+	            + "        OR (? BETWEEN a.fechaini AND a.fechafin)\n"
+	            + "        OR (? BETWEEN a.fechaini AND a.fechafin)\n"
+	            + "    )\n"
+	            + ")\n"
+	        );
+	    }
 
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql.toString())) {
+	        if (soloDisponibles) {
+	            java.sql.Date sqlFecha1 = java.sql.Date.valueOf(fecha1);
+	            java.sql.Date sqlFecha2 = java.sql.Date.valueOf(fecha2);
+	            stmt.setDate(1, sqlFecha1);
+	            stmt.setDate(2, sqlFecha2);
+	            stmt.setDate(3, sqlFecha1);
+	            stmt.setDate(4, sqlFecha2);
+	            stmt.setDate(5, sqlFecha1);
+	            stmt.setDate(6, sqlFecha2);
 	        }
+
+	        ResultSet rs = stmt.executeQuery();
+	        return genObjetosyArray(rs);
+
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
-	    
+
 	    return listaVehiculos;
 	}
+
 	
 	public Vehiculo ver1Vehiculo(String matricula) {
 	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, \n"
@@ -219,10 +231,48 @@ public class DbVehiculo extends Conexion{
 	        return false;
 	    }
 	}
+	
+	public ArrayList<Vehiculo> genObjetosyArray(ResultSet rs) {
+		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
+		try {
+			while (rs.next()) {
+				String matricula = rs.getString("matricula");
+			    String modelo = rs.getString("modelo");
+			    String marca = rs.getString("marca");
+			    Double precioh = rs.getDouble("precioh");
+			    LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
+			    String color = rs.getString("color");
+			    int plazas = rs.getInt("plazas");
+			    int tipo = rs.getInt("tipo");
+			    String tipo_turismo = rs.getString("tipo_turismo");
+			    String tipo_furgo = rs.getString("tipo_furgo");
+			    int frecuencia = rs.getInt("frecuencia");
+			    LocalDate ultimo_mant = rs.getDate("fecha_ultimo_mantenimiento").toLocalDate();
 
-	public void calMantenimiento() {
-	}
+			    
+			    LocalDate prox_mantenimiento = ultimo_mant.plusMonths(frecuencia);
+			    
+			    if (tipo == 1) {
+			    	Vehiculo vehiculo = new Turismo(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_turismo);
+			    	listaVehiculos.add(vehiculo);
+			    }
+			    if (tipo == 2) {
+			    	Vehiculo vehiculo = new Furgoneta(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_furgo);
+			    	listaVehiculos.add(vehiculo);
+			    }
+			    if (tipo == 3) {
+			    	Vehiculo vehiculo = new Moto(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas);
+			    	listaVehiculos.add(vehiculo);
+			    }
 
-	public void consultarDisponibilidad() {
-	}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaVehiculos;
+		
+	}	
+
 }

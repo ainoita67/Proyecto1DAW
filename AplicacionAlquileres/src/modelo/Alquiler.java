@@ -9,20 +9,48 @@ import java.time.LocalDate;
 public class Alquiler {
 
 
+	public Alquiler(Cliente cliente, Vehiculo vehiculo, LocalDate fecha_ini, LocalDate fecha_fin, Double total) {
+		super();
+		this.cliente = cliente;
+		this.vehiculo = vehiculo;
+		this.fecha_ini = fecha_ini;
+		this.fecha_fin = fecha_fin;
+		this.total = total;
+	}
 	private Cliente cliente;
 	private Vehiculo vehiculo;
 	private LocalDate fecha_ini;
 	private LocalDate fecha_fin;
 	private Double total;
-
-
-	
-	public void Alquiler() {
+	public Cliente getCliente() {
+		return cliente;
 	}
-	
-	public void editar() {
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+	public Vehiculo getVehiculo() {
+		return vehiculo;
+	}
+	public void setVehiculo(Vehiculo vehiculo) {
+		this.vehiculo = vehiculo;
+	}
+	public LocalDate getFecha_ini() {
+		return fecha_ini;
+	}
+	public void setFecha_ini(LocalDate fecha_ini) {
+		this.fecha_ini = fecha_ini;
+	}
+	public LocalDate getFecha_fin() {
+		return fecha_fin;
+	}
+	public void setFecha_fin(LocalDate fecha_fin) {
+		this.fecha_fin = fecha_fin;
+	}
+	public Double getTotal() {
+		return total;
+	}
+	public void setTotal(Double total) {
+		this.total = total;
 	}
 
-	public void mostrar() {
-	}
 }

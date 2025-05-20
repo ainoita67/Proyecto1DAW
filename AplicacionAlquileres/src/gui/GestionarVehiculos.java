@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import java.awt.Font;
 
 
 public class GestionarVehiculos extends JFrame {
@@ -30,7 +31,6 @@ public class GestionarVehiculos extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private JTextField txtBuscarMatricula;
 
 	/**
 	 * Launch the application.
@@ -53,7 +53,7 @@ public class GestionarVehiculos extends JFrame {
 	 */
 	public GestionarVehiculos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1400, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -61,38 +61,16 @@ public class GestionarVehiculos extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(27, 71, 400, 180);
+		scrollPane.setBounds(68, 97, 1209, 600);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
-		cargarTablaClientes();
-		
-		txtBuscarMatricula = new JTextField();
-		txtBuscarMatricula.setText("Buscar Matricula");
-		txtBuscarMatricula.setBounds(27, 40, 114, 19);
-		contentPane.add(txtBuscarMatricula);
-		txtBuscarMatricula.setColumns(10);
-		
-		// Evento para borrar el "placeholder" cuando el usuario hace clic
-		txtBuscarMatricula.addFocusListener(new java.awt.event.FocusAdapter() {
-		    public void focusGained(java.awt.event.FocusEvent evt) {
-		        if (txtBuscarMatricula.getText().equals("Buscar Matricula")) {
-		        	txtBuscarMatricula.setText("");
-		        }
-		    }
-		    
-		    public void focusLost(java.awt.event.FocusEvent evt) {
-		        // Si el usuario deja el campo vacío, vuelve a mostrar el placeholder
-		        if (txtBuscarMatricula.getText().isEmpty()) {
-		        	txtBuscarMatricula.setText("Buscar Matricula");
-		        }
-		    }
-		});
+		cargarTablaVehiculos();
 		
 		JButton btnAadir = new JButton("Añadir");
-		btnAadir.setBounds(153, 37, 80, 25);
+		btnAadir.setBounds(310, 60, 80, 25);
 		contentPane.add(btnAadir);
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -101,7 +79,7 @@ public class GestionarVehiculos extends JFrame {
 		});
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(245, 37, 80, 25);
+		btnEditar.setBounds(416, 60, 80, 25);
 		contentPane.add(btnEditar);
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -110,7 +88,7 @@ public class GestionarVehiculos extends JFrame {
 		});
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(337, 37, 90, 25);
+		btnEliminar.setBounds(525, 60, 90, 25);
 		contentPane.add(btnEliminar);
 		btnEliminar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -119,7 +97,7 @@ public class GestionarVehiculos extends JFrame {
 		});
 		
 		JButton btnMen = new JButton("Menú");
-		btnMen.setBounds(321, 0, 117, 25);
+		btnMen.setBounds(1160, 60, 117, 25);
 		contentPane.add(btnMen);
 		btnMen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -128,13 +106,23 @@ public class GestionarVehiculos extends JFrame {
 		});
 		
 		JLabel lblNewLabel = new JLabel("Vehiculos");
-		lblNewLabel.setBounds(46, 13, 70, 15);
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 25));
+		lblNewLabel.setBounds(77, 40, 270, 45);
 		contentPane.add(lblNewLabel);
+		
+		JButton btnVerVehiculo = new JButton("Ver Vehiculo");
+		btnVerVehiculo.setBounds(640, 60, 130, 25);
+		contentPane.add(btnVerVehiculo);
+		btnVerVehiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				verVehiculo();
+			}
+		});
 	}
 	
-	public void cargarTablaClientes() {
+	public void cargarTablaVehiculos() {
 	    // Definir las columnas
-	    String[] columnas = {"Matrícula", "Marca", "Modelo", "Precio/Hora", "F matriculacion", "prox mantenimiento", "Plazas", "Color"};
+	    String[] columnas = {"Matrícula", "Marca", "Modelo", "Precio/Dia", "F matriculacion", "prox mantenimiento", "Plazas", "Color", "Tipo", "Subtipo"};
 
 	    // Crear un modelo de tabla que no permita edición
 	    DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
@@ -146,9 +134,24 @@ public class GestionarVehiculos extends JFrame {
 
 	    try {
 	        DbVehiculo dbVehiculo = new DbVehiculo();
-	        ArrayList<Vehiculo> lista = dbVehiculo.verTodosVehiculos();
+	        ArrayList<Vehiculo> lista = dbVehiculo.obtenerVehiculos(null, null, false);
 	        
 	        for (Vehiculo v : lista) {
+	        	
+	        	String tipo = "";
+	            String subtipo = "";
+
+	            if (v instanceof modelo.Turismo) {
+	                tipo = "Turismo";
+	                subtipo = ((modelo.Turismo) v).getTipo();
+	            } else if (v instanceof modelo.Furgoneta) {
+	                tipo = "Furgoneta";
+	                subtipo = ((modelo.Furgoneta) v).getTipo();
+	            } else if (v instanceof modelo.Moto) {
+	                tipo = "Moto";
+	                subtipo = "";
+	            }
+	        	
 	            Object[] fila = {
 	            	v.getMatricula(),
 	            	v.getMarca(),
@@ -157,7 +160,9 @@ public class GestionarVehiculos extends JFrame {
 	            	v.getF_matriculacion(),
 	            	v.getProximo_mantenimiento(),
 	            	v.getPlazas(),
-	            	v.getColor()
+	            	v.getColor(),
+	            	tipo,
+	                subtipo
 
 	            };
 	            modeloTabla.addRow(fila);
@@ -197,6 +202,33 @@ public class GestionarVehiculos extends JFrame {
 	    }
 	}
 	
+	private void verVehiculo() {
+	    int filaSeleccionada = table.getSelectedRow();
+
+	    if (filaSeleccionada != -1) {
+	        String matriculaSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        try {
+	            DbVehiculo dbVehiculo = new DbVehiculo();
+	            Vehiculo vehiculoSeleccionado = dbVehiculo.ver1Vehiculo(matriculaSeleccionado);
+
+	            if (vehiculoSeleccionado != null) {
+	                InformacionVehiculo ventanaVer = new InformacionVehiculo(vehiculoSeleccionado);
+	                ventanaVer.setVisible(true);
+	            } else {
+	                JOptionPane.showMessageDialog(this, "No se encontró el vehiculo.");
+	            }
+
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+	        }
+
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
+	}
+	
 	private void abrirVentanaCrearVehiculo() {
 		CrearVehiculo ventanaCrear = new CrearVehiculo();
 	    ventanaCrear.setVisible(true);
@@ -221,7 +253,7 @@ public class GestionarVehiculos extends JFrame {
 
 	                if (exito) {
 	                    JOptionPane.showMessageDialog(this, "Vehículo eliminado correctamente.");
-	                    cargarTablaClientes(); // Recargar la tabla
+	                    cargarTablaVehiculos(); // Recargar la tabla
 	                } else {
 	                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el vehículo.");
 	                }
