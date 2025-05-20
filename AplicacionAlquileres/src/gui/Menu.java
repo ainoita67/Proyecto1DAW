@@ -14,6 +14,7 @@ import modelo.Usuario;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Color;
 
@@ -79,7 +80,7 @@ public class Menu extends JFrame {
 		    }
 		});
 		
-		JButton btnGestionarVehiculos = new JButton("Gestionar vehiculos");
+		JButton btnGestionarVehiculos = new JButton("Gestionar Vehiculos");
 		btnGestionarVehiculos.setBounds(228, 152, 199, 25);
 		contentPane.add(btnGestionarVehiculos);
 		
@@ -114,28 +115,49 @@ public class Menu extends JFrame {
 		Usuario usuario = modelo.Sesion.getUsuarioActivo();
 		if (usuario != null) {
 		    lblUsuarioactivo.setText(usuario.getNombre());
+		    
+		    int rol = usuario.getRol();
+		    
+		    if (rol==2) {
+		    	btnGestionarEmpleados.setVisible(false);
+		    	btnConsultarVehiculos.setVisible(false);
+		    }else if (rol==3) {
+		    	
+		    }
 		}
 		
 	}
 	
 	private void irAClientes() {
-		Menu ventanamenu = new Menu();
-	    GestionarClientes ventanaclientes = new GestionarClientes();
-	    ventanaclientes.setVisible(true);
-	    this.dispose();
+		if (Sesion.getUsuarioActivo() != null) {
+			Menu ventanamenu = new Menu();
+		    GestionarClientes ventanaclientes = new GestionarClientes();
+		    ventanaclientes.setVisible(true);
+		    this.dispose();
+		}else{
+			JOptionPane.showMessageDialog(this, "Inicie sesión para acceder", "Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 	
 	private void irAUsuarios() {
-		Menu ventanamenu = new Menu();
-	    GestionarUsuarios ventanausuarios = new GestionarUsuarios();
-	    ventanausuarios.setVisible(true);
-	    this.dispose();
+		if (Sesion.getUsuarioActivo() != null) {
+			Menu ventanamenu = new Menu();
+		    GestionarUsuarios ventanausuarios = new GestionarUsuarios();
+		    ventanausuarios.setVisible(true);
+		    this.dispose();
+		}else{
+			JOptionPane.showMessageDialog(this, "Inicie sesión para acceder", "Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 	
 	private void irAVehiculos() {
-		Menu ventanamenu = new Menu();
-	    GestionarVehiculos ventanavehiculos = new GestionarVehiculos();
-	    ventanavehiculos.setVisible(true);
-	    this.dispose();
+		if (Sesion.getUsuarioActivo() != null) {
+			Menu ventanamenu = new Menu();
+		    GestionarVehiculos ventanavehiculos = new GestionarVehiculos();
+		    ventanavehiculos.setVisible(true);
+		    this.dispose();
+		}else{
+			JOptionPane.showMessageDialog(this, "Inicie sesión para acceder", "Acceso Denegado", JOptionPane.WARNING_MESSAGE);
+		}
 	}
 }
