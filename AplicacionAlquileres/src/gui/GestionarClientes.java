@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -11,7 +12,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import bdd.DbCliente;
+import bdd.DbVehiculo;
 import modelo.Cliente;
+import modelo.Vehiculo;
 
 import javax.swing.JTable;
 
@@ -51,7 +54,7 @@ public class GestionarClientes extends JFrame {
 	 */
 	public GestionarClientes() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1400, 800);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -59,7 +62,7 @@ public class GestionarClientes extends JFrame {
 		contentPane.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(27, 71, 400, 180);
+		scrollPane.setBounds(68, 97, 1209, 600);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -67,71 +70,55 @@ public class GestionarClientes extends JFrame {
 		
 		cargarTablaClientes();
 		
-		txtBuscarDni = new JTextField();
-		txtBuscarDni.setText("Buscar DNI");
-		txtBuscarDni.setBounds(27, 40, 114, 19);
-		contentPane.add(txtBuscarDni);
-		txtBuscarDni.setColumns(10);
-		
-		// Evento para borrar el "placeholder" cuando el usuario hace clic
-		txtBuscarDni.addFocusListener(new java.awt.event.FocusAdapter() {
-		    public void focusGained(java.awt.event.FocusEvent evt) {
-		        if (txtBuscarDni.getText().equals("Buscar DNI")) {
-		        	txtBuscarDni.setText("");
-		        }
-		    }
-		    
-		    public void focusLost(java.awt.event.FocusEvent evt) {
-		        // Si el usuario deja el campo vacío, vuelve a mostrar el placeholder
-		        if (txtBuscarDni.getText().isEmpty()) {
-		        	txtBuscarDni.setText("Buscar DNI");
-		        }
-		    }
-		});
-		
 		JButton btnAadir = new JButton("Añadir");
-		btnAadir.setBounds(153, 37, 80, 25);
+		btnAadir.setBounds(310, 60, 80, 25);
 		contentPane.add(btnAadir);
-		
 		btnAadir.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        abrirVentanaCrearCliente();
-		    }
+			public void actionPerformed(ActionEvent arg0) {
+				abrirVentanaCrearCliente();
+			}
 		});
 		
 		JButton btnEditar = new JButton("Editar");
-		btnEditar.setBounds(245, 37, 80, 25);
+		btnEditar.setBounds(416, 60, 80, 25);
 		contentPane.add(btnEditar);
-		
 		btnEditar.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        editarCliente();
-		    }
+			public void actionPerformed(ActionEvent arg0) {
+				editarCliente();
+			}
 		});
 		
 		JButton btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(337, 37, 90, 25);
+		btnEliminar.setBounds(525, 60, 90, 25);
 		contentPane.add(btnEliminar);
-		
 		btnEliminar.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        eliminarCliente();
-		    }
+			public void actionPerformed(ActionEvent arg0) {
+				eliminarCliente();
+			}
 		});
 		
 		JButton btnMen = new JButton("Menú");
-		btnMen.setBounds(321, 0, 117, 25);
+		btnMen.setBounds(1160, 60, 117, 25);
 		contentPane.add(btnMen);
-		
 		btnMen.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        irAMenu();
-		    }
+			public void actionPerformed(ActionEvent arg0) {
+				irAMenu();
+			}
 		});
 		
-		JLabel lblClientes = new JLabel("Clientes");
-		lblClientes.setBounds(47, 13, 70, 15);
-		contentPane.add(lblClientes);
+		JLabel lblNewLabel = new JLabel("Clientes");
+		lblNewLabel.setFont(new Font("Dialog", Font.BOLD, 25));
+		lblNewLabel.setBounds(77, 40, 270, 45);
+		contentPane.add(lblNewLabel);
+		
+		JButton btnVerVehiculo = new JButton("Ver Cliente");
+		btnVerVehiculo.setBounds(640, 60, 130, 25);
+		contentPane.add(btnVerVehiculo);
+		btnVerVehiculo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				verCliente();
+			}
+		});
 	}
 	
 	public void cargarTablaClientes() {
@@ -245,5 +232,32 @@ public class GestionarClientes extends JFrame {
 	    Menu ventanamenu = new Menu();
 	    ventanamenu.setVisible(true);
 	    ventanacliente.setVisible(false);
+	}
+	
+	private void verCliente() {
+	    int filaSeleccionada = table.getSelectedRow();
+
+	    if (filaSeleccionada != -1) {
+	        String dniSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        try {
+	            DbCliente dbCliente = new DbCliente();
+	            Cliente clienteSeleccionado = dbCliente.ver1Cliente(dniSeleccionado);
+
+	            if (clienteSeleccionado != null) {
+	                InformacionCliente ventanaVer = new InformacionCliente(clienteSeleccionado);
+	                ventanaVer.setVisible(true);
+	            } else {
+	                JOptionPane.showMessageDialog(this, "No se encontró el cliente.");
+	            }
+
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+	        }
+
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
 	}
 }

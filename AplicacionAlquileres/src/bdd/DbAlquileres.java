@@ -67,4 +67,39 @@ public class DbAlquileres extends Conexion {
 
         return listaAlquileres;
     }
+    
+    public boolean crearAlquiler(Alquiler alquiler) {
+        String sql = "INSERT INTO alquiler (cliente, vehiculo, fechaini, fechafin, total) VALUES (?, ?, ?, ?, ?)";
+        
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            stmt.setString(1, alquiler.getCliente().getDNI());
+            stmt.setString(2, alquiler.getVehiculo().getMatricula());
+            stmt.setDate(3, java.sql.Date.valueOf(alquiler.getFecha_ini()));
+            stmt.setDate(4, java.sql.Date.valueOf(alquiler.getFecha_fin()));
+            stmt.setDouble(5, alquiler.getTotal());
+
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean eliminarAlquiler(String dniCliente, String matriculaVehiculo, LocalDate fechaini) {
+        String sql = "DELETE FROM alquiler WHERE cliente = ? AND vehiculo = ? AND fechaini = ?";
+        
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            stmt.setString(1, dniCliente);
+            stmt.setString(2, matriculaVehiculo);
+            stmt.setDate(3, java.sql.Date.valueOf(fechaini));
+
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

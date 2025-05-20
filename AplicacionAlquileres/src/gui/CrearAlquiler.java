@@ -8,8 +8,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import bdd.DbAlquileres;
 import bdd.DbCliente;
 import bdd.DbVehiculo;
+import modelo.Alquiler;
 import modelo.Cliente;
 import modelo.Vehiculo;
 
@@ -19,7 +21,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 
@@ -97,7 +102,11 @@ public class CrearAlquiler extends JFrame {
 		});
 		
 		JButton btnAadir = new JButton("Añadir");
-		btnAadir.setBounds(26, 163, 80, 25);
+		btnAadir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAadir.setBounds(26, 265, 80, 25);
 		contentPane.add(btnAadir);
 		
 		JButton btnMen = new JButton("Menú");
@@ -127,21 +136,20 @@ public class CrearAlquiler extends JFrame {
 		contentPane.add(lblVehiculos);
 		
 		txtFechaFin = new JTextField();
-		txtFechaFin.setText("Fecha Fin");
-		txtFechaFin.setBounds(26, 101, 131, 19);
+		txtFechaFin.setText("AAAA-MM-DD");
+		txtFechaFin.setBounds(26, 157, 131, 19);
 		contentPane.add(txtFechaFin);
 		txtFechaFin.setColumns(10);
 		
 		txtPrecio = new JTextField();
-		txtPrecio.setText("Precio/Hora");
-		txtPrecio.setBounds(26, 132, 131, 19);
+		txtPrecio.setBounds(26, 221, 131, 19);
 		contentPane.add(txtPrecio);
 		txtPrecio.setColumns(10);
 		
 		txtFechaInicio = new JTextField();
-		txtFechaInicio.setText("Fecha Inicio");
+		txtFechaInicio.setText("AAAA-MM-DD");
 		txtFechaInicio.setColumns(10);
-		txtFechaInicio.setBounds(26, 70, 131, 19);
+		txtFechaInicio.setBounds(26, 99, 131, 19);
 		contentPane.add(txtFechaInicio);
 		
 		btnBuscar = new JButton("Buscar disponibilidad");
@@ -156,6 +164,18 @@ public class CrearAlquiler extends JFrame {
 		btnMostrarTodo = new JButton("Mostrar todo");
 		btnMostrarTodo.setBounds(26, 469, 131, 25);
 		contentPane.add(btnMostrarTodo);
+		
+		JLabel lblFechaInicio = new JLabel("Fecha Inicio:");
+		lblFechaInicio.setBounds(26, 72, 125, 15);
+		contentPane.add(lblFechaInicio);
+		
+		JLabel lblFechaFin = new JLabel("Fecha fin:");
+		lblFechaFin.setBounds(26, 130, 70, 15);
+		contentPane.add(lblFechaFin);
+		
+		JLabel lblPrecioTotal = new JLabel("Precio Total:");
+		lblPrecioTotal.setBounds(26, 194, 125, 15);
+		contentPane.add(lblPrecioTotal);
 		btnMostrarTodo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cargarTablaVehiculos(null, null,false);
@@ -241,4 +261,51 @@ public class CrearAlquiler extends JFrame {
 	        e.printStackTrace();
 	    }
 	}
+	
+	private void crearAlquilerDesdeSeleccion() {
+	    int clienteSeleccionada = tableC.getSelectedRow();
+	    int vehiculoSeleccionada = tableV.getSelectedRow();
+
+	    if (clienteSeleccionada != -1 && vehiculoSeleccionada != -1) {
+	    	String idCliente = (String) tableC.getValueAt(clienteSeleccionada, 1); 
+	    	String idVehiculo = (String) tableV.getValueAt(vehiculoSeleccionada, 2); 
+
+			try {
+		    	DbVehiculo dbVehiculo = new DbVehiculo();
+		    	DbCliente dbCliente = new DbCliente();
+		    	
+		    	Cliente cliente = dbCliente.ver1Cliente(idCliente);
+		        Vehiculo vehiculo = dbVehiculo.ver1Vehiculo(idVehiculo);
+		        
+		        double total = Double.parseDouble(txtPrecio.getText());
+		        LocalDate fechaIni = LocalDate.parse(txtFechaInicio.getText());
+		        LocalDate fechaFin = LocalDate.parse(txtFechaFin.getText());
+
+
+		        if (cliente != null && vehiculo != null) {
+		        	Alquiler alquiler = new Alquiler(cliente, vehiculo, fechaIni, fechaFin, total);
+		        	DbAlquileres dbAlquiler = new DbAlquileres();
+		            if (dbAlquiler.crearAlquiler(alquiler)) {
+		                JOptionPane.showMessageDialog(null, "Aqlquiler insertado correctamente");
+		                dispose(); // Cerrar ventana después de guardar
+		 	           GestionarAlquileres ventanagestionar = new GestionarAlquileres();
+		 	           ventanagestionar.setVisible(true);
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Error al insertar alquiler");
+		            }
+
+		        } else {
+		            JOptionPane.showMessageDialog(null, "No se pudo obtener el cliente o vehículo seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
+		        }
+		    	
+		    	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}	    	
+	    	
+	    } else {
+	        JOptionPane.showMessageDialog(null, "Selecciona un vehiculo y cliente de la tabla primero.", "Aviso", JOptionPane.WARNING_MESSAGE);
+	    }
+	}
+
 }

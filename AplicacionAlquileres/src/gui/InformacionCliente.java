@@ -6,6 +6,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modelo.Alquiler;
 import modelo.Cliente;
+import modelo.Vehiculo;
 import bdd.DbAlquileres;
 
 import java.awt.*;
@@ -101,7 +102,7 @@ public class InformacionCliente extends JFrame {
 		});
 
 		cargarDatosCliente(cliente);
-		cargarTablaVehiculos(cliente);
+		cargarTablaAlquileres(cliente);
 	}
 
 	private void cargarDatosCliente(Cliente cliente) {
@@ -114,8 +115,8 @@ public class InformacionCliente extends JFrame {
 		txtDireccion.setText(cliente.getDireccion());
 	}
 
-	private void cargarTablaVehiculos(Cliente cliente) {
-		String[] columnas = {"Matrícula", "Marca", "Modelo", "Tipo", "Fecha Inicio", "Fecha Fin", "Total"};
+	private void cargarTablaAlquileres(Cliente cliente) {
+		String[] columnas = {"Matricula", "Marca", "Modelo", "Tipo", "Fecha Inicio", "Fecha Fin", "Total"};
 		DefaultTableModel modelo = new DefaultTableModel(columnas, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -128,29 +129,20 @@ public class InformacionCliente extends JFrame {
 			ArrayList<Alquiler> lista = dbAlquileres.obtenerAlquileresPorCliente(cliente.getDNI());
 
 			for (Alquiler a : lista) {
-				
-				String tipo;
-				
-				if (vehiculo instanceof modelo.Furgoneta) {
-					= "Furgoneta";
-			
-				} else if (vehiculo instanceof modelo.Turismo) {
-					txtTipo.setText("Turismo");
-					txtSubtipo.setText(((modelo.Turismo) vehiculo).getTipo());
-					txtSubtipo.setVisible(true);
-					lblSubtipo.setVisible(true);
-				} else if (vehiculo instanceof modelo.Moto) {
-					txtTipo.setText("Moto");
-					txtSubtipo.setText("");
-					txtSubtipo.setVisible(false); 
-					lblSubtipo.setVisible(false); 
+				String tipo = "";
+				if (a.getVehiculo() instanceof modelo.Furgoneta) {
+					tipo = "Furgoneta";
+				} else if (a.getVehiculo() instanceof modelo.Turismo) {
+					tipo = "Turismo";
+				} else if (a.getVehiculo() instanceof modelo.Moto) {
+					tipo = "Moto";
 				}
 				
 				Object[] fila = {
 					a.getVehiculo().getMatricula(),
 					a.getVehiculo().getMarca(),
 					a.getVehiculo().getModelo(),
-					(modelo.Turismo) vehiculo).getTipo();
+					tipo,
 					a.getFecha_ini(),
 					a.getFecha_fin(),
 					a.getTotal()

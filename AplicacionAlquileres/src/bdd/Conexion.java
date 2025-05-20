@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Conexion {
-	private static Connection conn = null;
 	    
  	private static final String DB_HOST = "192.168.4.140";
     private static final String DB_PORT = "3306";
@@ -13,8 +12,6 @@ public class Conexion {
     private static final String DB_URL = "jdbc:mysql://" + DB_HOST + ":" + DB_PORT + "/" + DB_NAME + "?serverTimezone=UTC";
     private static final String DB_USER = "root";
     private static final String DB_PASS = "bd2024";
-    private static final String DB_MSQ_CONN_OK = "CONEXIÓN CORRECTA";
-    private static final String DB_MSQ_CONN_NO = "ERROR EN LA CONEXIÓN";
     
     protected Connection conexion;
     
