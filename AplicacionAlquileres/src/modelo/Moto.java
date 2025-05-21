@@ -6,11 +6,29 @@ package modelo;
 
 import java.time.LocalDate;
 
+/**
+ * Clase que gestiona los datos de una moto.
+ * Hereda todos los atributos y comportamientos de la clase {@code Vehiculo}.
+ * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
+ */
 public class Moto extends Vehiculo {
-	public Moto(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
-			LocalDate proximo_mantenimiento, String color, int plazas) {
-		super(matricula, marca, modelo, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
-	}
 
-	
+    /**
+     * Constructor que crea una nueva moto con los datos especificados.
+     * 
+     * @param matricula Matrícula del vehículo.
+     * @param marca Marca del vehículo.
+     * @param modelo Modelo del vehículo.
+     * @param precioH Precio por hora del alquiler.
+     * @param f_matriculacion Fecha de matriculación del vehículo.
+     * @param proximo_mantenimiento Fecha del próximo mantenimiento programado.
+     * @param color Color del vehículo.
+     * @param plazas Número de plazas del vehículo.
+     */
+    public Moto(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
+                LocalDate proximo_mantenimiento, String color, int plazas) {
+        super(matricula, marca, modelo, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
+    }
 }

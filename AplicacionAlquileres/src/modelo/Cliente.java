@@ -4,13 +4,35 @@
 
 package modelo;
 
+/**
+ * Clase que gestiona los datos del objeto cliente.
+ * Contiene información personal como nombre, teléfono, correo electrónico, dirección y DNI.
+ * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
+ */
 public class Cliente {
+	
+	/** DNI único del cliente.*/
 	private final String DNI;
+	/** Nombre completo del cliente.*/
 	private String nombre;
+	/** Número telefonico del cliente.*/
 	private String tfno;
+	/** Correo electrónico del cliente.*/
 	private String correo;
+	/** Dirección física del cliente.*/
 	private String direccion;
 
+	/**
+     * Constructor que crea un cliente con los datos especificados.
+     * 
+     * @param dNI Documento Nacional de Identidad.
+     * @param nombre Nombre del cliente.
+     * @param tfno Número de teléfono.
+     * @param correo Correo electrónico.
+     * @param direccion Dirección física.
+     */
 	public Cliente(String dNI, String nombre, String tfno, String correo, String direccion) {
 		DNI = dNI;
 		this.nombre = nombre;
@@ -19,46 +41,84 @@ public class Cliente {
 		this.direccion = direccion;
 	}
 
-	public void editar() {
-	}
-
-	public void mostrar() {
-	}
-
+	/**
+     * Devuelve el DNI del cliente.
+     * 
+     * @return DNI del cliente.
+     */
 	public String getDNI() {
 		return DNI;
 	}
 
-
+	/**
+     * Método que devuelve el nombre del cliente.
+     * 
+     * @return Nombre del cliente.
+     */
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	/**
+     * Método que establece el nombre del cliente.
+     * 
+     * @param nombre Nuevo nombre del cliente.
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-	public String getTfno() {
-		return tfno;
-	}
+    /**
+     * Método que devuelve el número de teléfono del cliente.
+     * 
+     * @return Teléfono del cliente.
+     */
+    public String getTfno() {
+        return tfno;
+    }
 
-	public void setTfno(String tfno) {
-		this.tfno = tfno;
-	}
+    /**
+     * Método que establece el número de teléfono del cliente.
+     * 
+     * @param tfno Nuevo número de teléfono.
+     */
+    public void setTfno(String tfno) {
+        this.tfno = tfno;
+    }
 
-	public String getCorreo() {
-		return correo;
-	}
+    /**
+     * Método que devuelve el correo electrónico del cliente.
+     * 
+     * @return Correo electrónico del cliente.
+     */
+    public String getCorreo() {
+        return correo;
+    }
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
+    /**
+     * Método que establece el correo electrónico del cliente.
+     * 
+     * @param correo Nuevo correo electrónico.
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
-	public String getDireccion() {
-		return direccion;
-	}
+    /**
+     * Método que devuelve la dirección del cliente.
+     * 
+     * @return Dirección del cliente.
+     */
+    public String getDireccion() {
+        return direccion;
+    }
 
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
+    /**
+     * Método que establece la dirección del cliente.
+     * 
+     * @param direccion Nueva dirección física.
+     */
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
 }

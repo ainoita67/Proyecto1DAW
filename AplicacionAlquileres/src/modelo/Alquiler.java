@@ -6,9 +6,25 @@ package modelo;
 
 import java.time.LocalDate;
 
+/**
+ * @author Pyto_Grupo_D
+ * @version 1.0
+ * 
+ * Clase que gestiona los datos del objeto Alquiler.
+ * Contiene información sobre el cliente, el vehículo, las fechas de alquiler y el precio total.
+ * 
+ */
 public class Alquiler {
 
-
+	/**
+     * Constructor que crea un alquiler con los datos especificados.
+     * 
+     * @param cliente Cliente que realiza el alquiler.
+     * @param vehiculo Vehículo que se alquila.
+     * @param fecha_ini Fecha de inicio del alquiler.
+     * @param fecha_fin Fecha de fin del alquiler.
+     * @param total Precio total del alquiler.
+     */
 	public Alquiler(Cliente cliente, Vehiculo vehiculo, LocalDate fecha_ini, LocalDate fecha_fin, Double total) {
 		super();
 		this.cliente = cliente;
@@ -17,40 +33,105 @@ public class Alquiler {
 		this.fecha_fin = fecha_fin;
 		this.total = total;
 	}
+	
+	/** Cliente que realiza el alquiler.*/
 	private Cliente cliente;
+	/** Vehiculo que se alquila.*/
 	private Vehiculo vehiculo;
+	/** Fecha inicial del alquiler.*/
 	private LocalDate fecha_ini;
+	/** Fecha final del alquiler.*/
 	private LocalDate fecha_fin;
+	/** Precio total del alquiler.*/
 	private Double total;
+	
+	/**
+	 * Método que devuelve el cliente que realizó el alquiler.
+	 * 
+	 * @return Cliente asociado al alquiler.
+	 */
 	public Cliente getCliente() {
 		return cliente;
 	}
+	
+	/**
+	 * Método que establece el cliente que realiza el alquiler.
+	 *  
+	 * @param cliente Cliente que se asigna al alquiler.
+	 */
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
+	
+	/**
+	 * Método que devuelve el vehiculo alquilado.
+	 * 
+	 * @return Vehiculo asociado al alquiler.
+	 */
 	public Vehiculo getVehiculo() {
 		return vehiculo;
 	}
+	
+	/**
+	 * Método que establece el vehiculo que se alquila. 
+	 *  
+	 * @param vehiculo Vehiculo que se asigna.
+	 */
 	public void setVehiculo(Vehiculo vehiculo) {
 		this.vehiculo = vehiculo;
 	}
+	
+	/**
+	 * Método que devuelve la fecha inicial del alquilar.
+	 * 
+	 * @return Fecha inical del alquiler.
+	 */
 	public LocalDate getFecha_ini() {
 		return fecha_ini;
 	}
+	
+	/**
+	 * Método que establece la fecha inicial del alquilar. 
+	 *  
+	 * @param fecha_ini Fecha inicial del alquiler.
+	 */
 	public void setFecha_ini(LocalDate fecha_ini) {
 		this.fecha_ini = fecha_ini;
 	}
+	
+	/**
+	 * Método que devuelve la fecha final del alquilar.
+	 * 
+	 * @return Fecha final del alquiler.
+	 */
 	public LocalDate getFecha_fin() {
 		return fecha_fin;
 	}
+	
+	/**
+	 * Método que establece la fecha final del alquilar. 
+	 *  
+	 * @param fecha_fin Fecha final del alquiler.
+	 */
 	public void setFecha_fin(LocalDate fecha_fin) {
 		this.fecha_fin = fecha_fin;
 	}
+	
+	/**
+     * Devuelve el precio total del alquiler.
+     * 
+     * @return Precio total del alquiler.
+     */
 	public Double getTotal() {
 		return total;
 	}
+	
+	/**
+     * Establece el precio total del alquiler.
+     * 
+     * @param total Precio total a asignar.
+     */
 	public void setTotal(Double total) {
 		this.total = total;
 	}
-
 }
