@@ -87,19 +87,61 @@ public class DbAlquileres extends Conexion {
     }
 
     public boolean eliminarAlquiler(String dniCliente, String matriculaVehiculo, LocalDate fechaini) {
-        String sql = "DELETE FROM alquiler WHERE cliente = ? AND vehiculo = ? AND fechaini = ?";
+        String sql = "DELETE FROM alquiler WHERE cliente = ? AND vehiculo = ? AND date(fechaini) = ?";
         
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
             stmt.setString(1, dniCliente);
             stmt.setString(2, matriculaVehiculo);
             stmt.setDate(3, java.sql.Date.valueOf(fechaini));
 
+            System.out.println("Intentando eliminar con: DNI = " + dniCliente + 
+                               ", Matrícula = " + matriculaVehiculo + 
+                               ", Fecha Inicio = " + fechaini);
+
             int filas = stmt.executeUpdate();
+            System.out.println("Filas eliminadas: " + filas);
             return filas > 0;
         } catch (SQLException e) {
+            System.err.println("Error SQL al eliminar:");
             e.printStackTrace();
             return false;
         }
+    }
+
+    public ArrayList<Alquiler> obtenerAlquileresHoy() {
+        ArrayList<Alquiler> listaAlquileres = new ArrayList<>();
+        String sql = "SELECT cliente, vehiculo, fechaini, fechafin, total FROM alquiler WHERE fechaini <= ? AND fechafin >= ? ORDER BY fechaini";
+
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            java.sql.Date hoy = java.sql.Date.valueOf(LocalDate.now());
+            stmt.setDate(1, hoy);
+            stmt.setDate(2, hoy);
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                DbCliente dbCliente = new DbCliente();
+                DbVehiculo dbVehiculo = new DbVehiculo();
+
+                while (rs.next()) {
+                    String dni = rs.getString("cliente");
+                    String matricula = rs.getString("vehiculo");
+                    LocalDate fechaIni = rs.getDate("fechaini").toLocalDate();
+                    LocalDate fechaFin = rs.getDate("fechafin").toLocalDate();
+                    double total = rs.getDouble("total");
+
+                    Cliente cliente = dbCliente.ver1Cliente(dni);
+                    Vehiculo vehiculo = dbVehiculo.ver1Vehiculo(matricula);
+
+                    if (cliente != null && vehiculo != null) {
+                        Alquiler alquiler = new Alquiler(cliente, vehiculo, fechaIni, fechaFin, total);
+                        listaAlquileres.add(alquiler);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return listaAlquileres;
     }
 
 }

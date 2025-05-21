@@ -1,132 +1,12 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+/* Estilos adicionales para la página de vehículos */
 
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #f5f5f5;
-  color: #333;
-  line-height: 1.4;
-}
-
-header {
-  background-color: #fff;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-header h1 {
-  color: #0077cc;
-  font-size: 28px;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #444;
-}
-
-nav a:hover {
-  color: #0077cc;
-}
-
-nav a.active {
-  color: #0077cc;
-  font-weight: bold;
-}
-
-.hero {
-  background: linear-gradient(to right, #0077cc, #00b386);
-  color: white;
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.hero h2 {
-  font-size: 40px;
-  margin-bottom: 15px;
-}
-
-.hero p {
-  font-size: 20px;
-}
-
-.hero a {
-  margin-top: 30px;
-  display: inline-block;
-  background: white;
-  color: #0077cc;
-  padding: 12px 30px;
-  border-radius: 30px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.hero a:hover {
-  background: #eee;
-}
-
-.section {
-  padding: 60px 40px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-.info {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: center;
-}
-
-.info img {
-  max-width: 100%;
-  border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  flex: 1;
-}
-
-.info-text {
-  flex: 1;
-}
-
-.info-text h3 {
-  font-size: 24px;
-  margin-bottom: 15px;
-  color: #0077cc;
-}
-
-.news h3 {
-  text-align: center;
-  font-size: 26px;
-  color: #0077cc;
-  margin-bottom: 30px;
-}
-
-footer {
-  background: #222;
-  color: #fff;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-}
-
-/* VEHICULOS */
+/* Hero específico para vehículos */
 .vehicle-hero {
-  background: linear-gradient(to right, #0077cc, #00a0b0);
+  background: linear-gradient(to right, #0077cc, #00b386);
   padding: 70px 20px;
 }
-
+  
+/* Contenedor de filtros */
 .filtros-container {
   background-color: #ffffff;
   padding: 25px;
@@ -138,9 +18,8 @@ footer {
 
 .filtros-container h3 {
   color: #0077cc;
-  margin-bottom: 0px;
   font-size: 22px;
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 .filtros {
@@ -186,6 +65,7 @@ footer {
   background: #005fa3;
 }
 
+/* Contenedor de vehículos */
 .vehiculos-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -221,6 +101,10 @@ footer {
   transition: transform 0.5s;
 }
 
+.vehiculo-card:hover .vehiculo-imagen img {
+  transform: scale(1.05);
+}
+
 .etiqueta {
   position: absolute;
   top: 10px;
@@ -229,8 +113,6 @@ footer {
   font-weight: bold;
   color: white;
   border-radius: 20px;
-  background: #f39c12;
-  right: 10px;
 }
 
 .etiqueta.electrico {
@@ -253,6 +135,11 @@ footer {
   right: 10px;
 }
 
+.etiqueta.cuatro-x-cuatro {
+  background: #f39c12;
+  right: 110px;
+}
+
 .vehiculo-info {
   padding: 20px;
 }
@@ -266,9 +153,9 @@ footer {
 .tipo {
   display: inline-block;
   font-size: 14px;
-  color: #333;
+  color: #777;
   margin-bottom: 15px;
-  background: #eeeeee;
+  background: #f5f5f5;
   padding: 4px 10px;
   border-radius: 15px;
 }
@@ -280,7 +167,7 @@ footer {
 
 .caracteristicas li {
   padding: 8px 0;
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #eee;
   display: flex;
   justify-content: space-between;
 }
@@ -311,6 +198,12 @@ footer {
   background: #005fa3;
 }
 
+/* Activo en la navegación */
+nav a.active {
+  color: #0077cc;
+  font-weight: bold;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .filtros {
@@ -325,20 +218,9 @@ footer {
   .vehiculos-container {
     grid-template-columns: 1fr;
   }
-
-  .info {
-    flex-direction: column;
-  }
-
-  .hero h2 {
-    font-size: 30px;
-  }
-
-  .hero p {
-    font-size: 18px;
-  }
 }
 
+/* Ajustes para pantallas pequeñas */
 @media (max-width: 480px) {
   .etiqueta.cuatro-x-cuatro {
     top: 45px;

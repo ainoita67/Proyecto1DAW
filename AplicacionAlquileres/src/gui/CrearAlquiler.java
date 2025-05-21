@@ -35,8 +35,6 @@ public class CrearAlquiler extends JFrame {
 	private JPanel contentPane;
 	private JTable tableC;
 	private JTable tableV;
-	private JTextField txtBuscarDni;
-	private JTextField txtBuscarMatricula;
 	private JTextField txtFechaFin;
 	private JTextField txtPrecio;
 	private JTextField txtFechaInicio;
@@ -79,37 +77,21 @@ public class CrearAlquiler extends JFrame {
 		scrollPaneC.setViewportView(tableC);
 		cargarTablaClientes();
 		
-		txtBuscarDni = new JTextField();
-		txtBuscarDni.setText("Buscar DNI");
-		txtBuscarDni.setBounds(575, 40, 114, 19);
-		contentPane.add(txtBuscarDni);
-		txtBuscarDni.setColumns(10);
-		
-		// Evento para borrar el "placeholder" cuando el usuario hace clic
-		txtBuscarDni.addFocusListener(new java.awt.event.FocusAdapter() {
-		    public void focusGained(java.awt.event.FocusEvent evt) {
-		        if (txtBuscarDni.getText().equals("Buscar DNI")) {
-		        	txtBuscarDni.setText("");
-		        }
-		    }
-		    
-		    public void focusLost(java.awt.event.FocusEvent evt) {
-		        // Si el usuario deja el campo vacío, vuelve a mostrar el placeholder
-		        if (txtBuscarDni.getText().isEmpty()) {
-		        	txtBuscarDni.setText("Buscar DNI");
-		        }
-		    }
-		});
-		
 		JButton btnAadir = new JButton("Añadir");
 		btnAadir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				crearAlquilerDesdeSeleccion();
 			}
 		});
 		btnAadir.setBounds(26, 265, 80, 25);
 		contentPane.add(btnAadir);
 		
-		JButton btnMen = new JButton("Menú");
+		JButton btnMen = new JButton("Atras");
+		btnMen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				irAtras();
+			}
+		});
 		btnMen.setBounds(26, 506, 131, 25);
 		contentPane.add(btnMen);
 		
@@ -124,12 +106,6 @@ public class CrearAlquiler extends JFrame {
 		tableV = new JTable();
 		scrollPaneV.setViewportView(tableV);
 		cargarTablaVehiculos(null, null, false);
-		
-		txtBuscarMatricula = new JTextField();
-		txtBuscarMatricula.setText("Buscar Matricula");
-		txtBuscarMatricula.setColumns(10);
-		txtBuscarMatricula.setBounds(1213, 40, 114, 19);
-		contentPane.add(txtBuscarMatricula);
 		
 		JLabel lblVehiculos = new JLabel("Vehiculos");
 		lblVehiculos.setBounds(1257, 13, 70, 15);
@@ -267,8 +243,8 @@ public class CrearAlquiler extends JFrame {
 	    int vehiculoSeleccionada = tableV.getSelectedRow();
 
 	    if (clienteSeleccionada != -1 && vehiculoSeleccionada != -1) {
-	    	String idCliente = (String) tableC.getValueAt(clienteSeleccionada, 1); 
-	    	String idVehiculo = (String) tableV.getValueAt(vehiculoSeleccionada, 2); 
+	    	String idCliente = (String) tableC.getValueAt(clienteSeleccionada, 0); 
+	    	String idVehiculo = (String) tableV.getValueAt(vehiculoSeleccionada, 0); 
 
 			try {
 		    	DbVehiculo dbVehiculo = new DbVehiculo();
@@ -280,7 +256,6 @@ public class CrearAlquiler extends JFrame {
 		        double total = Double.parseDouble(txtPrecio.getText());
 		        LocalDate fechaIni = LocalDate.parse(txtFechaInicio.getText());
 		        LocalDate fechaFin = LocalDate.parse(txtFechaFin.getText());
-
 
 		        if (cliente != null && vehiculo != null) {
 		        	Alquiler alquiler = new Alquiler(cliente, vehiculo, fechaIni, fechaFin, total);
@@ -306,6 +281,11 @@ public class CrearAlquiler extends JFrame {
 	    } else {
 	        JOptionPane.showMessageDialog(null, "Selecciona un vehiculo y cliente de la tabla primero.", "Aviso", JOptionPane.WARNING_MESSAGE);
 	    }
+	}
+	private void irAtras() {
+	    GestionarAlquileres ventanaAlquiler = new GestionarAlquileres();
+	    ventanaAlquiler.setVisible(true);
+	    dispose();
 	}
 
 }

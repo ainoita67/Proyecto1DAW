@@ -86,6 +86,49 @@ public class DbVehiculo extends Conexion{
 
 	    return listaVehiculos;
 	}
+	
+	public ArrayList<Vehiculo> genObjetosyArray(ResultSet rs) {
+		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
+		try {
+			while (rs.next()) {
+				String matricula = rs.getString("matricula");
+			    String modelo = rs.getString("modelo");
+			    String marca = rs.getString("marca");
+			    Double precioh = rs.getDouble("precioh");
+			    LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
+			    String color = rs.getString("color");
+			    int plazas = rs.getInt("plazas");
+			    int tipo = rs.getInt("tipo");
+			    String tipo_turismo = rs.getString("tipo_turismo");
+			    String tipo_furgo = rs.getString("tipo_furgo");
+			    int frecuencia = rs.getInt("frecuencia");
+			    LocalDate ultimo_mant = rs.getDate("fecha_ultimo_mantenimiento").toLocalDate();
+
+			    
+			    LocalDate prox_mantenimiento = ultimo_mant.plusMonths(frecuencia);
+			    
+			    if (tipo == 1) {
+			    	Vehiculo vehiculo = new Turismo(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_turismo);
+			    	listaVehiculos.add(vehiculo);
+			    }
+			    if (tipo == 2) {
+			    	Vehiculo vehiculo = new Furgoneta(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_furgo);
+			    	listaVehiculos.add(vehiculo);
+			    }
+			    if (tipo == 3) {
+			    	Vehiculo vehiculo = new Moto(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas);
+			    	listaVehiculos.add(vehiculo);
+			    }
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return listaVehiculos;
+		
+	}
 
 	
 	public Vehiculo ver1Vehiculo(String matricula) {
@@ -232,47 +275,6 @@ public class DbVehiculo extends Conexion{
 	    }
 	}
 	
-	public ArrayList<Vehiculo> genObjetosyArray(ResultSet rs) {
-		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
-		try {
-			while (rs.next()) {
-				String matricula = rs.getString("matricula");
-			    String modelo = rs.getString("modelo");
-			    String marca = rs.getString("marca");
-			    Double precioh = rs.getDouble("precioh");
-			    LocalDate fecha_matriculacion = rs.getDate("fecha_matriculacion").toLocalDate();
-			    String color = rs.getString("color");
-			    int plazas = rs.getInt("plazas");
-			    int tipo = rs.getInt("tipo");
-			    String tipo_turismo = rs.getString("tipo_turismo");
-			    String tipo_furgo = rs.getString("tipo_furgo");
-			    int frecuencia = rs.getInt("frecuencia");
-			    LocalDate ultimo_mant = rs.getDate("fecha_ultimo_mantenimiento").toLocalDate();
-
-			    
-			    LocalDate prox_mantenimiento = ultimo_mant.plusMonths(frecuencia);
-			    
-			    if (tipo == 1) {
-			    	Vehiculo vehiculo = new Turismo(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_turismo);
-			    	listaVehiculos.add(vehiculo);
-			    }
-			    if (tipo == 2) {
-			    	Vehiculo vehiculo = new Furgoneta(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas, tipo_furgo);
-			    	listaVehiculos.add(vehiculo);
-			    }
-			    if (tipo == 3) {
-			    	Vehiculo vehiculo = new Moto(matricula, marca, modelo, precioh, fecha_matriculacion, prox_mantenimiento, color, plazas);
-			    	listaVehiculos.add(vehiculo);
-			    }
-
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		return listaVehiculos;
-		
-	}	
 
 }
