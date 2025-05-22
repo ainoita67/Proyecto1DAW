@@ -17,11 +17,11 @@ import modelo.Vehiculo;
 
 
 /**
- * @author Pyto_Grupo_D
- * @version 1.0
- * 
  * Clase que gestiona las operaciones CRUD sobre vehículos (Turismo, Furgoneta, Moto).
  * Incluye operaciones avanzadas como filtrado por disponibilidad y generación de objetos según tipo.
+ * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
  */
 
 public class DbVehiculo extends Conexion{

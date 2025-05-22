@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import modelo.Cliente;
 
 /**
- * @author Pyto_Grupo_D
- * @version 1.0
- * 
  * Clase que gestiona las operaciones CRUD relacionadas con los clientes.
  * Filtra por clientes usando el campo 'rol', siendo 1 para clientes, 
  * 2 para empleados y 3 para administradores.
+ * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
  */
 public class DbCliente extends Conexion {
 
