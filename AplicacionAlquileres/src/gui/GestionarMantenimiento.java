@@ -1,29 +1,35 @@
 package gui;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
+import bdd.DbCliente;
+import bdd.DbVehiculo;
+import modelo.Cliente;
+import modelo.Vehiculo;
+
 import javax.swing.JTable;
+
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GestionarMantenimiento extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private DbMantenimiento conexion;
 
 	/**
 	 * Launch the application.
@@ -90,5 +96,136 @@ public class GestionarMantenimiento extends JFrame {
 		contentPane.add(btnMenu);
 	}
 	
+	public void cargarTablaMantenimientos() {
+		String[] columnas = {"Matricula", "Fecha", "Descripción"};
+		DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		
+		try {
+			DbVehiculo dbVehiculo = new DbVehiculo();
+			ArrayList<Vehiculo> lista = dbVehiculo.obtenerVehiculos(null, null, false);
+			
+			for (Vehiculo c : lista) {
+				Object[] fila = {
+					c.getMatricula()
+					
+				};
+				modeloTabla.addRow(fila);
+			}
+		
+			table.setModel(modeloTabla);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
+	public void editarMantenimiento() {
+		int filaSeleccionada = table.getSelectedRow();
+		
+		  if (filaSeleccionada != -1) {
+			  String matriculaSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+			  
+			  try {
+				  DbVehiculo dbVehiculo = new DbVehiculo();
+				  Vehiculo vehiculoSeleccionado = dbVehiculo.ver1Vehiculo(matriculaSeleccionado);
+				  
+				  if(vehiculoSeleccionado != null) {
+					  EditarMantenimiento ventanaEditar = new EditarMantenimiento();
+		              ventanaEditar.setVisible(true);
+		              dispose(); 
+				  } else {
+					  JOptionPane.showMessageDialog(this, "No se encontró el cliente.");
+		          }
+				  
+			  } catch (Exception ex) {
+		            ex.printStackTrace();
+		            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+		        }
+
+		    } else {
+		        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+		    }
+	}
+	
+	private void abrirVentanaCrearMantenimiento() {
+	    CrearMantenimiento ventanaCrear = new CrearMantenimiento();
+	    ventanaCrear.setVisible(true);
+	    dispose();
+	}
+	
+	private void eliminarMantenimiento() {
+		int filaSeleccionada = table.getSelectedRow();
+		
+		if (filaSeleccionada != -1) {
+			  String matriculaSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+		     
+			 int confirmacion = JOptionPane.showConfirmDialog(this, 
+		                "¿Estás seguro de que quieres eliminar el mantenimiento del vehiculo con mátricula: " + matriculaSeleccionado + "?", 
+		                "Confirmar eliminación", 
+		                JOptionPane.YES_NO_OPTION);
+			 
+			 if (confirmacion == JOptionPane.YES_OPTION) {
+		            try {
+		                conexion = new DbCliente();
+		                if (conexion.eliminarMantenimiento(matriculaSeleccionado)) {
+		                    JOptionPane.showMessageDialog(this, "Mantenimiento eliminado correctamente.");
+		                    dispose(); // Cerrar ventana actual
+		                    GestionarMantenimiento ventanagestionar = new GestionarMantenimiento();
+		                    ventanagestionar.setVisible(true);
+		                } else {
+		                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el mantenimiento.");
+		                }
+		            } catch (Exception ex) {
+		                ex.printStackTrace();
+		                JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+		            }
+		        } else {
+		            // Si elige "No", no hacemos nada
+		            JOptionPane.showMessageDialog(this, "Eliminación cancelada.");
+		        }
+
+		    } else {
+		        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+		    }
+	}
+	
+	private void irAMenu() {
+		GestionarMantenimiento ventanacliente = new GestionarMantenimiento();
+	    Menu ventanamenu = new Menu();
+	    ventanamenu.setVisible(true);
+	    this.dispose();
+	}
+	
+	private void verMantenimiento() {
+	    int filaSeleccionada = table.getSelectedRow();
+
+	    if (filaSeleccionada != -1) {
+	        String dniSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+
+	        try {
+	            DbMantenimiento dbMantenimiento = new DbMantenimiento();
+	            Mantenimiento mantenimientoSeleccionado = DbMantenimiento.ver1Mantenimiento(dniSeleccionado);
+
+	            if (mantenimientoSeleccionado != null) {
+	            	InformacionMantenimiento ventanaVer = new InformacionMantenimiento(mantenimientoSeleccionado);
+	                ventanaVer.setVisible(true);
+	            } else {
+	                JOptionPane.showMessageDialog(this, "No se encontró el cliente.");
+	            }
+
+	        } catch (Exception ex) {
+	            ex.printStackTrace();
+	            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
+	        }
+
+	    } else {
+	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
+	    }
+	}
 }
+		
