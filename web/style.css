@@ -311,6 +311,25 @@ footer {
   background: #005fa3;
 }
 
+.cliente-info {
+  background-color: #e6e6e6;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.cliente-info p {
+  margin-bottom: 6px;
+}
+
+.cliente-info p:last-child {
+  margin-bottom: 0;
+}
+
+
 /* Responsive */
 @media (max-width: 768px) {
   .filtros {

@@ -13,8 +13,8 @@
     <nav>
       <ul>
         <li><a href="index.html">Inicio</a></li>
-        <li><a href="vehiculos.html" class="active">Vehículos</a></li>
-        <li><a href="reservados.html">Reservas</a></li>
+        <li><a href="vehiculos.html">Vehículos</a></li>
+        <li><a href="reservados.html" class="active">Reservas</a></li>
         <li><a href="disponibles.html">Disponibles</a></li>
         <li><a href="contacto.html">Contacto</a></li>
       </ul>
@@ -22,8 +22,8 @@
   </header>
 
   <section class="hero vehicle-hero">
-    <h2>Nuestra Flota</h2>
-    <p>Encuentra el vehículo perfecto para tus necesidades</p>
+    <h2>Vehiculos Reservados</h2>
+    <p>Vehiculos en uso por clientes contentos</p>
   </section>
 
   <section class="filtros-container">
@@ -54,28 +54,28 @@
 </html>
 
 <script>
-  //variable global donde se guardarán todos los vehículos del JSON
+  // Variable global donde se guardarán todos los vehículos del JSON
   let todosLosVehiculos = [];
 
-  //función para cargar los datos del archivo vehiculos.json
+  // Función para cargar los datos del archivo alquilados.json
   async function cargarVehiculos() {
-    const respuesta = await fetch('vehiculos.json'); //carga el archivo
-    const vehiculos = await respuesta.json(); //lo convierte a objeto JS
-    todosLosVehiculos = vehiculos; //guardamos la lista completa para filtrarla más adelante
-    mostrarVehiculos(vehiculos); //se muestran todos los vehículos al cargar
+    const respuesta = await fetch('alquilados.json'); // carga el archivo de vehículos alquilados
+    const vehiculos = await respuesta.json(); // lo convierte a objeto JS
+    todosLosVehiculos = vehiculos; // guardamos la lista completa para filtrarla más adelante
+    mostrarVehiculos(vehiculos); // se muestran todos los vehículos al cargar
   }
 
-  //función para mostrar un listado de vehículos recibido como parámetro
+  // Función para mostrar un listado de vehículos recibido como parámetro
   function mostrarVehiculos(lista) {
-    const contenedor = document.querySelector('.vehiculos-container'); //nos posicionamos en el contenedor
-    contenedor.innerHTML = ''; //limpiamos su contenido
+    const contenedor = document.querySelector('.vehiculos-container'); // nos posicionamos en el contenedor
+    contenedor.innerHTML = ''; // limpiamos su contenido
 
-    //para cada vehículo se crea una tarjeta o contenedor div
+    // para cada vehículo se crea una tarjeta o contenedor div
     lista.forEach(vehiculo => {
       const tarjeta = document.createElement('div');
       tarjeta.classList.add('vehiculo-card');
 
-      //se guarda el subtipo de turismo o furgoneta para que no haya problemas
+      // se guarda el subtipo de turismo o furgoneta para que no haya problemas
       const subtipo = vehiculo.tipoTurismo || vehiculo.tipoFurgo;
       const tipo = vehiculo.tipo.toLowerCase();
 
@@ -84,8 +84,8 @@
         ? `<span class="etiqueta ${subtipo.toLowerCase()}">${subtipo.charAt(0).toUpperCase() + subtipo.slice(1)}</span>`
         : '';
 
-      //rellena las tarjetas html con la información del vehículo. 
-      //Se formatea el subtipo para que quede más bonito y la fecha para mostrar solo el año
+      // rellena las tarjetas html con la información del vehículo.
+      // se formatea el subtipo y la fecha
       tarjeta.innerHTML = `
         <div class="vehiculo-imagen">
           <img src="fotos/${vehiculo.modelo}.jpeg" alt="${vehiculo.marca} ${vehiculo.modelo}">
@@ -98,31 +98,36 @@
             <li><strong>Color:</strong> ${vehiculo.color}</li>
             <li><strong>Plazas:</strong> ${vehiculo.plazas}</li>
             <li><strong>Año:</strong> ${vehiculo.fechaMatriculacion.split('-')[0]}</li>
-            <li><strong>Precio/dia:</strong> <span class="precio">${vehiculo.precioHora}€</span></li>
+            <li><strong>Precio/hora:</strong> <span class="precio">${vehiculo.precioHora}€</span></li>
           </ul>
-          <a href="disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+          <div class="cliente-info">
+            <p><strong>Alquilado por:</strong>${vehiculo.nombre}</p>
+            <p><strong>DNI:</strong> ${vehiculo.dni}</p>
+            <p><strong>Email:</strong> ${vehiculo.email}</p>
+          </div>
         </div>
       `;
-      contenedor.appendChild(tarjeta); //añadimos la tarjeta al contenedor
+      contenedor.appendChild(tarjeta); // añadimos la tarjeta al contenedor
     });
   }
 
-  //cuando se carga la página se ejecuta la función cargarVehiculos
+  // Cuando se carga la página se ejecuta la función cargarVehiculos
   document.addEventListener('DOMContentLoaded', cargarVehiculos);
 
-  //cuando se pulsa el botón "Aplicar filtros" se filtra el tipo seleccionado
+  // Cuando se pulsa el botón "Aplicar filtros" se filtra el tipo seleccionado
   document.querySelector('.boton-filtrar').addEventListener('click', () => {
-    const tipoSeleccionado = document.getElementById('tipo').value; //obtenemos el tipo seleccionado
+    const tipoSeleccionado = document.getElementById('tipo').value; // obtenemos el tipo seleccionado
 
     let filtrados = todosLosVehiculos;
 
-    //si se ha elegido un tipo distinto a todos se filtra la lista
+    // si se ha elegido un tipo distinto a todos se filtra la lista
     if (tipoSeleccionado !== 'todos') {
-      filtrados = todosLosVehiculos.filter(vehiculo => 
+      filtrados = todosLosVehiculos.filter(vehiculo =>
         vehiculo.tipo.toLowerCase() === tipoSeleccionado.toLowerCase()
       );
     }
 
-    mostrarVehiculos(filtrados); //mostramos los vehículos filtrados
+    mostrarVehiculos(filtrados); // mostramos los vehículos filtrados
   });
 </script>
+
