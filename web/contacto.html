@@ -38,21 +38,17 @@
 
   <section class="section news">
     <h3>Nuestras cucursales y puntos de recogida</h3>
-    <img src="fotos/mimapa.png" alt="Mapa ubicación" style="width: 100%; max-width: 800px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <img id="imgmapa" src="fotos/mimapa.png" alt="Mapa ubicación">
   </section>
 
   <section class="section news">
     <h3>Formulario de contacto</h3>
-    <form action="#" method="post" style="display: flex; flex-direction: column; gap: 20px; max-width: 600px;">
-      <input type="text" name="nombre" placeholder="Nombre completo" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios" style="padding: 12px; border-radius: 6px; border: 1px solid #ccc;">
-      
-      <input type="email" name="email" placeholder="Correo electrónico" required style="padding: 12px; border-radius: 6px; border: 1px solid #ccc;">
-      
-      <input type="tel" name="telefono" placeholder="Teléfono (opcional)" pattern="[0-9\s+()-]{9,15}" title="Introduce un teléfono válido" style="padding: 12px; border-radius: 6px; border: 1px solid #ccc;">
-
-      <textarea name="mensaje" placeholder="Escribe tu mensaje aquí" required rows="5" style="padding: 12px; border-radius: 6px; border: 1px solid #ccc;"></textarea>
-
-      <button type="submit" style="padding: 12px; background: #0077cc; color: white; font-weight: bold; border: none; border-radius: 30px; cursor: pointer;">
+    <form id="formulario" action="#" method="post">
+      <input type="text" id="nombre" name="nombre" placeholder="Nombre completo" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+" title="Solo letras y espacios">
+      <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+      <input type="tel" id="telefono" name="telefono" placeholder="Teléfono (opcional)" pattern="[0-9\s+()-]{9,15}" title="Introduce un teléfono válido">
+      <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí" required rows="5"></textarea>
+      <button id="formularioboton" type="submit">
         Enviar mensaje
       </button>
     </form>
@@ -61,6 +57,6 @@
   <footer>
     &copy; 2025 MOVEYOU Rent. Todos los derechos reservados.
   </footer>
-
+  <script src="formulario.js"></script>
 </body>
 </html>

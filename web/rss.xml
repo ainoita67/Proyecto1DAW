@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>Noticias MOVEYOU Rent</title>
+    <link>http://localhost:5500</link>
+    <description>Últimas novedades y anuncios</description>
+    <item>
+      <title>¡Nueva Sucursal en Valencia!</title>
+      <description>Abrimos una nueva sucursal para estar más cerca de ti.</description>
+    </item>
+    <item>
+      <title>Flota renovada 2025</title>
+      <description>Incorporamos coches eléctricos de última generación.</description>
+    </item>
+    <item>
+      <title>Descuentos de verano en MOVEYOU Rent</title>
+      <description>Este verano, disfruta de hasta un 30% de descuento en todos nuestros vehículos. ¡Reserva ya!</description>
+    </item>
+  </channel>
+</rss>
