@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 import bdd.DbCliente;
 import bdd.DbVehiculo;
 import modelo.Cliente;
+import modelo.Usuario;
 import modelo.Vehiculo;
 
 import javax.swing.JTable;
@@ -118,6 +119,20 @@ public class GestionarVehiculos extends JFrame {
 				verVehiculo();
 			}
 		});
+		
+		Usuario usuario = modelo.Sesion.getUsuarioActivo();
+		if (usuario != null) {
+		    
+		    int rol = usuario.getRol();
+		    
+		    if (rol==2) {
+		    	btnAadir.setVisible(false);
+		    	btnEditar.setVisible(false);
+		    	btnEliminar.setVisible(false);
+		    }else if(rol==3){
+		    
+		    }
+		}
 	}
 	
 	public void cargarTablaVehiculos() {

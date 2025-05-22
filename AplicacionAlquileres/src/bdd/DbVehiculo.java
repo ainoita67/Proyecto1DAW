@@ -15,10 +15,32 @@ import modelo.Moto;
 import modelo.Turismo;
 import modelo.Vehiculo;
 
+
+/**
+ * @author Pyto_Grupo_D
+ * @version 1.0
+ * 
+ * Clase que gestiona las operaciones CRUD sobre vehículos (Turismo, Furgoneta, Moto).
+ * Incluye operaciones avanzadas como filtrado por disponibilidad y generación de objetos según tipo.
+ */
+
 public class DbVehiculo extends Conexion{
+	
+	/**
+     * Constructor que establece la conexión con la base de datos.
+     * @throws SQLException si ocurre un error de conexión.
+     */
 	public DbVehiculo() throws SQLException {
 		super();
 	}
+	
+	 /**
+     * Método que muestra una lista de vehículos disponibles o no entre dos fechas.
+     * @param fecha1 Fecha inicial.
+     * @param fecha2 Fecha final.
+     * @param soloDisponibles {@code true} si solo se deben traer los vehículos no alquilados en ese período.
+     * @return Lista de vehículos que cumplen con los criterios.
+     */
 	
 	public ArrayList<Vehiculo> obtenerVehiculos(LocalDate fecha1, LocalDate fecha2, boolean soloDisponibles) {
 	    ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
@@ -87,6 +109,11 @@ public class DbVehiculo extends Conexion{
 	    return listaVehiculos;
 	}
 	
+    /**
+     * Método que convierte un {@link ResultSet} en una lista de objetos {@link Vehiculo}.
+     * @param rs ResultSet obtenido de una consulta SQL.
+     * @return Lista de vehículos construida a partir del ResultSet.
+     */	
 	public ArrayList<Vehiculo> genObjetosyArray(ResultSet rs) {
 		ArrayList<Vehiculo> listaVehiculos = new ArrayList<>();
 		try {
@@ -130,7 +157,11 @@ public class DbVehiculo extends Conexion{
 		
 	}
 
-	
+	/**
+     * Método que bsuca un único vehículo a partir de su matrícula.
+     * @param matricula Matrícula del vehículo a consultar.
+     * @return Objeto {@link Vehiculo} o {@code null} si no se encuentra.
+     */
 	public Vehiculo ver1Vehiculo(String matricula) {
 	    String sql = "SELECT matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, v.tipo, tipo_turismo, tipo_furgo, frecuencia, \n"
 	    		+ "	    IF(\n"
@@ -184,6 +215,11 @@ public class DbVehiculo extends Conexion{
 	    return null;
 	}
 	
+	/**
+     * Métedo que actualiza la información de un vehículo existente.
+     * @param vehiculo Objeto {@link Vehiculo} con los datos a actualizar.
+     * @return {@code true} si la actualización fue exitosa.
+     */
 	public boolean actualizarVehiculo(Vehiculo vehiculo) {
 	    String sql = "UPDATE vehiculo SET modelo = ?, marca = ?, precioh = ?, fecha_matriculacion = ?, color = ?, plazas = ?, tipo = ?, tipo_turismo = ?, tipo_furgo = ? WHERE matricula = ?";
 
@@ -222,7 +258,11 @@ public class DbVehiculo extends Conexion{
 	    }
 	}
 
-
+	/**
+     * Método que crea un nuevo vehículo en la base de datos.
+     * @param vehiculo Objeto {@link Vehiculo} a registrar.
+     * @return {@code true} si la inserción fue exitosa.
+     */
 	public boolean crearVehiculo(Vehiculo vehiculo) {
 	    String sql = "INSERT INTO vehiculo (matricula, modelo, marca, precioh, fecha_matriculacion, color, plazas, tipo, tipo_turismo, tipo_furgo) "
 	               + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -261,7 +301,11 @@ public class DbVehiculo extends Conexion{
 	    }
 	}
 
-
+	/**
+     * Método que elimina un vehículo de la base de datos.
+     * @param matricula Matrícula del vehículo a eliminar.
+     * @return {@code true} si se eliminó correctamente.
+     */
 	public boolean eliminarVehiculo(String matricula) {
 	    String sql = "DELETE FROM vehiculo WHERE matricula = ?";
 

@@ -6,21 +6,54 @@ package modelo;
 
 import java.time.LocalDate;
 
-
+/**
+ * Clase que gestiona los datos de una furgoneta.
+ * Hereda los atributos y métodos de la clase {@code Vehiculo} y añade el atributo {@code tipo}.
+ * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
+ */
 public class Furgoneta extends Vehiculo {
-	public Furgoneta(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
-			LocalDate proximo_mantenimiento, String color, int plazas, String tipo) {
-		super(matricula, marca, modelo, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
-		this.tipo = tipo;
-	}
 
-	private String tipo;
+    /**
+     * Tipo de furgoneta.
+     */
+    private String tipo;
 
-	public String getTipo() {
-		return tipo;
-	}
+    /**
+     * Constructor que crea una nueva furgoneta con los datos especificados.
+     * 
+     * @param matricula Matrícula del vehículo.
+     * @param marca Marca del vehículo.
+     * @param modelo Modelo del vehículo.
+     * @param precioH Precio por hora del alquiler.
+     * @param f_matriculacion Fecha de matriculación del vehículo.
+     * @param proximo_mantenimiento Fecha del próximo mantenimiento programado.
+     * @param color Color del vehículo.
+     * @param plazas Número de plazas del vehículo.
+     * @param tipo Tipo de furgoneta.
+     */
+    public Furgoneta(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
+                     LocalDate proximo_mantenimiento, String color, int plazas, String tipo) {
+        super(matricula, marca, modelo, precioH, f_matriculacion, proximo_mantenimiento, color, plazas);
+        this.tipo = tipo;
+    }
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+    /**
+     * Método que devuelve el tipo de furgoneta.
+     * 
+     * @return Tipo de furgoneta.
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * Método que establece el tipo de furgoneta.
+     * 
+     * @param tipo Tipo de furgoneta a asignar.
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 }

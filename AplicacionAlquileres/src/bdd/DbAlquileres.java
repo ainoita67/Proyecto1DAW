@@ -10,24 +10,56 @@ import modelo.Alquiler;
 import modelo.Cliente;
 import modelo.Vehiculo;
 
-
+/**
+ * @author Pyto_Grupo_D
+ * @version 1.0
+ * 
+ * Clase que gestiona las operaciones CRUD relacionadas con los alquileres.
+ * Hereda de {@link Conexion} para hacer la conexión a la base de datos.
+ * 
+ */
 public class DbAlquileres extends Conexion {
+	
+	/**
+     * Constructor que hace la conexión a la base de datos.
+     * @throws SQLException si ocurre un error al conectar.
+     */
     public DbAlquileres() throws SQLException {
         super();
     }
-
+    
+    /**
+     * Método que obtiene todos los registros de alquileres en la base de datos.
+     * @return Lista de objetos {@link Alquiler}.
+     */
     public ArrayList<Alquiler> obtenerAlquileres() {
         return obtenerAlquileresConFiltro(null, null);
     }
-
+    
+    /**
+     * Método que obtiene los registros de alquileres asociados a un cliente.
+     * @param dniCliente DNI del cliente.
+     * @return Lista de alquileres del cliente.
+     */
     public ArrayList<Alquiler> obtenerAlquileresPorCliente(String dniCliente) {
         return obtenerAlquileresConFiltro("cliente", dniCliente);
     }
-
+    
+    /**
+     * Método obtiene los registros de alquileres asociados a un vehículo.
+     * @param matriculaVehiculo Matrícula del vehículo.
+     * @return Lista de alquileres del vehículo.
+     */
     public ArrayList<Alquiler> obtenerAlquileresPorVehiculo(String matriculaVehiculo) {
         return obtenerAlquileresConFiltro("vehiculo", matriculaVehiculo);
     }
-
+    
+    /**
+     * Método privado que obtiene los alquileres desde la base de datos con o sin filtro.
+     * @param campo Campo por el que filtrar ("cliente" o "vehiculo").
+     * @param valor Valor del campo a filtrar.
+     * @return Lista de objetos {@link Alquiler} filtrados o no.
+     */
     private ArrayList<Alquiler> obtenerAlquileresConFiltro(String campo, String valor) {
         ArrayList<Alquiler> listaAlquileres = new ArrayList<>();
 
@@ -68,6 +100,11 @@ public class DbAlquileres extends Conexion {
         return listaAlquileres;
     }
     
+    /**
+     * Método que inserta un nuevo alquiler en la base de datos.
+     * @param alquiler Objeto {@link Alquiler} a insertar.
+     * @return {@code true} si se insertó correctamente, {@code false} en caso contrario.
+     */
     public boolean crearAlquiler(Alquiler alquiler) {
         String sql = "INSERT INTO alquiler (cliente, vehiculo, fechaini, fechafin, total) VALUES (?, ?, ?, ?, ?)";
         
@@ -86,6 +123,13 @@ public class DbAlquileres extends Conexion {
         }
     }
 
+    /**
+     * Método que elimina un alquiler específico de la base de datos.
+     * @param dniCliente DNI del cliente asociado al alquiler.
+     * @param matriculaVehiculo Matrícula del vehículo alquilado.
+     * @param fechaini Fecha de inicio del alquiler.
+     * @return {@code true} si se eliminó correctamente, {@code false} en caso contrario.
+     */
     public boolean eliminarAlquiler(String dniCliente, String matriculaVehiculo, LocalDate fechaini) {
         String sql = "DELETE FROM alquiler WHERE cliente = ? AND vehiculo = ? AND date(fechaini) = ?";
         
@@ -107,6 +151,11 @@ public class DbAlquileres extends Conexion {
             return false;
         }
     }
+    
+    /**
+     * Método que saca una lista de los alquileres que hay hoy en la base de datos.
+     * @return Lista de objetos {@link Alquiler} de hoy.
+     */
 
     public ArrayList<Alquiler> obtenerAlquileresHoy() {
         ArrayList<Alquiler> listaAlquileres = new ArrayList<>();
