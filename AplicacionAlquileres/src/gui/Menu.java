@@ -18,13 +18,22 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Color;
 
+/**
+ * @author Pyto_Grupo_D
+ * @version 1.0
+ * 
+ * Ventana que muestra el menú y las opciones de la aplicación a los usuarios.
+ * Los botones de Gestionar redirigen a ventanas de gestión de la aplicación.
+ * El botón de cerrar sesión cierra la sesión del usuario actual.
+ * 
+ */
 public class Menu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
+	 * Método principal. Lanza la aplicación y muestra el menú.
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -40,7 +49,7 @@ public class Menu extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Constructor que inicializa el menú y sus partes.
 	 */
 	public Menu() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,12 +71,8 @@ public class Menu extends JFrame {
 		    }
 		});
 		
-		JButton btnConsultarVehiculos = new JButton("Consultar Vehiculos");
-		btnConsultarVehiculos.setBounds(22, 152, 184, 25);
-		contentPane.add(btnConsultarVehiculos);
-		
 		JButton btnGestionarAlquileres = new JButton("Gestionar Alquileres");
-		btnGestionarAlquileres.setBounds(22, 200, 184, 25);
+		btnGestionarAlquileres.setBounds(228, 105, 199, 25);
 		contentPane.add(btnGestionarAlquileres);
 		btnGestionarAlquileres.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
@@ -76,7 +81,7 @@ public class Menu extends JFrame {
 		});
 		
 		JButton btnGestionarEmpleados = new JButton("Gestionar Empleados");
-		btnGestionarEmpleados.setBounds(228, 105, 199, 25);
+		btnGestionarEmpleados.setBounds(228, 152, 199, 25);
 		contentPane.add(btnGestionarEmpleados);
 		
 		btnGestionarEmpleados.addActionListener(new ActionListener() {
@@ -86,7 +91,7 @@ public class Menu extends JFrame {
 		});
 		
 		JButton btnGestionarVehiculos = new JButton("Gestionar Vehiculos");
-		btnGestionarVehiculos.setBounds(228, 152, 199, 25);
+		btnGestionarVehiculos.setBounds(22, 152, 184, 25);
 		contentPane.add(btnGestionarVehiculos);
 		
 		btnGestionarVehiculos.addActionListener(new ActionListener() {
@@ -120,12 +125,9 @@ public class Menu extends JFrame {
 		Usuario usuario = modelo.Sesion.getUsuarioActivo();
 		if (usuario != null) {
 		    lblUsuarioactivo.setText(usuario.getNombre());
-		    
 		    int rol = usuario.getRol();
-		    
 		    if (rol==2) {
 		    	btnGestionarEmpleados.setVisible(false);
-		    	btnConsultarVehiculos.setVisible(false);
 		    }else if (rol==3) {
 		    	
 		    }
@@ -133,6 +135,9 @@ public class Menu extends JFrame {
 		
 	}
 	
+	/**
+	 * Constructor que inicializa la ventana de GestionarClientes
+	 */
 	private void irAClientes() {
 		if (Sesion.getUsuarioActivo() != null) {
 			Menu ventanamenu = new Menu();
@@ -144,6 +149,9 @@ public class Menu extends JFrame {
 		}
 	}
 	
+	/**
+	 *  Método que inicializa la ventana de GestionarUsuarios
+	 */
 	private void irAUsuarios() {
 		if (Sesion.getUsuarioActivo() != null) {
 			Menu ventanamenu = new Menu();
@@ -155,6 +163,9 @@ public class Menu extends JFrame {
 		}
 	}
 	
+	/**
+	 *  Método que inicializa la ventana de GestionarVehiculos
+	 */
 	private void irAVehiculos() {
 		if (Sesion.getUsuarioActivo() != null) {
 			Menu ventanamenu = new Menu();
@@ -166,6 +177,9 @@ public class Menu extends JFrame {
 		}
 	}
 	
+	/**
+	 *  Método que inicializa la ventana de GestionarAlquileres
+	 */
 	private void irAAlquileres() {
 	    GestionarAlquileres ventanaalquileres = new GestionarAlquileres();
 	    ventanaalquileres.setVisible(true);

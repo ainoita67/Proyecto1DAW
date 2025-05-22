@@ -6,108 +6,225 @@ package modelo;
 
 import java.time.LocalDate;
 
+/**
+ * Clase que gestiona los datos del objeto vehiculo.
+ * Sirve como clase base para vehículos concretos como {@link Turismo}, {@link Furgoneta} o {@link Moto}.
+ * 
+ * Incluye atributos comunes a todos los vehículos y métodos base que pueden ser sobrescritos por las subclases.
+ * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
+ */
 public abstract class Vehiculo {
-	
-	public Vehiculo(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
-			LocalDate proximo_mantenimiento, String color, int plazas) {
-		super();
-		this.matricula = matricula;
-		this.marca = marca;
-		this.modelo = modelo;
-		this.precioH = precioH;
-		this.f_matriculacion = f_matriculacion;
-		this.proximo_mantenimiento = proximo_mantenimiento;
-		this.color = color;
-		this.plazas = plazas;
-	}
 
-	private String matricula;
-	private String marca;
-	private String modelo;
-	private Double precioH;
-	private LocalDate f_matriculacion;
-	private LocalDate proximo_mantenimiento;
-	private String color;
-	private int plazas;
+    /** Matrícula única del vehículo. */
+    private String matricula;
 
-	
+    /** Marca del vehículo. */
+    private String marca;
 
-	public void editar() {
-	}
+    /** Modelo del vehículo. */
+    private String modelo;
 
-	public void mostrar() {
-	}
+    /** Precio por hora de alquiler. */
+    private Double precioH;
 
-	public void hacerMantenimiento() {
-	}
+    /** Fecha de matriculación del vehículo. */
+    private LocalDate f_matriculacion;
 
-	public void disponible() {
-	}
+    /** Fecha prevista para el próximo mantenimiento. */
+    private LocalDate proximo_mantenimiento;
 
-	public void chPrecio() {
-	}
+    /** Color del vehículo. */
+    private String color;
 
-	public String getMatricula() {
-		return matricula;
-	}
+    /** Número de plazas disponibles en el vehículo. */
+    private int plazas;
 
-	public void setMatricula(String matricula) {
-		this.matricula = matricula;
-	}
+    /**
+     * Constructor que inicializa un vehículo con todos sus atributos.
+     * 
+     * @param matricula Matrícula del vehículo.
+     * @param marca Marca del vehículo.
+     * @param modelo Modelo del vehículo.
+     * @param precioH Precio por hora del alquiler.
+     * @param f_matriculacion Fecha de matriculación.
+     * @param proximo_mantenimiento Fecha del próximo mantenimiento.
+     * @param color Color del vehículo.
+     * @param plazas Número de plazas del vehículo.
+     */
+    public Vehiculo(String matricula, String marca, String modelo, Double precioH, LocalDate f_matriculacion,
+                    LocalDate proximo_mantenimiento, String color, int plazas) {
+        super();
+        this.matricula = matricula;
+        this.marca = marca;
+        this.modelo = modelo;
+        this.precioH = precioH;
+        this.f_matriculacion = f_matriculacion;
+        this.proximo_mantenimiento = proximo_mantenimiento;
+        this.color = color;
+        this.plazas = plazas;
+    }
 
-	public Double getPrecioH() {
-		return precioH;
-	}
+    // Métodos abstractos o de comportamiento genérico
 
-	public void setPrecioH(Double precioH) {
-		this.precioH = precioH;
-	}
+    /**
+     * Método para editar los datos del vehículo.
+     * Debe ser implementado o sobreescrito por las subclases.
+     */
+    public void editar() {}
 
-	public LocalDate getF_matriculacion() {
-		return f_matriculacion;
-	}
+    /**
+     * Método para mostrar los datos del vehículo.
+     * Debe ser implementado o sobreescrito por las subclases.
+     */
+    public void mostrar() {}
 
-	public void setF_matriculacion(LocalDate f_matriculacion) {
-		this.f_matriculacion = f_matriculacion;
-	}
+    /**
+     * Método que realiza o agenda el mantenimiento del vehículo.
+     * Debe ser implementado o sobreescrito por las subclases.
+     */
+    public void hacerMantenimiento() {}
 
-	public LocalDate getProximo_mantenimiento() {
-		return proximo_mantenimiento;
-	}
+    /**
+     * Método que indica si el vehículo está disponible para alquiler.
+     * Debe ser implementado o sobreescrito por las subclases.
+     */
+    public void disponible() {}
 
-	public void setProximo_mantenimiento(LocalDate proximo_mantenimiento) {
-		this.proximo_mantenimiento = proximo_mantenimiento;
-	}
+    /**
+     * Método para cambiar o verificar el precio del vehículo.
+     * Debe ser implementado o sobreescrito por las subclases.
+     */
+    public void chPrecio() {}
 
-	public String getColor() {
-		return color;
-	}
+    // Getters y Setters
 
-	public void setColor(String color) {
-		this.color = color;
-	}
+    /**
+     * Método que obtiene la matrícula del vehículo.
+     * @return Matrícula del vehículo.
+     */
+    public String getMatricula() {
+        return matricula;
+    }
 
-	public int getPlazas() {
-		return plazas;
-	}
+    /**
+     * Método que establece la matrícula del vehículo.
+     * @param matricula Nueva matrícula.
+     */
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
 
-	public void setPlazas(int plazas) {
-		this.plazas = plazas;
-	}
+    /**
+     * Método que obtiene el precio por hora de alquiler.
+     * @return Precio por hora.
+     */
+    public Double getPrecioH() {
+        return precioH;
+    }
 
-	public String getMarca() {
-		return marca;
-	}
+    /**
+     * Método que establece el precio por hora de alquiler.
+     * @param precioH Nuevo precio por hora.
+     */
+    public void setPrecioH(Double precioH) {
+        this.precioH = precioH;
+    }
 
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
+    /**
+     * Método que obtiene la fecha de matriculación del vehículo.
+     * @return Fecha de matriculación.
+     */
+    public LocalDate getF_matriculacion() {
+        return f_matriculacion;
+    }
 
-	public String getModelo() {
-		return modelo;
-	}
+    /**
+     * Método que establece la fecha de matriculación del vehículo.
+     * @param f_matriculacion Fecha de matriculación.
+     */
+    public void setF_matriculacion(LocalDate f_matriculacion) {
+        this.f_matriculacion = f_matriculacion;
+    }
 
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
+    /**
+     * Método que obtiene la fecha del próximo mantenimiento.
+     * @return Fecha del próximo mantenimiento.
+     */
+    public LocalDate getProximo_mantenimiento() {
+        return proximo_mantenimiento;
+    }
+
+    /**
+     * Método que establece la fecha del próximo mantenimiento.
+     * @param proximo_mantenimiento Nueva fecha de mantenimiento.
+     */
+    public void setProximo_mantenimiento(LocalDate proximo_mantenimiento) {
+        this.proximo_mantenimiento = proximo_mantenimiento;
+    }
+
+    /**
+     * Método que obtiene el color del vehículo.
+     * @return Color del vehículo.
+     */
+    public String getColor() {
+        return color;
+    }
+
+    /**
+     * Método que establece el color del vehículo.
+     * @param color Nuevo color.
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    /**
+     * Método que obtiene el número de plazas del vehículo.
+     * @return Número de plazas.
+     */
+    public int getPlazas() {
+        return plazas;
+    }
+
+    /**
+     * Método que establece el número de plazas del vehículo.
+     * @param plazas Nuevo número de plazas.
+     */
+    public void setPlazas(int plazas) {
+        this.plazas = plazas;
+    }
+
+    /**
+     * Método que obtiene la marca del vehículo.
+     * @return Marca del vehículo.
+     */
+    public String getMarca() {
+        return marca;
+    }
+
+    /**
+     * Método que establece la marca del vehículo.
+     * @param marca Nueva marca.
+     */
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    /**
+     * Método que obtiene el modelo del vehículo.
+     * @return Modelo del vehículo.
+     */
+    public String getModelo() {
+        return modelo;
+    }
+
+    /**
+     * Método que establece el modelo del vehículo.
+     * @param modelo Nuevo modelo.
+     */
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
 }
