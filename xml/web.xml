@@ -1,10 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html lang="es"><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="es">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"></meta>
+  <meta charset="UTF-8"></meta>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
   <title>MOVEYOU Rent - Vehículos Disponibles</title>
-  <link rel="stylesheet" href="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/style.css">
+  <link rel="stylesheet" href="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/style.css"></link>
 </head>
 <body>
 
@@ -45,7 +47,7 @@
 
   <section class="vehiculos-container"><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/leon.jpeg" alt="seat leon">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/leon.jpeg" alt="seat leon"></img>
           <span class="etiqueta hibrido">Hibrido</span>
         </div>
         <div class="vehiculo-info">
@@ -62,7 +64,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Civic.jpeg" alt="Honda Civic">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Civic.jpeg" alt="Honda Civic"></img>
           <span class="etiqueta deportivo">Deportivo</span>
         </div>
         <div class="vehiculo-info">
@@ -79,7 +81,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Clio.jpeg" alt="Renault Clio">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Clio.jpeg" alt="Renault Clio"></img>
           <span class="etiqueta compacto">Compacto</span>
         </div>
         <div class="vehiculo-info">
@@ -96,7 +98,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Focus.jpeg" alt="Ford Focus">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Focus.jpeg" alt="Ford Focus"></img>
           <span class="etiqueta familiar">Familiar</span>
         </div>
         <div class="vehiculo-info">
@@ -113,7 +115,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Golf.jpeg" alt="Volkswagen Golf">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Golf.jpeg" alt="Volkswagen Golf"></img>
           <span class="etiqueta compacto">Compacto</span>
         </div>
         <div class="vehiculo-info">
@@ -130,7 +132,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Ducato.jpeg" alt="Fiat Ducato">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Ducato.jpeg" alt="Fiat Ducato"></img>
           <span class="etiqueta carga">Carga</span>
         </div>
         <div class="vehiculo-info">
@@ -147,7 +149,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Sprinter.jpeg" alt="Mercedes Sprinter">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Sprinter.jpeg" alt="Mercedes Sprinter"></img>
           <span class="etiqueta mixta">Mixta</span>
         </div>
         <div class="vehiculo-info">
@@ -164,7 +166,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Transporter.jpeg" alt="Volkswagen Transporter">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Transporter.jpeg" alt="Volkswagen Transporter"></img>
           <span class="etiqueta carga">Carga</span>
         </div>
         <div class="vehiculo-info">
@@ -181,7 +183,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Z650.jpeg" alt="Kawasaki Z650">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Z650.jpeg" alt="Kawasaki Z650"></img>
           
         </div>
         <div class="vehiculo-info">
@@ -198,7 +200,7 @@
         </div>
       </div><div class="vehiculo-card">
         <div class="vehiculo-imagen">
-          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/CBR500.jpeg" alt="Honda CBR500">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/CBR500.jpeg" alt="Honda CBR500"></img>
           
         </div>
         <div class="vehiculo-info">
@@ -257,80 +259,4 @@
 	// ]]>
 </script>
 
-
-
-<script>
-  //variable global donde se guardarán todos los vehículos del JSON
-  let todosLosVehiculos = [];
-
-  //función para cargar los datos del archivo vehiculos.json
-  async function cargarVehiculos() {
-    const respuesta = await fetch('vehiculos.json'); //carga el archivo
-    const vehiculos = await respuesta.json(); //lo convierte a objeto JS
-    todosLosVehiculos = vehiculos; //guardamos la lista completa para filtrarla más adelante
-    mostrarVehiculos(vehiculos); //se muestran todos los vehículos al cargar
-  }
-
-  //función para mostrar un listado de vehículos recibido como parámetro
-  function mostrarVehiculos(lista) {
-    const contenedor = document.querySelector('.vehiculos-container'); //nos posicionamos en el contenedor
-    contenedor.innerHTML = ''; //limpiamos su contenido
-
-    //para cada vehículo se crea una tarjeta o contenedor div
-    lista.forEach(vehiculo => {
-      const tarjeta = document.createElement('div');
-      tarjeta.classList.add('vehiculo-card');
-
-      //se guarda el subtipo de turismo o furgoneta para que no haya problemas
-      const subtipo = vehiculo.tipoTurismo || vehiculo.tipoFurgo;
-      const tipo = vehiculo.tipo.toLowerCase();
-
-      // Solo mostrar etiqueta si es turismo o furgoneta
-      const etiquetaHTML = (tipo === 'turismo' || tipo === 'furgoneta') && subtipo
-        ? `<span class="etiqueta ${subtipo.toLowerCase()}">${subtipo.charAt(0).toUpperCase() + subtipo.slice(1)}</span>`
-        : '';
-
-      //rellena las tarjetas html con la información del vehículo. 
-      //Se formatea el subtipo para que quede más bonito y la fecha para mostrar solo el año
-      tarjeta.innerHTML = `
-        <div class="vehiculo-imagen">
-          <img src="fotos/${vehiculo.modelo}.jpeg" alt="${vehiculo.marca} ${vehiculo.modelo}">
-          ${etiquetaHTML}
-        </div>
-        <div class="vehiculo-info">
-          <h3>${vehiculo.marca} ${vehiculo.modelo}</h3>
-          <span class="tipo">${vehiculo.tipo}</span>
-          <ul class="caracteristicas">
-            <li><strong>Matrícula:</strong><p class="matricula"> ${vehiculo.matricula} </p></li>
-            <li><strong>Color:</strong><p class="color"> ${vehiculo.color} </p></li>
-            <li><strong>Plazas:</strong> ${vehiculo.plazas}</li>
-            <li><strong>Año:</strong> ${vehiculo.fechaMatriculacion.split('-')[0]}</li>
-            <li><strong>Precio/hora:</strong> <span class="precio">${vehiculo.precioHora}€</span></li>
-          </ul>
-          <a href="disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
-        </div>
-      `;
-      contenedor.appendChild(tarjeta); //añadimos la tarjeta al contenedor
-    });
-  }
-
-  //cuando se carga la página se ejecuta la función cargarVehiculos
-  document.addEventListener('DOMContentLoaded', cargarVehiculos);
-
-  //cuando se pulsa el botón "Aplicar filtros" se filtra el tipo seleccionado
-  document.querySelector('.boton-filtrar').addEventListener('click', () => {
-    const tipoSeleccionado = document.getElementById('tipo').value; //obtenemos el tipo seleccionado
-
-    let filtrados = todosLosVehiculos;
-
-    //si se ha elegido un tipo distinto a todos se filtra la lista
-    if (tipoSeleccionado !== 'todos') {
-      filtrados = todosLosVehiculos.filter(vehiculo => 
-        vehiculo.tipo.toLowerCase() === tipoSeleccionado.toLowerCase()
-      );
-    }
-
-    mostrarVehiculos(filtrados); //mostramos los vehículos filtrados
-  });
-</script>
 </body></html>
