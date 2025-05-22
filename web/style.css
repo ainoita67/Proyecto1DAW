@@ -229,6 +229,8 @@ footer {
   font-weight: bold;
   color: white;
   border-radius: 20px;
+  background: #f39c12;
+  right: 10px;
 }
 
 .etiqueta.electrico {
@@ -249,11 +251,6 @@ footer {
 .etiqueta.hibrido {
   background: #9b59b6;
   right: 10px;
-}
-
-.etiqueta.cuatro-x-cuatro {
-  background: #f39c12;
-  right: 110px;
 }
 
 .vehiculo-info {
@@ -313,6 +310,25 @@ footer {
 .boton-reservar:hover {
   background: #005fa3;
 }
+
+.cliente-info {
+  background-color: #e6e6e6;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.5;
+}
+
+.cliente-info p {
+  margin-bottom: 6px;
+}
+
+.cliente-info p:last-child {
+  margin-bottom: 0;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {

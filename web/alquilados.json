@@ -1,0 +1,19 @@
+[
+  {
+    "matricula": "7777777",
+    "marca": "seat",
+    "modelo": "leon",
+    "precioHora": 8.0,
+    "fechaMatriculacion": "2024-02-12",
+    "color": "Azul",
+    "plazas": 5,
+    "tipo": "Turismo",
+    "tipoTurismo": "hibrido",
+    "tipoFurgo": null,
+    "proxMantenimiento": "2026-02-12",
+    "dni": "tal",
+    "nombre": "hola",
+    "telefono": "6",
+    "correo": "que"
+  }
+]
