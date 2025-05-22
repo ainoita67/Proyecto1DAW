@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOVEYOU Rent - Vehículos Disponibles</title>
+  <link rel="stylesheet" href="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/style.css">
+</head>
+<body>
+
+  <header>
+    <h1>MOVEYOU Rent</h1>
+    <nav>
+      <ul>
+        <li><a href="http://127.0.0.1:5500/index.html">Inicio</a></li>
+        <li><a href="http://127.0.0.1:5500/vehiculos.html" class="active">Vehículos</a></li>
+        <li><a href="http://127.0.0.1:5500/reservados.html">Reservas</a></li>
+        <li><a href="http://127.0.0.1:5500/disponibles.html">Disponibles</a></li>
+        <li><a href="http://127.0.0.1:5500/contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero vehicle-hero">
+    <h2>Nuestra Flota</h2>
+    <p>Encuentra el vehículo perfecto para tus necesidades</p>
+  </section>
+
+  <section class="filtros-container">
+    <h3>Filtrar por:</h3>
+    <div class="filtros">
+      <div class="filtro-grupo">
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo">
+          <option value="todos" selected="selected">Todos</option>
+          <option value="turismo">Turismo</option>
+          <option value="moto">Moto</option>
+          <option value="furgoneta">Furgoneta</option>
+        </select>
+      </div>
+
+      <button class="boton-filtrar">Aplicar filtros</button>
+    </div>
+  </section>
+
+  <section class="vehiculos-container"><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/leon.jpeg" alt="seat leon">
+          <span class="etiqueta hibrido">Hibrido</span>
+        </div>
+        <div class="vehiculo-info">
+          <h3>seat leon</h3>
+          <span class="tipo">Turismo</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 7777777 </p></li>
+            <li><strong>Color:</strong><p class="color"> Azul </p></li>
+            <li><strong>Plazas:</strong> 5</li>
+            <li><strong>Año:</strong> 2024</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">8€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Civic.jpeg" alt="Honda Civic">
+          <span class="etiqueta deportivo">Deportivo</span>
+        </div>
+        <div class="vehiculo-info">
+          <h3>Honda Civic</h3>
+          <span class="tipo">Turismo</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 8888HHH </p></li>
+            <li><strong>Color:</strong><p class="color"> Negro </p></li>
+            <li><strong>Plazas:</strong> 5</li>
+            <li><strong>Año:</strong> 2019</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">16.5€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Clio.jpeg" alt="Renault Clio">
+          <span class="etiqueta compacto">Compacto</span>
+        </div>
+        <div class="vehiculo-info">
+          <h3>Renault Clio</h3>
+          <span class="tipo">Turismo</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 5555EEE </p></li>
+            <li><strong>Color:</strong><p class="color"> Gris </p></li>
+            <li><strong>Plazas:</strong> 5</li>
+            <li><strong>Año:</strong> 2020</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">13€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Focus.jpeg" alt="Ford Focus">
+          <span class="etiqueta familiar">Familiar</span>
+        </div>
+        <div class="vehiculo-info">
+          <h3>Ford Focus</h3>
+          <span class="tipo">Turismo</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 4444DDD </p></li>
+            <li><strong>Color:</strong><p class="color"> Azul </p></li>
+            <li><strong>Plazas:</strong> 5</li>
+            <li><strong>Año:</strong> 2019</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">14€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Golf.jpeg" alt="Volkswagen Golf">
+          <span class="etiqueta compacto">Compacto</span>
+        </div>
+        <div class="vehiculo-info">
+          <h3>Volkswagen Golf</h3>
+          <span class="tipo">Turismo</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 1111AAA </p></li>
+            <li><strong>Color:</strong><p class="color"> Rojo </p></li>
+            <li><strong>Plazas:</strong> 5</li>
+            <li><strong>Año:</strong> 2021</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">15.5€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Ducato.jpeg" alt="Fiat Ducato">
+          <span class="etiqueta carga">Carga</span>
+        </div>
+        <div class="vehiculo-info">
+          <h3>Fiat Ducato</h3>
+          <span class="tipo">Furgoneta</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 9999III </p></li>
+            <li><strong>Color:</strong><p class="color"> Blanco </p></li>
+            <li><strong>Plazas:</strong> 3</li>
+            <li><strong>Año:</strong> 2023</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">22€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Sprinter.jpeg" alt="Mercedes Sprinter">
+          <span class="etiqueta mixta">Mixta</span>
+        </div>
+        <div class="vehiculo-info">
+          <h3>Mercedes Sprinter</h3>
+          <span class="tipo">Furgoneta</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 6666FFF </p></li>
+            <li><strong>Color:</strong><p class="color"> Blanco </p></li>
+            <li><strong>Plazas:</strong> 3</li>
+            <li><strong>Año:</strong> 2018</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">25€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Transporter.jpeg" alt="Volkswagen Transporter">
+          <span class="etiqueta carga">Carga</span>
+        </div>
+        <div class="vehiculo-info">
+          <h3>Volkswagen Transporter</h3>
+          <span class="tipo">Furgoneta</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 2222BBB </p></li>
+            <li><strong>Color:</strong><p class="color"> Blanco </p></li>
+            <li><strong>Plazas:</strong> 3</li>
+            <li><strong>Año:</strong> 2020</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">20€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/Z650.jpeg" alt="Kawasaki Z650">
+          
+        </div>
+        <div class="vehiculo-info">
+          <h3>Kawasaki Z650</h3>
+          <span class="tipo">Moto</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 7777GGG </p></li>
+            <li><strong>Color:</strong><p class="color"> Verde </p></li>
+            <li><strong>Plazas:</strong> 2</li>
+            <li><strong>Año:</strong> 2021</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">11€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div><div class="vehiculo-card">
+        <div class="vehiculo-imagen">
+          <img src="MOVEYOU%20Rent%20-%20Veh%C3%ADculos%20Disponibles_files/CBR500.jpeg" alt="Honda CBR500">
+          
+        </div>
+        <div class="vehiculo-info">
+          <h3>Honda CBR500</h3>
+          <span class="tipo">Moto</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> 3333CCC </p></li>
+            <li><strong>Color:</strong><p class="color"> Negro </p></li>
+            <li><strong>Plazas:</strong> 2</li>
+            <li><strong>Año:</strong> 2022</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">10€</span></li>
+          </ul>
+          <a href="http://127.0.0.1:5500/disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      </div></section>
+
+  <footer>
+    © 2025 MOVEYOU Rent. Todos los derechos reservados.
+  </footer>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+
+<script>
+  //variable global donde se guardarán todos los vehículos del JSON
+  let todosLosVehiculos = [];
+
+  //función para cargar los datos del archivo vehiculos.json
+  async function cargarVehiculos() {
+    const respuesta = await fetch('vehiculos.json'); //carga el archivo
+    const vehiculos = await respuesta.json(); //lo convierte a objeto JS
+    todosLosVehiculos = vehiculos; //guardamos la lista completa para filtrarla más adelante
+    mostrarVehiculos(vehiculos); //se muestran todos los vehículos al cargar
+  }
+
+  //función para mostrar un listado de vehículos recibido como parámetro
+  function mostrarVehiculos(lista) {
+    const contenedor = document.querySelector('.vehiculos-container'); //nos posicionamos en el contenedor
+    contenedor.innerHTML = ''; //limpiamos su contenido
+
+    //para cada vehículo se crea una tarjeta o contenedor div
+    lista.forEach(vehiculo => {
+      const tarjeta = document.createElement('div');
+      tarjeta.classList.add('vehiculo-card');
+
+      //se guarda el subtipo de turismo o furgoneta para que no haya problemas
+      const subtipo = vehiculo.tipoTurismo || vehiculo.tipoFurgo;
+      const tipo = vehiculo.tipo.toLowerCase();
+
+      // Solo mostrar etiqueta si es turismo o furgoneta
+      const etiquetaHTML = (tipo === 'turismo' || tipo === 'furgoneta') && subtipo
+        ? `<span class="etiqueta ${subtipo.toLowerCase()}">${subtipo.charAt(0).toUpperCase() + subtipo.slice(1)}</span>`
+        : '';
+
+      //rellena las tarjetas html con la información del vehículo. 
+      //Se formatea el subtipo para que quede más bonito y la fecha para mostrar solo el año
+      tarjeta.innerHTML = `
+        <div class="vehiculo-imagen">
+          <img src="fotos/${vehiculo.modelo}.jpeg" alt="${vehiculo.marca} ${vehiculo.modelo}">
+          ${etiquetaHTML}
+        </div>
+        <div class="vehiculo-info">
+          <h3>${vehiculo.marca} ${vehiculo.modelo}</h3>
+          <span class="tipo">${vehiculo.tipo}</span>
+          <ul class="caracteristicas">
+            <li><strong>Matrícula:</strong><p class="matricula"> ${vehiculo.matricula} </p></li>
+            <li><strong>Color:</strong><p class="color"> ${vehiculo.color} </p></li>
+            <li><strong>Plazas:</strong> ${vehiculo.plazas}</li>
+            <li><strong>Año:</strong> ${vehiculo.fechaMatriculacion.split('-')[0]}</li>
+            <li><strong>Precio/hora:</strong> <span class="precio">${vehiculo.precioHora}€</span></li>
+          </ul>
+          <a href="disponibles.html" class="boton-reservar">Consultar disponibilidad</a>
+        </div>
+      `;
+      contenedor.appendChild(tarjeta); //añadimos la tarjeta al contenedor
+    });
+  }
+
+  //cuando se carga la página se ejecuta la función cargarVehiculos
+  document.addEventListener('DOMContentLoaded', cargarVehiculos);
+
+  //cuando se pulsa el botón "Aplicar filtros" se filtra el tipo seleccionado
+  document.querySelector('.boton-filtrar').addEventListener('click', () => {
+    const tipoSeleccionado = document.getElementById('tipo').value; //obtenemos el tipo seleccionado
+
+    let filtrados = todosLosVehiculos;
+
+    //si se ha elegido un tipo distinto a todos se filtra la lista
+    if (tipoSeleccionado !== 'todos') {
+      filtrados = todosLosVehiculos.filter(vehiculo => 
+        vehiculo.tipo.toLowerCase() === tipoSeleccionado.toLowerCase()
+      );
+    }
+
+    mostrarVehiculos(filtrados); //mostramos los vehículos filtrados
+  });
+</script>
+</body></html>
