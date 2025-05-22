@@ -7,12 +7,11 @@ package modelo;
 import java.time.LocalDate;
 
 /**
- * @author Pyto_Grupo_D
- * @version 1.0
- * 
  * Clase que gestiona los datos del objeto Alquiler.
  * Contiene información sobre el cliente, el vehículo, las fechas de alquiler y el precio total.
  * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
  */
 public class Alquiler {
 

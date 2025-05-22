@@ -5,12 +5,11 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * @author Pyto_Grupo_D
- * @version 1.0
- * 
  * Clase que gestiona la conexión con la base de datos MySQL, 
  * utilizando JDBC para establecer y cerrar la conexión.
  * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
  */
 public class Conexion {
 	

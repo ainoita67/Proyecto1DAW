@@ -10,12 +10,12 @@ import javax.swing.JOptionPane;
 import modelo.Usuario;
 
 /**
- * @author Pyto_Grupo_D
- * @version 1.0
- * 
  * Clase que gestiona las operaciones CRUD sobre la entidad Usuario.
  * Usa la tabla 'usuario' en la base de datos, considerando diferentes roles.
  * Filtra usando el campo 'rol', 2 para empleados y 3 para administradores.
+ * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
  */
 public class DbUsuario extends Conexion {
 

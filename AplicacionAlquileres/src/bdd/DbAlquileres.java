@@ -11,12 +11,11 @@ import modelo.Cliente;
 import modelo.Vehiculo;
 
 /**
- * @author Pyto_Grupo_D
- * @version 1.0
- * 
  * Clase que gestiona las operaciones CRUD relacionadas con los alquileres.
  * Hereda de {@link Conexion} para hacer la conexión a la base de datos.
  * 
+ * @author Pyto_Grupo_D
+ * @version 1.0
  */
 public class DbAlquileres extends Conexion {
 	
