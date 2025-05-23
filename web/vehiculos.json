@@ -62,7 +62,7 @@
     "tipo": "Turismo",
     "tipoTurismo": "compacto",
     "tipoFurgo": null,
-    "proxMantenimiento": "2024-06-01"
+    "proxMantenimiento": "2026-05-23"
   },
   {
     "matricula": "9999III",
@@ -101,7 +101,7 @@
     "tipo": "Furgoneta",
     "tipoTurismo": null,
     "tipoFurgo": "carga",
-    "proxMantenimiento": "2024-03-01"
+    "proxMantenimiento": "2025-12-21"
   },
   {
     "matricula": "7777GGG",
@@ -127,6 +127,6 @@
     "tipo": "Moto",
     "tipoTurismo": null,
     "tipoFurgo": null,
-    "proxMantenimiento": "2026-01-15"
+    "proxMantenimiento": "2027-03-11"
   }
 ]
