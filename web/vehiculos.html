@@ -5,25 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MOVEYOU Rent - Vehículos Disponibles</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .paginacion-container {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .boton-pagina {
-      margin: 0 5px;
-      padding: 6px 12px;
-      background-color: #f0f0f0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .boton-pagina.activo {
-      background-color: #007bff;
-      color: white;
-      border-color: #007bff;
-    }
-  </style>
 </head>
 <body>
 
@@ -124,11 +105,6 @@
             <li><strong>Año:</strong> ${vehiculo.fechaMatriculacion.split('-')[0]}</li>
             <li><strong>Precio/hora:</strong> <span class="precio">${vehiculo.precioHora}€</span></li>
           </ul>
-          <div class="cliente-info">
-            <p><strong>Alquilado por:</strong> ${vehiculo.nombre}</p>
-            <p><strong>DNI:</strong> ${vehiculo.dni}</p>
-            <p><strong>Email:</strong> ${vehiculo.correo}</p>
-          </div>
         </div>
       `;
       contenedor.appendChild(tarjeta);
@@ -167,28 +143,6 @@
     crearPaginacion(filtrados);
   });
 </script>
-<style>
-  .vehiculo-card.mantenimiento {
-    background-color: #ffcccc;
-  }
-  .vehiculo-card.cerca-mantenimiento {
-    background-color: #fff0b3;
-  }
-  .paginacion-container {
-    text-align: center;
-    margin: 20px 0;
-  }
-  .boton-pagina {
-    margin: 0 4px;
-    padding: 6px 12px;
-    cursor: pointer;
-  }
-  .boton-pagina.activo {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-  }
-</style>
 
 </body>
 </html>
