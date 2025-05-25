@@ -329,6 +329,28 @@ footer {
   margin-bottom: 0;
 }
 
+/*mantenimientos*/
+
+  .vehiculo-card.mantenimiento {
+    border: red 3px solid;
+  }
+  .vehiculo-card.cerca-mantenimiento {
+    border: orangered 3px solid;
+  }
+  .paginacion-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .boton-pagina {
+    margin: 0 4px;
+    padding: 6px 12px;
+    cursor: pointer;
+  }
+  .boton-pagina.activo {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
 
 /* Responsive */
 @media (max-width: 768px) {
