@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import bdd.DbCliente;
 import modelo.Cliente;
 
-class TestBdd {
+class TestClientes {
 
 	@Test
 	void testCrearClientes() {
@@ -44,7 +44,7 @@ class TestBdd {
 	}
 	
 	@Test
-	void testVeerTososClientes() {
+	void testVeerTodosClientes() {
 		Cliente cliente = new Cliente("111111111m", "Ainoa", "667020202", "ainoa@ainoa.com", "c mayor 10 alcañiz");
 		DbCliente conn;
 		ArrayList<Cliente> lista = new ArrayList<Cliente>();
