@@ -189,7 +189,7 @@ public class GestionarClientes extends JFrame {
 	    dispose();
 	}
 	
-	private void eliminarCliente() {
+	private boolean eliminarCliente() {
 	    int filaSeleccionada = table.getSelectedRow();
 
 	    if (filaSeleccionada != -1) {
@@ -210,6 +210,7 @@ public class GestionarClientes extends JFrame {
 	                    dispose(); // Cerrar ventana actual
 	                    GestionarClientes ventanagestionar = new GestionarClientes();
 	                    ventanagestionar.setVisible(true);
+	                    return true;
 	                } else {
 	                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el cliente.");
 	                }
@@ -225,6 +226,7 @@ public class GestionarClientes extends JFrame {
 	    } else {
 	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
 	    }
+        return false;
 	}
 
 	private void irAMenu() {
