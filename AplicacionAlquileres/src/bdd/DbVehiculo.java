@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
+import modelo.Cliente;
 import modelo.Furgoneta;
 import modelo.Moto;
 import modelo.Turismo;
@@ -319,6 +320,41 @@ public class DbVehiculo extends Conexion{
 	    }
 	}
 	
-		
+	/**
+     * Método que inserta un nuevo mantenimiento en la base de datos.
+     * @param vehiculo Objeto {@link Vehiculo} al que se le asigna el mantenimiento.
+     * @param fecha del mantenimiento.
+     * @param descripcion del mantenimiento.
+
+     * @return {@code true} si se insertó correctamente, {@code false} si hubo un error.
+     */
+    public boolean hacerMantenimiento(Vehiculo vehiculo, LocalDate fecha, String descripcion) {
+        String sql = "INSERT INTO mantenimiento(descripcion, fecha, matricula) VALUES (?, ?, ?)";
+
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+            stmt.setString(1, descripcion);
+	        stmt.setDate(2, java.sql.Date.valueOf(fecha));
+            stmt.setString(3, vehiculo.getMatricula());
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+	/**
+     * Método que inserta un nuevo mantenimiento hoy en la base de datos.
+     * @param vehiculo Objeto {@link Vehiculo} al que se le asigna el mantenimiento.
+     * @param descripcion del mantenimiento.
+
+     * @return {@code true} si se insertó correctamente, {@code false} si hubo un error.
+     */
+    
+    public boolean hacerMantenimientoHoy(Vehiculo vehiculo, String descripcion) {
+    	LocalDate hoy = LocalDate.now();
+        return hacerMantenimiento(vehiculo, hoy, descripcion);
+
+    }
 
 }
