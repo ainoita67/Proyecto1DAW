@@ -365,7 +365,7 @@ public class DbVehiculo extends Conexion{
      */
     public ArrayList<Mantenimiento> verMantenimientos() {
     	ArrayList<Mantenimiento> lista = new ArrayList<>();
-        String sql = "SELECT (descripcion, fecha, matricula) FROM mantenimiento;";
+        String sql = "SELECT descripcion, fecha, matricula FROM mantenimiento;";
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
         	var rs = stmt.executeQuery();
         	while (rs.next()) {
@@ -394,7 +394,7 @@ public class DbVehiculo extends Conexion{
      * @return {@code true} si se eliminó correctamente.
      */
 	public boolean eliminarMantenimiento(String matricula, LocalDate fecha) {
-	    String sql = "DELETE FROM mantenimiento WHERE vehiculo = ? and DATE(fecha) = ?";
+	    String sql = "DELETE FROM mantenimiento WHERE matricula = ? and date(fecha) = ?";
 
 	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
 	        stmt.setString(1, matricula);
