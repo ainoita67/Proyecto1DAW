@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 import modelo.Cliente;
 import modelo.Furgoneta;
+import modelo.Mantenimiento;
 import modelo.Moto;
 import modelo.Turismo;
 import modelo.Vehiculo;
@@ -356,5 +357,54 @@ public class DbVehiculo extends Conexion{
         return hacerMantenimiento(vehiculo, hoy, descripcion);
 
     }
+    
+	/**
+     * Método que da la lista de mantenimientos de la base de datos.
+
+     * @return ArrayList<{@link Mantenimiento}> lista de mantenimientos
+     */
+    public ArrayList<Mantenimiento> verMantenimientos() {
+    	ArrayList<Mantenimiento> lista = new ArrayList<>();
+        String sql = "SELECT (descripcion, fecha, matricula) FROM mantenimiento;";
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+        	var rs = stmt.executeQuery();
+        	while (rs.next()) {
+        		
+        		String descripcion = rs.getString("descripcion");
+        		String matricula = rs.getString("matricula");
+        		LocalDate fecha = rs.getDate("fecha").toLocalDate();
+
+        		Vehiculo vehiculo = ver1Vehiculo(matricula);
+        		
+        		Mantenimiento mantenimiento = new Mantenimiento(vehiculo, descripcion, fecha);
+        		
+        		lista.add(mantenimiento);
+        	}
+        	return lista;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return lista;
+        }
+    }
+    
+	/**
+     * Método que elimina un alquiler de la base de datos.
+     * @param matricula Matrícula del vehículo a eliminar.
+     * @param fecha del mantenimiento a eliminar.
+     * @return {@code true} si se eliminó correctamente.
+     */
+	public boolean eliminarMantenimiento(String matricula, LocalDate fecha) {
+	    String sql = "DELETE FROM mantenimiento WHERE vehiculo = ? and DATE(fecha) = ?";
+
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, matricula);
+	        stmt.setDate(2, java.sql.Date.valueOf(fecha));
+	        int filas = stmt.executeUpdate();
+	        return filas > 0; // Devuelve true si se eliminó al menos una fila
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
 
 }
