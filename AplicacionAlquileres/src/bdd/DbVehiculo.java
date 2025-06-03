@@ -329,13 +329,13 @@ public class DbVehiculo extends Conexion{
 
      * @return {@code true} si se insertó correctamente, {@code false} si hubo un error.
      */
-    public boolean hacerMantenimiento(Vehiculo vehiculo, LocalDate fecha, String descripcion) {
+    public boolean hacerMantenimiento(Mantenimiento m) {
         String sql = "INSERT INTO mantenimiento(descripcion, fecha, matricula) VALUES (?, ?, ?)";
 
         try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
-            stmt.setString(1, descripcion);
-	        stmt.setDate(2, java.sql.Date.valueOf(fecha));
-            stmt.setString(3, vehiculo.getMatricula());
+            stmt.setString(1, m.getDescripcion());
+	        stmt.setDate(2, java.sql.Date.valueOf(m.getFecha()));
+            stmt.setString(3, m.getVehiculo().getMatricula());
             int filas = stmt.executeUpdate();
             return filas > 0;
         } catch (SQLException e) {
@@ -354,7 +354,8 @@ public class DbVehiculo extends Conexion{
     
     public boolean hacerMantenimientoHoy(Vehiculo vehiculo, String descripcion) {
     	LocalDate hoy = LocalDate.now();
-        return hacerMantenimiento(vehiculo, hoy, descripcion);
+        modelo.Mantenimiento m = new modelo.Mantenimiento(vehiculo, descripcion, hoy);
+        return hacerMantenimiento(m);
 
     }
     
@@ -387,6 +388,34 @@ public class DbVehiculo extends Conexion{
         }
     }
     
+    /**
+     * Método que da un objeto con el mantenimiento seleccionadp.
+
+     * @return {@link Mantenimiento} mantenimiento seleccionado
+     */
+    public Mantenimiento ver1Mantenimiento(String matricula, LocalDate fecha) {
+        String sql = "SELECT descripcion, fecha, matricula FROM mantenimiento where matricula = ? and date(fecha) = ?;";
+        try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+        	stmt.setString(1, matricula);
+	        stmt.setDate(2, java.sql.Date.valueOf(fecha));
+        	var rs = stmt.executeQuery();
+        	while (rs.next()) {
+        		
+        		String descripcion = rs.getString("descripcion");
+
+        		Vehiculo vehiculo = ver1Vehiculo(matricula);
+        		
+        		Mantenimiento mantenimiento = new Mantenimiento(vehiculo, descripcion, fecha);
+        		
+        		return mantenimiento;
+        	}
+        	return null;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
 	/**
      * Método que elimina un alquiler de la base de datos.
      * @param matricula Matrícula del vehículo a eliminar.
@@ -401,6 +430,29 @@ public class DbVehiculo extends Conexion{
 	        stmt.setDate(2, java.sql.Date.valueOf(fecha));
 	        int filas = stmt.executeUpdate();
 	        return filas > 0; // Devuelve true si se eliminó al menos una fila
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false;
+	    }
+	}
+
+	/**
+	 * Método que actualiza un registro de mantenimiento existente en la base de datos.
+	 * @param mantenimiento Objeto {@link Mantenimiento} con los datos actualizados.
+	 * @return {@code true} si la actualización fue exitosa, {@code false} en caso contrario.
+	 */
+	public boolean actualizarMantenimiento(Mantenimiento mantenimiento) {
+	    String sql = "UPDATE mantenimiento SET descripcion = ? WHERE matricula = ? and date(fecha) = ?";
+
+	    try (PreparedStatement stmt = conexion.prepareStatement(sql)) {
+	        stmt.setString(1, mantenimiento.getDescripcion());
+	        stmt.setString(2, mantenimiento.getVehiculo().getMatricula());
+	        stmt.setDate(3, java.sql.Date.valueOf(mantenimiento.getFecha()));
+
+
+	        int filas = stmt.executeUpdate();
+	        return filas > 0;
+
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	        return false;

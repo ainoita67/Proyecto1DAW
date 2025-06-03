@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import bdd.DbCliente;
 import bdd.DbVehiculo;
 import modelo.Cliente;
+import modelo.Mantenimiento;
 import modelo.Vehiculo;
 
 import javax.swing.JTable;
@@ -29,7 +31,7 @@ public class GestionarMantenimiento extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private DbMantenimiento conexion;
+	private DbVehiculo conexion;
 
 	/**
 	 * Launch the application.
@@ -80,8 +82,6 @@ public class GestionarMantenimiento extends JFrame {
 		JButton btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(378, 10, 90, 25);
 		
-		JButton btnMantenimiento = new JButton("Ver Mantenimiento");
-		btnMantenimiento.setBounds(486, 10, 179, 25);
 		contentPane.setLayout(null);
 		contentPane.add(scrollPane);
 		
@@ -91,51 +91,84 @@ public class GestionarMantenimiento extends JFrame {
 		contentPane.add(btnAnadir);
 		contentPane.add(btnEditar);
 		contentPane.add(btnEliminar);
-		contentPane.add(btnMantenimiento);
 		contentPane.add(lblMantenimiento);
 		contentPane.add(btnMenu);
+		
+		btnAnadir.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        abrirVentanaCrearMantenimiento();
+		    }
+		});
+		
+		btnEditar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        editarMantenimiento();
+		    }
+		});
+		
+		btnEliminar.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		    	eliminarMantenimiento();
+		    }
+		});
+		
+		btnMenu.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        irAMenu();
+		    }
+		});
+
+		
+		cargarTablaMantenimientos();
 	}
 	
 	public void cargarTablaMantenimientos() {
-		String[] columnas = {"Matricula", "Fecha", "Descripción"};
-		DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				return false;
-			}
-		};
-		
-		try {
-			DbVehiculo dbVehiculo = new DbVehiculo();
-			ArrayList<Vehiculo> lista = dbVehiculo.obtenerVehiculos(null, null, false);
-			
-			for (Vehiculo c : lista) {
-				Object[] fila = {
-					c.getMatricula()
-					
-				};
-				modeloTabla.addRow(fila);
-			}
-		
-			table.setModel(modeloTabla);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	    String[] columnas = {"Matricula", "Fecha", "Descripción"};
+	    DefaultTableModel modeloTabla = new DefaultTableModel(columnas, 0) {
+	        @Override
+	        public boolean isCellEditable(int row, int column) {
+	            return false;
+	        }
+	    };
+
+	    try {
+	        DbVehiculo dbVehiculo = new DbVehiculo();
+	        ArrayList<Mantenimiento> lista = dbVehiculo.verMantenimientos();
+
+	        for (Mantenimiento m : lista) {
+	            Object[] fila = {
+	                m.getVehiculo().getMatricula(),
+	                m.getFecha(),
+	                m.getDescripcion()
+	            };
+	            modeloTabla.addRow(fila);
+	        }
+
+	        table.setModel(modeloTabla);
+
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
 	}
+
 	
 	public void editarMantenimiento() {
 		int filaSeleccionada = table.getSelectedRow();
 		
 		  if (filaSeleccionada != -1) {
 			  String matriculaSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+			  String descripcion = table.getValueAt(filaSeleccionada, 2).toString();
+			  LocalDate fecha = LocalDate.parse(table.getValueAt(filaSeleccionada, 1).toString());
 			  
+
 			  try {
 				  DbVehiculo dbVehiculo = new DbVehiculo();
 				  Vehiculo vehiculoSeleccionado = dbVehiculo.ver1Vehiculo(matriculaSeleccionado);
 				  
+				  Mantenimiento mant = new Mantenimiento(vehiculoSeleccionado, descripcion, fecha);
+				  
 				  if(vehiculoSeleccionado != null) {
-					  EditarMantenimiento ventanaEditar = new EditarMantenimiento();
+					  EditarMantenimiento ventanaEditar = new EditarMantenimiento(mant);
 		              ventanaEditar.setVisible(true);
 		              dispose(); 
 				  } else {
@@ -163,6 +196,7 @@ public class GestionarMantenimiento extends JFrame {
 		
 		if (filaSeleccionada != -1) {
 			  String matriculaSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
+			  LocalDate fecha = LocalDate.parse(table.getValueAt(filaSeleccionada, 1).toString());
 		     
 			 int confirmacion = JOptionPane.showConfirmDialog(this, 
 		                "¿Estás seguro de que quieres eliminar el mantenimiento del vehiculo con mátricula: " + matriculaSeleccionado + "?", 
@@ -171,12 +205,10 @@ public class GestionarMantenimiento extends JFrame {
 			 
 			 if (confirmacion == JOptionPane.YES_OPTION) {
 		            try {
-		                conexion = new DbCliente();
-		                if (conexion.eliminarMantenimiento(matriculaSeleccionado)) {
+		                conexion = new DbVehiculo();
+		                if (conexion.eliminarMantenimiento(matriculaSeleccionado, fecha)) {
 		                    JOptionPane.showMessageDialog(this, "Mantenimiento eliminado correctamente.");
-		                    dispose(); // Cerrar ventana actual
-		                    GestionarMantenimiento ventanagestionar = new GestionarMantenimiento();
-		                    ventanagestionar.setVisible(true);
+		                    cargarTablaMantenimientos();
 		                } else {
 		                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el mantenimiento.");
 		                }
@@ -195,37 +227,12 @@ public class GestionarMantenimiento extends JFrame {
 	}
 	
 	private void irAMenu() {
-		GestionarMantenimiento ventanacliente = new GestionarMantenimiento();
-	    Menu ventanamenu = new Menu();
-	    ventanamenu.setVisible(true);
+	    Menu ventana = new Menu();
+	    ventana.setVisible(true);
 	    this.dispose();
 	}
 	
-	private void verMantenimiento() {
-	    int filaSeleccionada = table.getSelectedRow();
 
-	    if (filaSeleccionada != -1) {
-	        String dniSeleccionado = table.getValueAt(filaSeleccionada, 0).toString();
-
-	        try {
-	            DbMantenimiento dbMantenimiento = new DbMantenimiento();
-	            Mantenimiento mantenimientoSeleccionado = DbMantenimiento.ver1Mantenimiento(dniSeleccionado);
-
-	            if (mantenimientoSeleccionado != null) {
-	            	InformacionMantenimiento ventanaVer = new InformacionMantenimiento(mantenimientoSeleccionado);
-	                ventanaVer.setVisible(true);
-	            } else {
-	                JOptionPane.showMessageDialog(this, "No se encontró el cliente.");
-	            }
-
-	        } catch (Exception ex) {
-	            ex.printStackTrace();
-	            JOptionPane.showMessageDialog(this, "Error al obtener datos.");
-	        }
-
-	    } else {
-	        JOptionPane.showMessageDialog(this, "Selecciona una fila primero.");
-	    }
-	}
+	
 }
 		

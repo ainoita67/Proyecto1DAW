@@ -41,37 +41,5 @@ public class Sesion {
     public static void cerrarSesionUsuario() {
         usuarioActivo = null;
     }
-
-    /**
-     * Rol actualmente activo en la sesión.
-     * Este campo también es de tipo {@code Usuario}.
-     */
-    private static Usuario rolActivo;
-
-    /**
-     * Método que establece el rol activo en la sesión.
-     * 
-     * @param rol Rol activo (objeto {@code Usuario}).
-     */
-    public static void setrolActivo(Usuario rol) {
-        rolActivo = rol;
-    }
-
-    /**
-     * Método que devuelve el rol activo en la sesión.
-     * 
-     * @return Rol activo (objeto {@code Usuario}).
-     */
-    public static Usuario getrolActivo() {
-        return rolActivo;
-    }
-
-    /**
-     * Método que cierra la sesión del rol activo.
-     * Establece el rol activo como {@code null}.
-     */
-    public static void cerrarSesionRol() {
-        rolActivo = null;
-    }
 }
 
